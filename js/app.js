@@ -271,10 +271,12 @@ function detalle(id) {
       ${a.aCargo ? fila(iconosAct.personas, 'A cargo de', esc(a.aCargo)) : ''}
       ${a.gentileza.length ? fila(iconos.personas, 'Gracias a', a.gentileza.map(esc).join(' · ')) : ''}
     </ul>
-    <button class="enlace" data-opciones="${a.id}">Usar otro calendario</button>
     <div class="pie-hoja">
       <div class="pie-acciones">
-        <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Agregado a su calendario' : TEXTO_CAL.boton}</button>
+        <div class="grupo-cal tap">
+          <button class="btn btn-noche" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Agregado a su calendario' : TEXTO_CAL.boton}</button>
+          <button class="btn btn-noche btn-caret" data-opciones="${a.id}" aria-label="Elegir otro calendario">${iconos.abajo}</button>
+        </div>
         <button class="btn btn-borde tap" data-compartir-act="${a.id}" aria-label="Compartir esta actividad">${iconos.compartir}Compartir</button>
       </div>
     </div>`, a.id, 'detalle', true);
@@ -287,10 +289,10 @@ function opciones(id) {
     <button class="enlace" data-act="${a.id}">${iconos.atras}Volver</button>
     <h2 id="hoja-titulo">Elija su calendario</h2>
     <div class="opciones">
-      <a class="opcion tap-suave" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>iPhone, Samsung u Outlook<span class="sub">Esta actividad · archivo .ics</span></span><span class="rec">Con avisos</span></a>
-      <a class="opcion tap-suave" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Esta actividad · active la notificación</span></span></a>
-      <a class="opcion tap-suave" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${ndest} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
-      <a class="opcion tap-suave" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
+      <a class="opcion tap-suave" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>iPhone, Samsung u Outlook<span class="sub">Solo esta actividad</span></span></a>
+      <a class="opcion tap-suave" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Solo esta actividad</span></span></a>
+      <a class="opcion tap-suave" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${ndest} actividades</span></span></a>
+      <a class="opcion tap-suave" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades</span></span></a>
     </div>`, a.id, 'opciones');
 }
 

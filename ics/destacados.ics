@@ -155,12 +155,15 @@ DTSTAMP:20261113T000000Z
 DTSTART:20261114T150000Z
 DTEND:20261114T160000Z
 SUMMARY:Paseo Procesional del Chagra
-DESCRIPTION:Recorrido por las calles del barrio. Concentración en el parqu
- eadero del Estadio Monumental. Ameniza una banda de músicos.\nA cargo de:
-  Comisionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de
-  Río Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiest
- as en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.
- \nCómo llegar: https://maps.app.goo.gl/T2kfsPxNL3ET54o47
+DESCRIPTION:Recorrido por las calles del barrio en honor a la Santísima Vi
+ rgen de El Quinche. Concentración en el parqueadero del Estadio Monumenta
+ l. Ameniza una banda de pueblo con sonido Jatari. Requisitos para caballos
+ : examen de anemia infecciosa equina\, certificado de vacunación contra i
+ nfluenza equina y certificado de movilización.\nA cargo de: Comisionados:
+  Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Río Blanco A
+ lto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas en honor a 
+ la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar
+ : https://maps.app.goo.gl/T2kfsPxNL3ET54o47
 LOCATION:Estadio Monumental Río Blanco Alto\, Río Blanco Alto\, Tanicuch
  í
 BEGIN:VALARM
@@ -185,11 +188,14 @@ DTSTAMP:20261113T000000Z
 DTSTART:20261114T170000Z
 DTEND:20261114T180000Z
 SUMMARY:Gran Concurso de Lazo
-DESCRIPTION:En la plaza central del barrio. Ameniza una banda de músicos.\
- nA cargo de: Comisionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo d
- e Chagras de Río Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Gua
- rdia.\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanc
- o Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+DESCRIPTION:En la plaza central del barrio. Premios económicos y atuendos 
+ chacarreros. Ameniza una banda de pueblo con sonido Jatari. Requisitos par
+ a caballos: examen de anemia infecciosa equina\, certificado de vacunació
+ n contra influenza equina y certificado de movilización.\nA cargo de: Com
+ isionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Rí
+ o Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas e
+ n honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nC
+ ómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
 LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -215,9 +221,10 @@ DTEND:20261115T013000Z
 SUMMARY:Coronación de Dulce María I\, Reina del Barrio
 DESCRIPTION:Coronación y exaltación de Dulce María I\, Reina del Barrio 
  Río Blanco Alto 2026\, y su Corte de Honor. Ameniza un disco móvil de la
-  provincia.\nA cargo de: Comité Promejoras del Barrio Río Blanco Alto.\n
- Fiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 
- 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+  provincia. Conduce Fernando Erazo.\nA cargo de: Comité Promejoras del Ba
+ rrio Río Blanco Alto.\nFiestas en honor a la Santísima Virgen de El Quin
+ che · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU
+ 43uRN7eSn7L9
 LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -241,15 +248,20 @@ DTSTAMP:20261113T000000Z
 DTSTART:20261115T130000Z
 DTEND:20261115T140000Z
 SUMMARY:GIRO-RBA 2026 · Vuelta ciclística
-DESCRIPTION:Vuelta ciclística a Río Blanco Alto. Modalidades montañera\,
-  rutera y gravel\; todas las categorías.\nGracias a: Lic. María Fernanda
-  Tipán\, Sra. Eva Mena G.\, Sra. Zoila Freire M.\, Sr. Arnulfo Mena G.\, 
- Sr. Jaime Trávez\, Ing. Fernando Rosero\, Ing. Saúl Mena\, Sr. Luis Mena
-  V.\, Dr. William Tapia\, Ing. Alejandro Gallardo\, Sr. Nelson Jácome\, S
- r. Carlos Martínez\, Lic. Manolo Escobar\, Arq. Patricio Luje y Flia.\, I
- ng. Juan Carlos Pinto\, Dr. Jorge Pinto.\nFiestas en honor a la Santísima
-  Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://map
- s.app.goo.gl/G3GdU43uRN7eSn7L9
+DESCRIPTION:La Vuelta Río Blanco Alto: ruta de 25 km con salida desde el P
+ arque Central del barrio. Modalidad abierta: montañeras\, ruteras y grave
+ l. Categorías: Juvenil (15 a 18 años)\, Máster A (29 a 39)\, Máster B 
+ (40 a 49)\, Máster C (50 a 59)\, Élite (abierta) y Leyendas (60 en adela
+ nte)\, para varones y damas.\nA cargo de: Liga Deportiva Barrial Central R
+ ío Blanco Alto.\nGracias a: Lic. María Fernanda Tipán\, Sra. Eva Mena G
+ .\, Sra. Zoila Freire M.\, Sr. Arnulfo Mena G.\, Sr. Jaime Trávez\, Ing. 
+ Fernando Rosero\, Ing. Saúl Mena\, Sr. Luis Mena V.\, Dr. William Tapia\,
+  Ing. Alejandro Gallardo\, Sr. Nelson Jácome\, Sr. Carlos Martínez\, Lic
+ . Manolo Escobar\, Arq. Patricio Luje y Flia.\, Ing. Juan Carlos Pinto\, D
+ r. Jorge Pinto\, GIRO-RBA (auspicio)\, Mega Speed Corp. (auspicio)\, Cotop
+ axi (auspicio)\, Mutualista Pichincha (auspicio).\nFiestas en honor a la S
+ antísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: ht
+ tps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
 LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -273,13 +285,13 @@ DTSTAMP:20261113T000000Z
 DTSTART:20261121T010000Z
 DTEND:20261121T020000Z
 SUMMARY:Noche Cultural Río Blanco Alto
-DESCRIPTION:Grupos de danza invitados del GAD Parroquial de Tanicuchí\, de
-  Guaytacama y de Pastocalle. Ameniza un disco móvil\; hay refrigerios.\nA
-  cargo de: Comité Promejoras del Barrio Río Blanco Alto.\nGracias a: Fam
- ilia Jácome Arboleda (disco móvil)\, Sra. Norma Vilca\, vocal del GAD Pa
- rroquial Tanicuchí (refrigerios).\nFiestas en honor a la Santísima Virge
- n de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.
- goo.gl/G3GdU43uRN7eSn7L9
+DESCRIPTION:3ra edición. Grupos de danza invitados del GAD Parroquial de T
+ anicuchí\, de Guaytacama y de Pastocalle. Ameniza un disco móvil\; hay r
+ efrigerios.\nA cargo de: Comité Promejoras del Barrio Río Blanco Alto.\n
+ Gracias a: Familia Jácome Arboleda (disco móvil)\, Sra. Norma Vilca\, vo
+ cal del GAD Parroquial Tanicuchí (refrigerios).\nFiestas en honor a la Sa
+ ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
+ ps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
 LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY

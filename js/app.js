@@ -251,7 +251,9 @@ function detalle(id) {
   const ok = agregados.has(a.id);
   const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
   const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gracias a<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
-  const foto = FOTOS[a.lugar] ? `<img class="hoja-foto" src="${FOTOS[a.lugar]}" alt="">` : '';
+  const src = a.foto || FOTOS[a.lugar];
+  const cred = a.credito ? `<a class="credito" href="${a.credito.url}" target="_blank" rel="noopener">Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
+  const foto = src ? `<div class="hoja-foto-c"><img class="hoja-foto" src="${src}" alt="">${cred}</div>` : '';
   const desc = a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : '';
   // Orden: título → fecha → descripción → dónde (cómo llegar) → gracias a
   abrirHoja(`${foto}

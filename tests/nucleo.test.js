@@ -103,3 +103,11 @@ test('cada actividad tiene un ícono propio dibujado', async () => {
   const { iconosAct } = await import('../js/ilustraciones.js');
   for (const a of A) assert.ok(iconosAct[a.icono], `ícono faltante en ${a.id}: ${a.icono}`);
 });
+
+test('las fotos de las actividades existen y las de terceros tienen crédito', async () => {
+  const { existsSync } = await import('node:fs');
+  for (const a of A.filter((x) => x.foto)) {
+    assert.ok(existsSync(new URL('../' + a.foto, import.meta.url)), `falta la foto ${a.foto}`);
+    if (!a.foto.includes('toros') && !a.foto.includes('colchas')) assert.ok(a.credito && a.credito.autor && a.credito.licencia, `falta crédito en ${a.id}`);
+  }
+});

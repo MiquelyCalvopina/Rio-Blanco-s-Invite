@@ -30,7 +30,7 @@
     },
     "plaza": {
       "nombre": "Plaza central del barrio",
-      "corto": "Plaza central y de toros",
+      "corto": "Plaza",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
       "lat": -0.7487619,
       "lng": -78.6146614,
@@ -46,7 +46,10 @@
     "estadio": {
       "nombre": "Estadio Monumental Río Blanco Alto",
       "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47",
-      "icono": "balon"
+      "icono": "balon",
+      "lat": -0.747494,
+      "lng": -78.6141981,
+      "corto": "Estadio"
     },
     "coliseo": {
       "nombre": "Coliseo del Barrio Río Blanco Alto",
@@ -76,6 +79,59 @@
       "mapa": null,
       "icono": "vela"
     }
+  },
+  "servicios": [
+    {
+      "id": "parqueadero",
+      "tipo": "parqueo",
+      "nombre": "Parqueadero",
+      "detalle": "Estadio Monumental Río Blanco Alto",
+      "lat": -0.747494,
+      "lng": -78.6141981,
+      "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
+    },
+    {
+      "id": "banos-iglesia",
+      "tipo": "banos",
+      "nombre": "Baños",
+      "detalle": "Cruzando la calle, al costado de la iglesia",
+      "lat": -0.7492236,
+      "lng": -78.6153353,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7492236%2C-78.6153353"
+    },
+    {
+      "id": "banos-estadio",
+      "tipo": "banos",
+      "nombre": "Baños",
+      "detalle": "En el Estadio Monumental",
+      "lat": -0.747494,
+      "lng": -78.6141981,
+      "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
+    },
+    {
+      "id": "comida",
+      "tipo": "comida",
+      "nombre": "Comida",
+      "detalle": "Carpas de la iglesia a la plaza (lado izquierdo) y detrás de la plaza",
+      "lat": -0.7485343,
+      "lng": -78.6145484,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7485343%2C-78.6145484",
+      "tramo": [
+        [
+          -0.7490455,
+          -78.6154423
+        ],
+        [
+          -0.7487619,
+          -78.6146614
+        ]
+      ]
+    }
+  ],
+  "llegada": {
+    "nombre": "Iglesia del Barrio Río Blanco Alto",
+    "lat": -0.7490455,
+    "lng": -78.6154423
   },
   "actividades": [
     {"id": "13-0800-embanderamiento", "fecha": "2026-11-13", "hora": "08:00", "titulo": "Embanderamiento del Barrio", "tipo": "popular", "lugar": "barrio", "detalle": "A cargo de la Liga Deportiva Barrial Central Río Blanco Alto.", "gentileza": [], "icono": "bandera"},

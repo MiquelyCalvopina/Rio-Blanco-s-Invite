@@ -74,7 +74,7 @@ function splash() {
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
-const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Lugares', gratitud: 'Gratitud' };
+const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Mapa del barrio', gratitud: 'Gratitud' };
 let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
@@ -294,22 +294,31 @@ function cargar(src, tipo) {
     e.onload = res; e.onerror = rej; document.head.appendChild(e);
   });
 }
-function lugaresUsados() {
-  const cuenta = {};
-  for (const a of D.actividades) if (a.lugar !== 'posada') cuenta[a.lugar] = (cuenta[a.lugar] || 0) + 1;
-  return cuenta;
-}
+const SRV_ICO = { parqueo: 'parqueo', banos: 'banos', comida: 'comida' };
+const pinSrv = (tipo) => `<span class="pin-srv s-${tipo}">${iconos[SRV_ICO[tipo]]}</span>`;
+let mapaL = null; const marcadores = {};
+
 function pintarLugares() {
-  const cuenta = lugaresUsados();
-  const orden = Object.keys(cuenta).sort((x, y) => (FOTOS[y] ? 1 : 0) - (FOTOS[x] ? 1 : 0) || cuenta[y] - cuenta[x]);
-  $('#lista-lugares').innerHTML = orden.map((k) => {
-    const l = D.lugares[k];
-    const n = `${cuenta[k]} ${cuenta[k] === 1 ? 'actividad' : 'actividades'}${k === 'estadio' ? ' · con parqueadero' : ''}`;
-    const foto = FOTOS[k] ? `<img src="${FOTOS[k]}" alt="" loading="lazy">` : '';
-    return `<li><a class="lugar tap${foto ? '' : ' sin-foto'}" href="${l.mapa}" target="_blank" rel="noopener">${foto}
-      <span class="info"><span class="cuerpo"><span class="tit">${esc(l.nombre)}</span><span class="met">${n}</span></span><span class="ir">Cómo llegar</span></span></a></li>`;
-  }).join('');
+  const ll = D.llegada;
+  $('#llegar').href = `https://www.google.com/maps/dir/?api=1&destination=${ll.lat}%2C${ll.lng}`;
+  $('#lista-servicios').innerHTML = D.servicios.map((x) => `<li><div class="srv-fila">
+      <button class="srv tap-suave" data-ver="${x.id}">
+        <span class="ic s-${x.tipo}">${iconos[SRV_ICO[x.tipo]]}</span>
+        <span class="cuerpo"><span class="tit">${esc(x.nombre)}</span><span class="met">${esc(x.detalle)}</span></span>
+      </button>
+      <a class="ir" href="${x.mapa}" target="_blank" rel="noopener">Ir</a></div></li>`).join('');
+  const usados = new Set(D.actividades.map((a) => a.lugar));
+  const vistos = new Set();
+  $('#lista-lugares').innerHTML = Object.entries(D.lugares)
+    .filter(([k, l]) => l.lat != null && usados.has(k) && !vistos.has(`${l.lat},${l.lng}`) && vistos.add(`${l.lat},${l.lng}`))
+    .map(([k, l]) => `<li><div class="srv-fila">
+      <button class="srv tap-suave" data-ver="${k}">
+        <span class="ic s-lugar">${iconosAct[l.icono] || iconos.mapa}</span>
+        <span class="cuerpo"><span class="tit">${esc(l.corto && k === 'plaza' ? 'Plaza central y plaza de toros' : l.nombre)}</span></span>
+      </button>
+      <a class="ir" href="${l.mapa}" target="_blank" rel="noopener">Ir</a></div></li>`).join('');
 }
+
 async function mapa() {
   if (mapaListo) return;
   mapaListo = true;
@@ -319,22 +328,42 @@ async function mapa() {
   } catch { $('#mapa').hidden = true; return; }
   const L = window.L;
   const m = L.map('mapa', { zoomControl: false, attributionControl: true, scrollWheelZoom: false });
+  mapaL = m;
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(m);
-  const puntos = {};
+  const grupo = [];
+  // Tramo de las carpas de comida
+  for (const x of D.servicios) if (x.tramo) L.polyline(x.tramo, { color: '#DE7A2C', weight: 6, opacity: .75, lineCap: 'round' }).addTo(m);
+  // Lugares de la fiesta (un punto por coordenada)
+  const vistos = {};
   for (const [k, l] of Object.entries(D.lugares)) {
     if (l.lat == null) continue;
     const clave = `${l.lat},${l.lng}`;
-    (puntos[clave] = puntos[clave] || { l, nombres: [] }).nombres.push(l.nombre);
+    if (vistos[clave]) { marcadores[k] = vistos[clave]; continue; }
+    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
+    const mk = L.marker([l.lat, l.lng], { icon, title: l.nombre }).addTo(m)
+      .bindPopup(`<b>${esc(l.nombre)}</b><br><a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
+    vistos[clave] = mk; marcadores[k] = mk; grupo.push([l.lat, l.lng]);
   }
-  const grupo = [];
-  for (const { l, nombres } of Object.values(puntos)) {
-    const corto = l.corto || nombres[0];
-    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq">${esc(corto)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
-    L.marker([l.lat, l.lng], { icon, title: nombres.join(' y ') }).addTo(m)
-      .bindPopup(`<b>${esc(nombres.join(' y '))}</b><br><a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
-    grupo.push([l.lat, l.lng]);
+  // Servicios (agrupados si comparten punto)
+  const porPunto = {};
+  for (const x of D.servicios) (porPunto[`${x.lat},${x.lng}`] = porPunto[`${x.lat},${x.lng}`] || []).push(x);
+  for (const xs of Object.values(porPunto)) {
+    const x = xs[0];
+    const icon = L.divIcon({ className: '', html: `<span class="pin-grupo">${xs.map((y) => pinSrv(y.tipo)).join('')}</span>`, iconSize: [28 * xs.length, 26], iconAnchor: [-6, 30] });
+    const mk = L.marker([x.lat, x.lng], { icon, title: xs.map((y) => y.nombre).join(' y ') }).addTo(m)
+      .bindPopup(xs.map((y) => `<b>${esc(y.nombre)}</b><br>${esc(y.detalle)}`).join('<br><br>') + `<br><a href="${x.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
+    for (const y of xs) marcadores[y.id] = mk;
+    grupo.push([x.lat, x.lng]);
   }
-  m.fitBounds(grupo, { padding: [40, 40], maxZoom: 18 });
+  m.fitBounds(grupo, { padding: [30, 30], maxZoom: 18 });
+}
+
+function verEnMapa(id) {
+  const mk = marcadores[id];
+  if (!mapaL || !mk) return;
+  $('#mapa').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  mapaL.flyTo(mk.getLatLng(), 18, { duration: .6 });
+  setTimeout(() => mk.openPopup(), 650);
 }
 
 /* ---------- Gratitud ---------- */
@@ -384,6 +413,7 @@ function eventos() {
     if (d.agregar) return agregar(d.agregar);
     if (d.act) return detalle(d.act);
     if (d.opciones) return opciones(d.opciones);
+    if (d.ver) return verEnMapa(d.ver);
     if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {
       const a = actividad(d.compartirAct);

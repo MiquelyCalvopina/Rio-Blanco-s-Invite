@@ -25,5 +25,10 @@ ACTION:DISPLAY
 DESCRIPTION:Recibimiento de la Banda de Músicos de Aloguincho
 TRIGGER:-PT2H
 END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de la Banda de Músicos de Aloguincho
+TRIGGER:PT0M
+END:VALARM
 END:VEVENT
 END:VCALENDAR

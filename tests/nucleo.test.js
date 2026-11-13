@@ -51,11 +51,12 @@ test('fechaICS da formato UTC compacto', () => {
   assert.equal(fechaICS(new Date('2026-11-22T17:00:00Z')), '20261122T170000Z');
 });
 
-test('el .ics trae dos recordatorios por actividad y escapa texto', () => {
+test('el .ics trae tres recordatorios (1 día antes, 2 horas antes y a la hora) por actividad y escapa texto', () => {
   const ics = icsCalendario([porId('21-1500-colchas')], datos.lugares, new Date('2026-11-13T00:00:00Z'));
   assert.match(ics, /^BEGIN:VCALENDAR\r\n/);
   assert.match(ics, /DTSTART:20261121T200000Z/);
-  assert.equal((ics.match(/BEGIN:VALARM/g) || []).length, 2);
+  assert.equal((ics.match(/BEGIN:VALARM/g) || []).length, 3);
+  assert.match(ics, /TRIGGER:PT0M/);
   assert.match(ics, /TRIGGER:-P1D/);
   assert.match(ics, /TRIGGER:-PT2H/);
   assert.ok(ics.includes('presentes taurinos'));

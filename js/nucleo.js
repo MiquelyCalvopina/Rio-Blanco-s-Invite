@@ -5,7 +5,7 @@ export const ZONA = 'America/Guayaquil';
 const DESFASE_MS = 5 * 60 * 60 * 1000; // Ecuador continental: UTC-5, sin horario de verano
 const DURACION_MS = 60 * 60 * 1000; // si el programa no da hora de fin
 export const SELLO_ICS = new Date('2026-11-13T00:00:00Z');
-export const RECORDATORIOS = ['-P1D', '-PT2H'];
+export const RECORDATORIOS = ['-P1D', '-PT2H', 'PT0M']; // 1 día antes, 2 horas antes y a la hora
 
 export function inicioUTC(a) {
   const [y, m, d] = a.fecha.split('-').map(Number);

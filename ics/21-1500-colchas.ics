@@ -37,5 +37,10 @@ ACTION:DISPLAY
 DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
 TRIGGER:-PT2H
 END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:PT0M
+END:VALARM
 END:VEVENT
 END:VCALENDAR

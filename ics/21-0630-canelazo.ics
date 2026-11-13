@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-0630-canelazo@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T113000Z
+DTEND:20261121T123000Z
+SUMMARY:Degustación del tradicional canelazo
+DESCRIPTION:Gentileza de: Sra. Amparito Guerra y Flia..\nFiestas en honor a
+  la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llega
+ r: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Degustación del tradicional canelazo
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Degustación del tradicional canelazo
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

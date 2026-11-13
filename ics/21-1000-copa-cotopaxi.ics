@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-1000-copa-cotopaxi@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T150000Z
+DTEND:20261121T160000Z
+SUMMARY:Gran final Copa Cotopaxi · V Edición
+DESCRIPTION:Campeonato de Fútbol Masculino y Femenino. Organiza la Empresa
+  Cotopaxi S.A.\nFiestas en honor a la Santísima Virgen de El Quinche · R
+ ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/T2kfsPxNL3ET5
+ 4o47
+LOCATION:Estadio Monumental Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran final Copa Cotopaxi · V Edición
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran final Copa Cotopaxi · V Edición
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

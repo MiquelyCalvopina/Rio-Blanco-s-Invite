@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:22-0600-albazos@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T110000Z
+DTEND:20261122T120000Z
+SUMMARY:Alegre despertar\, salvas y albazos
+DESCRIPTION:Gentileza de: Hnos. Caisaguano Pincha.\nFiestas en honor a la S
+ antísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: ht
+ tps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Alegre despertar\, salvas y albazos
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Alegre despertar\, salvas y albazos
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-2000-pirotecnia-yumbada@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T010000Z
+DTEND:20261122T020000Z
+SUMMARY:Juegos pirotécnicos y Yumbada Rioblanquense
+DESCRIPTION:Juegos pirotécnicos\, gentileza de los Señores Priostes 2026\
+ , acompañados de la tradicional Yumbada Rioblanquense.\nGentileza de: Se
+ ñores Priostes 2026\, Hnos. Jácome Mena\, Sra. Rosita Mena Jácome y Fli
+ a..\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco 
+ Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juegos pirotécnicos y Yumbada Rioblanquense
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juegos pirotécnicos y Yumbada Rioblanquense
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

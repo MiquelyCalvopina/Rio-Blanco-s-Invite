@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:19-1800-novena-7@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261119T230000Z
+DTEND:20261120T000000Z
+SUMMARY:Novena · Día 7
+DESCRIPTION:Posada: Familia Mena Delgado.\nFiestas en honor a la Santísima
+  Virgen de El Quinche · Río Blanco Alto 2026.
+LOCATION:Posada en casa de la familia anfitriona\, Río Blanco Alto\, Tanic
+ uchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 7
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 7
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

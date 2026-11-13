@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:13-1730-priostazgo@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T223000Z
+DTEND:20261113T233000Z
+SUMMARY:Entrega y recibimiento del priostazgo
+DESCRIPTION:Los Priostes salientes 2025\, Usuarios del Canal de Riego Alum
+ íes Río Blanco Alto\, entregan el priostazgo a los Priostes entrantes 20
+ 26: Sr. Luis Balseca y Flia.\, Sr. Saúl Barragán y Flia.\, Lic. Carlos J
+ ácome y Flia.\, Abg. Alexis Jácome y Flia. y Sr. Vicente Yánez y Flia.\
+ nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto
+  2026.\nCómo llegar: https://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

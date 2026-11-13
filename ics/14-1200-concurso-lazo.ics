@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:14-1200-concurso-lazo@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T170000Z
+DTEND:20261114T180000Z
+SUMMARY:Gran Concurso de Lazo
+DESCRIPTION:En la plaza central del barrio. Ameniza una banda de músicos. 
+ Comisionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de 
+ Río Blanco Alto.\nGentileza de: Grupo de Amigos de la Vieja Guardia.\nFie
+ stas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 202
+ 6.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran Concurso de Lazo
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran Concurso de Lazo
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

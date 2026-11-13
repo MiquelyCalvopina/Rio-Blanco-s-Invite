@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-0830-futbol-master@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T133000Z
+DTEND:20261121T143000Z
+SUMMARY:Fútbol Máster SUB-50
+DESCRIPTION:Aglomerados Cotopaxi vs. I. T. S. Vicente León. Comisionados: 
+ Liga Deportiva Barrial Central Río Blanco Alto.\nGentileza de: Sr. Mario 
+ Palacios Jácome (premio).\nFiestas en honor a la Santísima Virgen de El 
+ Quinche · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/T
+ 2kfsPxNL3ET54o47
+LOCATION:Estadio Monumental Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Fútbol Máster SUB-50
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Fútbol Máster SUB-50
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

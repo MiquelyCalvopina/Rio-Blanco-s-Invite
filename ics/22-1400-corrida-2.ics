@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:22-1400-corrida-2@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T190000Z
+DTEND:20261122T200000Z
+SUMMARY:Segunda corrida de toros populares
+DESCRIPTION:Apertura de la plaza de toros a cargo de Dulce María I\, Reina
+  del Barrio Río Blanco Alto 2026\, y su Corte de Honor\, los Priostes 202
+ 6\, el Comité Promejoras\, la Liga Deportiva Barrial Central\, familiares
+  y acompañantes.\nGentileza de: Sr. Álvaro Yánez A. y Flia. (barreras).
+ \nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alt
+ o 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segunda corrida de toros populares
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segunda corrida de toros populares
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

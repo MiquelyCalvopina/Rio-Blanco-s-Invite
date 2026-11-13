@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-1200-banda@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T170000Z
+DTEND:20261121T180000Z
+SUMMARY:Recibimiento de la Banda de Músicos de Aloguincho
+DESCRIPTION:Gentileza de: Señores Priostes 2026.\nFiestas en honor a la Sa
+ ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
+ ps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de la Banda de Músicos de Aloguincho
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de la Banda de Músicos de Aloguincho
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

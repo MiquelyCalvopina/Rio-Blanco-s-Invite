@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:15-0800-giro-rba@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261115T130000Z
+DTEND:20261115T140000Z
+SUMMARY:GIRO-RBA 2026 · Vuelta ciclística
+DESCRIPTION:Vuelta Ciclística a Río Blanco Alto. Modalidades montañeras\
+ , ruteras y gravel\; todas las categorías.\nGentileza de: Lic. María Fer
+ nanda Tipán\, Sra. Eva Mena G.\, Sra. Zoila Freire M.\, Sr. Arnulfo Mena 
+ G.\, Sr. Jaime Trávez\, Ing. Fernando Rosero\, Ing. Saúl Mena\, Sr. Luis
+  Mena V.\, Dr. William Tapia\, Ing. Alejandro Gallardo\, Sr. Nelson Jácom
+ e\, Sr. Carlos Martínez\, Lic. Manolo Escobar\, Arq. Patricio Luje y Flia
+ .\, Ing. Juan Carlos Pinto\, Dr. Jorge Pinto.\nFiestas en honor a la Sant
+ ísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https
+ ://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GIRO-RBA 2026 · Vuelta ciclística
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GIRO-RBA 2026 · Vuelta ciclística
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

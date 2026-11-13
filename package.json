@@ -1,0 +1,9 @@
+{
+  "name": "rio-blanco-alto-fiestas-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "ics": "node scripts/generar-ics.js"
+  }
+}

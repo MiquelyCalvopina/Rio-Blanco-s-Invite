@@ -278,8 +278,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .datos .ico { color: var(--tinta-3); margin-top: 1px; }
 .datos .sub { display: block; font-size: var(--t12); color: var(--tinta-2); }
 .datos a { color: var(--poncho); font-weight: var(--w-m); text-decoration: none; margin-left: auto; white-space: nowrap; padding-left: var(--s2); font-size: var(--t13); }
-.fecha-det { display: flex; align-items: center; gap: 6px; margin-top: var(--s3); font-size: var(--t14); font-weight: var(--w-m); color: var(--tinta); }
-.fecha-det .ico { width: 16px; height: 16px; color: var(--tinta-3); }
 .det { font-size: var(--t14); color: var(--tinta); margin-top: var(--s3); }
 .pie-hoja { position: sticky; bottom: 0; margin: var(--s4) calc(-1 * var(--s4)) 0; padding: var(--s3) var(--s4) calc(var(--s3) + var(--abajo)); background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--linea); }
 .pie-acciones { display: grid; grid-template-columns: 1fr auto; gap: var(--s2); }

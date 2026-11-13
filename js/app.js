@@ -97,10 +97,22 @@ function ir(vista) {
 
 // En el inicio, el botón flotante aparece cuando ya pasó el botón principal (para no taparlo).
 let ctaVisible = true;
+let bajando = false;
 function fabVisible() {
   const enInicio = !$('#vista-inicio').hidden;
   const enMapa = !$('#vista-lugares').hidden; // en el mapa la acción principal es Llegar al barrio
-  $('#fab').classList.toggle('oculto', (enInicio && ctaVisible) || enMapa);
+  $('#fab').classList.toggle('oculto', (enInicio && ctaVisible) || enMapa || bajando);
+}
+// Al bajar se oculta para no tapar contenido; al subir vuelve a aparecer.
+function observarScroll() {
+  let ultimo = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (Math.abs(y - ultimo) < 8) return;
+    bajando = y > ultimo && y > 40;
+    ultimo = y;
+    fabVisible();
+  }, { passive: true });
 }
 function observarCta() {
   if (!('IntersectionObserver' in window)) return;
@@ -167,8 +179,8 @@ function pintarFiltros() {
   $('#filtros').innerHTML = ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
 }
 
-function filaAct(a, enCurso) {
-  return `<li class="fila${enCurso ? ' en-curso' : ''}">
+function filaAct(a, enCurso, pasada) {
+  return `<li class="fila${enCurso ? ' en-curso' : ''}${pasada ? ' pasada' : ''}">
     <button class="fila-main tap-suave" data-act="${a.id}">
       <span class="hora">${a.hora}</span>
       <span class="cuerpo">
@@ -190,9 +202,6 @@ function pintarLista() {
   const acts = delDia.filter((a) => ui.filtro === 'todo' || a.tipo === ui.filtro);
   $('#dia-titulo').textContent = fechaLarga(ui.dia);
   const n = delDia.length;
-  $('#dia-resumen').textContent = ui.filtro === 'todo'
-    ? `${n} ${n === 1 ? 'actividad' : 'actividades'}`
-    : `${acts.length} de ${n} actividades · ${TIPOS[ui.filtro]}`;
   if (!acts.length) { $('#lista').innerHTML = `<li class="vacio">Este día no hay actividades de tipo ${TIPOS[ui.filtro].toLowerCase()}.</li>`; return; }
   let pos = -1;
   if (ui.dia === hoy) { pos = acts.findIndex((a) => a.hora > hora); if (pos < 0) pos = acts.length; }
@@ -206,7 +215,7 @@ function pintarLista() {
       html += `<li class="franja">${f === 'Noche' ? iconos.luna : iconos.sol}${f}</li>`;
     }
     if (i === pos) html += linea;
-    html += filaAct(a, enCurso.has(a.id));
+    html += filaAct(a, enCurso.has(a.id), !enCurso.has(a.id) && inicioUTC(a) < ahora());
   });
   if (pos === acts.length) html += linea;
   const l = $('#lista');
@@ -350,7 +359,7 @@ async function mapa() {
     if (l.lat == null) continue;
     const clave = `${l.lat},${l.lng}`;
     if (vistos[clave]) { marcadores[k] = vistos[clave]; continue; }
-    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
+    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq${l.etiqueta === 'arriba' ? ' arriba' : ''}">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
     const mk = L.marker([l.lat, l.lng], { icon, title: l.nombre }).addTo(m)
       .bindPopup(`<b>${esc(l.nombre)}</b><br><a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
     vistos[clave] = mk; marcadores[k] = mk; grupo.push([l.lat, l.lng]);
@@ -360,7 +369,7 @@ async function mapa() {
   for (const x of D.servicios) (porPunto[`${x.lat},${x.lng}`] = porPunto[`${x.lat},${x.lng}`] || []).push(x);
   for (const xs of Object.values(porPunto)) {
     const x = xs[0];
-    const icon = L.divIcon({ className: '', html: `<span class="pin-grupo">${xs.map((y) => pinSrv(y.tipo)).join('')}</span>`, iconSize: [28 * xs.length, 26], iconAnchor: [-6, 30] });
+    const icon = L.divIcon({ className: '', html: `<span class="pin-grupo">${xs.map((y) => pinSrv(y.tipo)).join('')}</span>`, iconSize: [28 * xs.length, 26], iconAnchor: x.ancla || [-6, 30] });
     const mk = L.marker([x.lat, x.lng], { icon, title: xs.map((y) => y.nombre).join(' y ') }).addTo(m)
       .bindPopup(xs.map((y) => `<b>${esc(y.nombre)}</b><br>${esc(y.detalle)}`).join('<br><br>') + `<br><a href="${x.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
     for (const y of xs) marcadores[y.id] = mk;
@@ -386,7 +395,7 @@ function pintarGratitud(q = '') {
     const i = norm(n).indexOf(nq);
     return i < 0 ? esc(n) : esc(n.slice(0, i)) + '<mark>' + esc(n.slice(i, i + nq.length)) + '</mark>' + esc(n.slice(i + nq.length));
   };
-  const fila = (n, ctx) => `<li class="nombre"><span>${marca(n)}</span><button data-gracias="${esc(n)}" data-ctx="${esc(ctx)}" aria-label="Compartir agradecimiento a ${esc(n)}">${iconos.compartir}</button></li>`;
+  const fila = (n, ctx) => `<li><button class="nombre tap-suave" data-gracias="${esc(n)}" data-ctx="${esc(ctx)}" aria-label="Compartir agradecimiento a ${esc(n)}"><span>${marca(n)}</span>${iconos.compartir}</button></li>`;
   const grupos = [];
   const pri = D.fiesta.priostes.filter((n) => !nq || norm(n).includes(nq));
   if (pri.length) grupos.push(`<article class="grupo"><div class="grupo-cab"><div><span class="ev">Toda la fiesta</span><h3>Priostes 2026</h3></div></div><ul class="nombres">${pri.map((n) => fila(n, 'como Prioste de las fiestas 2026')).join('')}</ul></article>`);
@@ -460,7 +469,7 @@ async function iniciar() {
 
   pintarEstado(); pintarPriostes(); pintarDias(); pintarFiltros(); pintarLista(); pintarLugares(); pintarGratitud();
   eventos();
-  observarCta(); fabVisible();
+  observarCta(); observarScroll(); fabVisible();
   setInterval(() => { pintarEstado(); if (!$('#vista-programa').hidden) pintarLista(); }, 60000);
 
   const m = location.hash.match(/^#a\/(.+)$/);

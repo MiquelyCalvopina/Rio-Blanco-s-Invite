@@ -150,7 +150,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .chip[aria-pressed="true"] { background: var(--noche); color: #fff; }
 
 .dia-titulo { font: var(--w-s) var(--t18)/1.25 var(--titulo); padding: var(--s5) var(--s4) 0; }
-.dia-resumen { font-size: var(--t12); color: var(--tinta-2); padding: 0 var(--s4); }
 .lista { list-style: none; padding: 0 var(--s4) var(--s6); }
 .franja { display: flex; align-items: center; gap: 6px; font-size: var(--t12); font-weight: var(--w-m); color: var(--tinta-3); padding: var(--s5) 0 var(--s1); }
 .franja .ico { width: 14px; height: 14px; }
@@ -165,6 +164,7 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .principal { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px; background: #FBEFD6; color: #8A5A10; font-size: var(--t12); font-weight: var(--w-m); line-height: 18px; vertical-align: 1px; white-space: nowrap; }
 .fila.en-curso .principal { background: rgba(241,214,140,.18); color: var(--oro-claro); }
 .fila .chev { color: var(--tinta-3); flex: 0 0 auto; }
+.fila.pasada { opacity: .45; }
 .fila.en-curso { margin: var(--s2) 0; }
 .fila.en-curso .fila-main { margin: 0; padding: var(--s3); border-radius: 14px; background: var(--noche); color: #fff; box-shadow: 0 8px 20px rgba(11,22,54,.22); }
 .fila.en-curso .hora, .fila.en-curso .tit { color: #fff; }
@@ -190,6 +190,7 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .mapa .leaflet-control-attribution { font-size: 9px; background: rgba(255,255,255,.7); margin-bottom: 0; }
 .mapa .leaflet-bottom { bottom: auto; top: 0; }
 .pin { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--noche); border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+.pin-etq.arriba { top: auto; bottom: 16px; }
 .pin-etq { position: absolute; left: 7px; top: 16px; transform: translateX(-50%); white-space: nowrap; font: var(--w-m) 12px var(--texto); color: var(--tinta); background: #fff; padding: 1px 6px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
 .lista-t { font: var(--w-s) var(--t14)/1.3 var(--titulo); color: var(--tinta); padding: var(--s5) var(--s4) 0; }
 .lista-lugares { list-style: none; padding: 0 var(--s4); }
@@ -225,11 +226,9 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .grupo-cab .ev { display: block; font-size: var(--t12); color: var(--tinta-2); }
 .grupo-cab h3 { font-size: var(--t14); font-weight: var(--w-s); line-height: 1.3; }
 .nombres { list-style: none; margin-top: 2px; }
-.nombre { display: flex; align-items: center; gap: var(--s2); }
-.nombre span { flex: 1; font-size: var(--t13); color: var(--tinta); padding: 4px 0; }
-.nombre button { width: 36px; height: 32px; display: grid; place-items: center; color: var(--tinta-3); border-radius: 8px; transition: transform .2s var(--ease-out), background-color .2s; }
-.nombre button:active { transform: scale(1.12); background: var(--gris-1); }
-.nombre button .ico { width: 16px; height: 16px; }
+.nombre { display: flex; align-items: center; gap: var(--s2); width: calc(100% + 16px); min-height: 44px; padding: 0 var(--s2); margin: 0 calc(-1 * var(--s2)); }
+.nombre span { flex: 1; font-size: var(--t14); color: var(--tinta); }
+.nombre .ico { width: 16px; height: 16px; color: var(--tinta-3); }
 .nombre mark { background: var(--oro-claro); color: var(--noche); border-radius: 3px; }
 
 /* ---------- Compartir la fiesta ---------- */
@@ -260,9 +259,10 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .hoja.con-foto .hoja-asa { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 2; background: rgba(255,255,255,.85); }
 .hoja.con-foto .hoja-cerrar { background: rgba(255,255,255,.9); color: var(--tinta); border-radius: 50%; top: 10px; right: 10px; width: 36px; height: 36px; }
 .hoja-cab { position: relative; margin: 0 -16px; height: 170px; overflow: hidden; }
+.hoja-cab.portada { height: 120px; }
 .hoja-foto { display: block; width: 100%; height: 100%; object-fit: cover; }
 .portada { display: grid; place-items: center; }
-.portada .ico { width: 64px; height: 64px; stroke-width: 1.2; opacity: .9; }
+.portada .ico { width: 52px; height: 52px; stroke-width: 1.2; opacity: .9; }
 .portada.k-religioso { background: #F6EBD0; color: var(--religioso); }
 .portada.k-cultural { background: #F7DFDB; color: var(--cultural); }
 .portada.k-popular { background: #FBE6D3; color: var(--popular); }

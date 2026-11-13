@@ -26,7 +26,8 @@
       "mapa": "https://maps.app.goo.gl/6BTtiLrkM3r29RhX8",
       "lat": -0.7490455,
       "lng": -78.6154423,
-      "icono": "iglesia"
+      "icono": "iglesia",
+      "etiqueta": "arriba"
     },
     "plaza": {
       "nombre": "Plaza central del barrio",
@@ -97,7 +98,11 @@
       "detalle": "Cruzando la calle, al costado de la iglesia",
       "lat": -0.7492236,
       "lng": -78.6153353,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7492236%2C-78.6153353"
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7492236%2C-78.6153353",
+      "ancla": [
+        -4,
+        -4
+      ]
     },
     {
       "id": "banos-estadio",

@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132117';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132117';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132120';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132120';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -145,7 +145,8 @@ function pintarEstado() {
   if (e.fase === 'despues') {
     html = `<h2 class="bloque-t">Gracias</h2><p class="estado-texto">Las fiestas de 2026 terminaron. Gracias por acompañar a Nuestra Patrona.</p>`;
   } else {
-    const t = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : 'Qué está pasando';
+    // El título dice la verdad del momento: si no hay nada en curso, anuncia lo que sigue.
+    const t = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : e.ahora.length ? 'Qué está pasando' : 'Lo que sigue';
     html += `<h2 class="bloque-t">${t}</h2><div class="estado">${e.ahora.map((a) => tarjetaEstado(a, true)).join('')}${e.proximo ? tarjetaEstado(e.proximo, false) : ''}</div>`;
   }
   $('#estado').innerHTML = html;

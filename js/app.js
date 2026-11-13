@@ -258,6 +258,16 @@ function cerrarHoja() {
   if (location.hash.startsWith('#a/')) history.replaceState(null, '', location.pathname + location.search);
 }
 
+// En el detalle, los agradecimientos largos se abren con «Ver más» y se recogen con «Ver menos».
+const GRACIAS_VISIBLES = 4;
+function listaGracias(nombres) {
+  const unir = (xs) => xs.map(esc).join(' · ');
+  if (nombres.length <= GRACIAS_VISIBLES) return unir(nombres);
+  const resto = nombres.length - GRACIAS_VISIBLES;
+  return `${unir(nombres.slice(0, GRACIAS_VISIBLES))}<span class="gracias-resto" hidden> · ${unir(nombres.slice(GRACIAS_VISIBLES))}</span>
+    <button class="ver-mas" data-ver-mas="${resto}" aria-expanded="false">Ver más (${resto})</button>`;
+}
+
 // Plantilla única para todas las actividades (mismo orden y mismas secciones):
 // cabecera → título → descripción → cuándo → dónde → a cargo de → gracias a
 function detalle(id) {
@@ -285,7 +295,7 @@ function detalle(id) {
       ${fila(iconos.reloj, 'Cuándo', `${fechaLarga(a.fecha)} · ${a.hora}`)}
       ${donde}
       ${a.aCargo ? fila(iconosAct.personas, 'A cargo de', esc(a.aCargo)) : ''}
-      ${a.gentileza.length ? fila(iconos.personas, 'Gracias a', a.gentileza.map(esc).join(' · ')) : ''}
+      ${a.gentileza.length ? fila(iconos.personas, 'Gracias a', listaGracias(a.gentileza)) : ''}
     </ul>
     <div class="pie-hoja">
       <div class="pie-acciones">
@@ -502,6 +512,7 @@ function eventos() {
     if (d.opciones) return opciones(d.opciones);
     if (d.ver) return seleccionar(d.ver);
     if ('deseleccionar' in d) return deseleccionar();
+    if (d.verMas) { const r = b.parentElement.querySelector('.gracias-resto'); r.hidden = !r.hidden; b.setAttribute('aria-expanded', String(!r.hidden)); b.textContent = r.hidden ? `Ver más (${d.verMas})` : 'Ver menos'; return; }
     if ('info' in d) { const c = b.parentElement.querySelector('.credito'); c.hidden = !c.hidden; return; }
     if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {

@@ -442,6 +442,9 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 /* ---------- Detalle ---------- */
 .hoja-cab.afiche::after { background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(122,86,14,0) 35%, rgba(122,86,14,.94) 100%); }
 
+.ver-mas { display: block; min-height: 44px; margin-top: 2px; font-size: var(--t14); font-weight: var(--w-s); color: var(--poncho); }
+.gracias-resto[hidden] { display: none; }
+
 /* ---------- Buscar en el programa ---------- */
 .buscar-barra { position: absolute; right: 4px; top: 0; height: var(--barra); min-width: 44px; display: inline-flex; align-items: center; gap: 4px; padding: 0 var(--s3); font-size: var(--t14); font-weight: var(--w-m); color: var(--poncho); animation: aparecer .25s var(--ease-out); }
 .buscar-barra[hidden] { display: none; }

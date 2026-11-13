@@ -6,6 +6,36 @@ METHOD:PUBLISH
 X-WR-CALNAME:Fiestas Río Blanco Alto 2026
 X-WR-TIMEZONE:America/Guayaquil
 BEGIN:VEVENT
+UID:13-1530-concentracion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T203000Z
+DTEND:20261113T213000Z
+SUMMARY:Concentración de los devotos en Tanicuchí
+DESCRIPTION:Concentración de los devotos y público en general en el Parqu
+ e Central de Tanicuchí. Voladores para la peregrinación.\nGracias a: Sr.
+  Segundo Tello y Sra. (voladores).\nFiestas en honor a la Santísima Virge
+ n de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://www.googl
+ e.com/maps/search/?api=1&query=Parque%20Central%20Tanicuch%C3%AD%2C%20Lata
+ cunga
+LOCATION:Parque Central de la Parroquia Tanicuchí\, Río Blanco Alto\, Tan
+ icuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:13-1600-peregrinacion@rioblancoalto-fiestas-2026
 DTSTAMP:20261113T000000Z
 DTSTART:20261113T210000Z
@@ -62,6 +92,60 @@ END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1800-novena-1@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T230000Z
+DTEND:20261114T000000Z
+SUMMARY:Novena · Día 1
+DESCRIPTION:Inicio de la novena en honor a la Santísima Virgen de El Quinc
+ he.\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco 
+ Alto 2026.\nCómo llegar: https://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1930-serenata@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T003000Z
+DTEND:20261114T013000Z
+SUMMARY:Serenata a la Santísima Virgen de El Quinche
+DESCRIPTION:Gracias a: Flia. Albán Mena.\nFiestas en honor a la Santísima
+  Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://map
+ s.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
 TRIGGER:PT0M
 END:VALARM
 END:VEVENT
@@ -418,6 +502,33 @@ END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Misa de Acción de Gracias
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1300-serenata@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T180000Z
+DTEND:20261122T190000Z
+SUMMARY:Serenata a la Santísima Virgen de El Quinche
+DESCRIPTION:Gracias a: Ing. Verónica Vargas y Flia..\nFiestas en honor a l
+ a Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar:
+  https://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
 TRIGGER:PT0M
 END:VALARM
 END:VEVENT

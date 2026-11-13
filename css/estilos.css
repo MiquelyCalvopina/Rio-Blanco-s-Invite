@@ -270,9 +270,9 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .info-foto { position: absolute; right: 8px; bottom: 8px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: rgba(0,0,0,.35); color: #fff; }
 .info-foto .ico { width: 16px; height: 16px; }
 .credito { position: absolute; right: 42px; bottom: 10px; font-size: 12px; line-height: 1.4; color: #fff; background: rgba(0,0,0,.45); padding: 1px 6px; border-radius: 6px; text-decoration: none; }
-.hoja .met-sup { font-size: var(--t12); color: var(--tinta-2); margin-top: var(--s1); }
+
 .etq-dato { display: block; font-size: var(--t12); color: var(--tinta-2); }
-.hoja h2 { font: var(--w-s) var(--t18)/1.25 var(--titulo); }
+.hoja h2 { font: var(--w-s) var(--t18)/1.25 var(--titulo); margin-top: var(--s1); }
 .datos { list-style: none; margin-top: var(--s4); }
 .datos li { display: flex; gap: var(--s3); align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--linea); font-size: var(--t14); }
 .datos .ico { color: var(--tinta-3); margin-top: 1px; }

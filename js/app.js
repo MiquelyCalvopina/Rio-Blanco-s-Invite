@@ -244,7 +244,7 @@ function cerrarHoja() {
 }
 
 // Plantilla única para todas las actividades (mismo orden y mismas secciones):
-// cabecera → tipo → título → fecha → descripción → dónde → a cargo de → gracias a
+// cabecera → título → fecha → descripción → dónde → a cargo de → gracias a
 function detalle(id) {
   const a = actividad(id);
   if (!a) return;
@@ -263,7 +263,6 @@ function detalle(id) {
     ? fila(iconos.mapa, 'Dónde', `Posada de ${esc(a.anfitrion)}<span class="sub">Casa particular</span>`)
     : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '');
   abrirHoja(`${cabecera}
-    <p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p>
     <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
     <p class="fecha-det">${iconos.reloj}${fechaLarga(a.fecha)} · ${a.hora}</p>
     ${a.descripcion ? `<p class="det">${esc(a.descripcion)}</p>` : ''}

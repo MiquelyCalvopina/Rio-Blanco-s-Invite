@@ -29,7 +29,7 @@ function ahora() {
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fechaLarga = (f) => { const d = new Date(f + 'T12:00:00Z'); return `${DIAS_SEM[d.getUTCDay()]} ${d.getUTCDate()} de ${MESES[d.getUTCMonth()]}`; };
 const lugar = (a) => D.lugares[a.lugar];
-const lugarTexto = (a) => (a.lugar === 'posada' ? a.detalle.replace(/\.$/, '') : lugar(a).nombre);
+const lugarTexto = (a) => (a.lugar === 'posada' ? `Posada de ${a.anfitrion}` : lugar(a).nombre);
 const actividad = (id) => D.actividades.find((x) => x.id === id);
 const dias = () => [...new Set(D.actividades.map((a) => a.fecha))];
 const ic = (a) => `<span class="ic c-${a.tipo}">${iconosAct[a.icono] || ''}</span>`;
@@ -243,27 +243,34 @@ function cerrarHoja() {
   if (location.hash.startsWith('#a/')) history.replaceState(null, '', location.pathname + location.search);
 }
 
+// Plantilla única para todas las actividades (mismo orden y mismas secciones):
+// cabecera → tipo → título → fecha → descripción → dónde → a cargo de → gracias a
 function detalle(id) {
   const a = actividad(id);
   if (!a) return;
   history.replaceState(null, '', `${location.search}#a/${a.id}`);
   const l = lugar(a);
   const ok = agregados.has(a.id);
-  const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
-  const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gracias a<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
   const src = a.foto || FOTOS[a.lugar];
-  const cred = a.credito ? `<a class="credito" href="${a.credito.url}" target="_blank" rel="noopener">Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
-  const foto = src ? `<div class="hoja-foto-c"><img class="hoja-foto" src="${src}" alt="">${cred}</div>` : '';
-  const desc = a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : '';
-  // Orden: título → fecha → descripción → dónde (cómo llegar) → gracias a
-  abrirHoja(`${foto}
-    <div class="hoja-top">${ic(a)}<div><p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div></div>
+  const info = a.credito
+    ? `<button class="info-foto" data-info aria-label="Créditos de la foto">${iconos.info}</button>
+       <a class="credito" href="${a.credito.url}" target="_blank" rel="noopener" hidden>Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
+  const cabecera = src
+    ? `<div class="hoja-cab"><img class="hoja-foto" src="${src}" alt="">${info}</div>`
+    : `<div class="hoja-cab portada k-${a.tipo}">${iconosAct[a.icono] || ''}</div>`;
+  const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
+  const donde = a.lugar === 'posada'
+    ? fila(iconos.mapa, 'Dónde', `Posada de ${esc(a.anfitrion)}<span class="sub">Casa particular</span>`)
+    : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '');
+  abrirHoja(`${cabecera}
+    <p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p>
+    <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
     <p class="fecha-det">${iconos.reloj}${fechaLarga(a.fecha)} · ${a.hora}</p>
-    ${desc}
-    ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
+    ${a.descripcion ? `<p class="det">${esc(a.descripcion)}</p>` : ''}
     <ul class="datos">
-      <li>${iconos.mapa}<span>${esc(lugarTexto(a))}${a.lugar === 'posada' ? '<span class="sub">Casa particular</span>' : ''}</span>${mapa}</li>
-      ${gent}
+      ${donde}
+      ${a.aCargo ? fila(iconosAct.personas, 'A cargo de', esc(a.aCargo)) : ''}
+      ${a.gentileza.length ? fila(iconos.personas, 'Gracias a', a.gentileza.map(esc).join(' · ')) : ''}
     </ul>
     <button class="enlace" data-opciones="${a.id}">Usar otro calendario</button>
     <div class="pie-hoja">
@@ -271,7 +278,7 @@ function detalle(id) {
         <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Agregado a su calendario' : TEXTO_CAL.boton}</button>
         <button class="btn btn-borde tap" data-compartir-act="${a.id}" aria-label="Compartir esta actividad">${iconos.compartir}Compartir</button>
       </div>
-    </div>`, a.id, 'detalle', !!foto);
+    </div>`, a.id, 'detalle', true);
 }
 
 function opciones(id) {
@@ -417,6 +424,7 @@ function eventos() {
     if (d.act) return detalle(d.act);
     if (d.opciones) return opciones(d.opciones);
     if (d.ver) return verEnMapa(d.ver);
+    if ('info' in d) { const c = b.parentElement.querySelector('.credito'); c.hidden = !c.hidden; return; }
     if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {
       const a = actividad(d.compartirAct);

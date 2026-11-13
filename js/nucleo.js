@@ -77,8 +77,10 @@ function plegar(linea) {
 
 export function descripcion(a, lugares) {
   const lineas = [];
-  if (a.detalle) lineas.push(a.detalle);
-  if (a.gentileza && a.gentileza.length) lineas.push('Gentileza de: ' + a.gentileza.join(', ') + '.');
+  if (a.descripcion) lineas.push(a.descripcion);
+  if (a.anfitrion) lineas.push('Posada: ' + a.anfitrion);
+  if (a.aCargo) lineas.push('A cargo de: ' + a.aCargo + '.');
+  if (a.gentileza && a.gentileza.length) lineas.push('Gracias a: ' + a.gentileza.join(', ') + '.');
   lineas.push('Fiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.');
   const lugar = lugares[a.lugar];
   if (lugar && lugar.mapa) lineas.push('Cómo llegar: ' + lugar.mapa);

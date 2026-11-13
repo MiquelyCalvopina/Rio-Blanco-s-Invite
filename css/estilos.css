@@ -259,11 +259,19 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .hoja.con-foto { padding-top: 0; }
 .hoja.con-foto .hoja-asa { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 2; background: rgba(255,255,255,.85); }
 .hoja.con-foto .hoja-cerrar { background: rgba(255,255,255,.9); color: var(--tinta); border-radius: 50%; top: 10px; right: 10px; width: 36px; height: 36px; }
-.hoja-foto-c { position: relative; margin: 0 -16px var(--s3); }
-.hoja-foto { display: block; width: 100%; height: 190px; object-fit: cover; }
-.credito { position: absolute; right: 8px; bottom: 6px; font-size: 12px; line-height: 1.4; color: #fff; background: rgba(0,0,0,.45); padding: 1px 6px; border-radius: 6px; text-decoration: none; }
-.hoja-top { display: flex; gap: var(--s3); align-items: center; margin-top: var(--s1); padding-right: 40px; }
-.hoja .met-sup { font-size: var(--t12); color: var(--tinta-2); }
+.hoja-cab { position: relative; margin: 0 -16px var(--s3); height: 170px; overflow: hidden; }
+.hoja-foto { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portada { display: grid; place-items: center; }
+.portada .ico { width: 64px; height: 64px; stroke-width: 1.2; opacity: .9; }
+.portada.k-religioso { background: #F6EBD0; color: var(--religioso); }
+.portada.k-cultural { background: #F7DFDB; color: var(--cultural); }
+.portada.k-popular { background: #FBE6D3; color: var(--popular); }
+.portada.k-deportivo { background: #DDE9E1; color: var(--deportivo); }
+.info-foto { position: absolute; right: 8px; bottom: 8px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: rgba(0,0,0,.35); color: #fff; }
+.info-foto .ico { width: 16px; height: 16px; }
+.credito { position: absolute; right: 42px; bottom: 10px; font-size: 12px; line-height: 1.4; color: #fff; background: rgba(0,0,0,.45); padding: 1px 6px; border-radius: 6px; text-decoration: none; }
+.hoja .met-sup { font-size: var(--t12); color: var(--tinta-2); margin-top: var(--s1); }
+.etq-dato { display: block; font-size: var(--t12); color: var(--tinta-2); }
 .hoja h2 { font: var(--w-s) var(--t18)/1.25 var(--titulo); }
 .datos { list-style: none; margin-top: var(--s4); }
 .datos li { display: flex; gap: var(--s3); align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--linea); font-size: var(--t14); }
@@ -273,8 +281,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .fecha-det { display: flex; align-items: center; gap: 6px; margin-top: var(--s3); font-size: var(--t14); font-weight: var(--w-m); color: var(--tinta); }
 .fecha-det .ico { width: 16px; height: 16px; color: var(--tinta-3); }
 .det { font-size: var(--t14); color: var(--tinta); margin-top: var(--s3); }
-.quees { margin-top: var(--s3); padding: var(--s3); border-radius: 12px; background: var(--gris-1); font-size: var(--t13); }
-.quees b { font-weight: var(--w-s); }
 .pie-hoja { position: sticky; bottom: 0; margin: var(--s4) calc(-1 * var(--s4)) 0; padding: var(--s3) var(--s4) calc(var(--s3) + var(--abajo)); background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--linea); }
 .pie-acciones { display: grid; grid-template-columns: 1fr auto; gap: var(--s2); }
 .pie-acciones .btn-borde { width: auto; padding: 0 var(--s4); }

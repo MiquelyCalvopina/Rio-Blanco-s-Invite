@@ -111,3 +111,18 @@ test('las fotos de las actividades existen y las de terceros tienen crédito', a
     if (!a.foto.includes('toros') && !a.foto.includes('colchas')) assert.ok(a.credito && a.credito.autor && a.credito.licencia, `falta crédito en ${a.id}`);
   }
 });
+
+test('todas las actividades siguen el mismo esquema de información', () => {
+  const obligatorios = ['id', 'fecha', 'hora', 'titulo', 'tipo', 'icono', 'lugar', 'descripcion', 'aCargo', 'gentileza'];
+  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito']);
+  for (const a of A) {
+    for (const k of obligatorios) assert.ok(k in a, `${a.id} no tiene ${k}`);
+    for (const k of Object.keys(a)) assert.ok(permitidos.has(k), `${a.id} tiene un campo fuera del esquema: ${k}`);
+    if (a.lugar === 'posada') assert.ok(a.anfitrion, `${a.id} es posada y no tiene anfitrión`);
+  }
+});
+
+test('el .ics usa la descripción, quién está a cargo y la gentileza', () => {
+  const ics = icsCalendario([porId('22-1200-misa-accion-gracias')], datos.lugares, SELLO_ICS).replace(/\r\n /g, '');
+  assert.ok(ics.includes('A cargo de: Padre José Luis Tapia'));
+});

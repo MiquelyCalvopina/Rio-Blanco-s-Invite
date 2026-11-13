@@ -22,6 +22,7 @@
   "lugares": {
     "iglesia": {
       "nombre": "Iglesia del Barrio Río Blanco Alto",
+      "corto": "Iglesia",
       "mapa": "https://maps.app.goo.gl/6BTtiLrkM3r29RhX8",
       "lat": -0.7490455,
       "lng": -78.6154423,
@@ -29,6 +30,7 @@
     },
     "plaza": {
       "nombre": "Plaza central del barrio",
+      "corto": "Plaza central y de toros",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
       "lat": -0.7487619,
       "lng": -78.6146614,
@@ -48,6 +50,7 @@
     },
     "coliseo": {
       "nombre": "Coliseo del Barrio Río Blanco Alto",
+      "corto": "Coliseo",
       "mapa": "https://maps.app.goo.gl/rfMhf9NwCNY8qQ2D6",
       "lat": -0.7486908,
       "lng": -78.613664,

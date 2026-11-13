@@ -27,10 +27,7 @@
 </svg>
 
 <div id="splash" class="splash" role="presentation">
-  <div class="splash-ilus">
-    <div id="splash-toro"></div>
-    <div id="splash-iglesia"></div>
-  </div>
+  <div id="splash-ilus"></div>
   <p class="splash-kicker">Fiestas en honor a la</p>
   <p class="splash-titulo">Santísima Virgen de El Quinche</p>
   <p class="splash-barrio">Río Blanco Alto</p>
@@ -48,20 +45,18 @@
         <div id="hero-virgen" class="hero-virgen"></div>
         <p class="kicker">Fiestas en honor a la</p>
         <h1>Santísima Virgen de El Quinche</h1>
-        <p class="hero-sub">Río Blanco Alto · 13 al 22 de noviembre de 2026</p>
+        <p class="hero-sub">13 al 22 de noviembre de 2026 · Tanicuchí</p>
       </div>
-      <div id="estado" aria-live="polite"></div>
-      <button class="btn btn-oro" data-ir="programa">Ver el programa completo</button>
+      <button class="btn btn-oro tap" data-ir="programa">Ver el programa</button>
     </div>
-    <section class="priostes-inicio" aria-labelledby="t-priostes">
-      <div class="cab">
-        <span class="tile" data-ico-act="estandarte"></span>
-        <div><h2 id="t-priostes">Priostes 2026</h2><p class="sub">Les invitan a celebrar a Nuestra Patrona</p></div>
-      </div>
+    <section class="bloque" aria-live="polite" id="estado"></section>
+    <section class="bloque" aria-labelledby="t-priostes">
+      <h2 id="t-priostes" class="bloque-t">Priostes 2026</h2>
+      <p class="bloque-sub">Les invitan a celebrar a Nuestra Patrona</p>
       <ul id="lista-priostes" class="lista-priostes"></ul>
       <p class="organizan">Junto al Comité Promejoras y la Liga Deportiva Barrial Central Río Blanco Alto.</p>
-      <p class="lema">Raíces fuertes, tradiciones vivas</p>
     </section>
+    <p class="lema">Raíces fuertes, tradiciones vivas</p>
   </section>
 
   <section id="vista-programa" class="vista" aria-label="Programa" hidden>
@@ -75,22 +70,22 @@
   </section>
 
   <section id="vista-lugares" class="vista" aria-label="Lugares" hidden>
-    <div class="lugares-cab">
-      <h2>Lugares de la fiesta</h2>
-      <p>Toque un punto o un lugar para ver cómo llegar.</p>
+    <div class="cab-vista">
+      <h2>Lugares</h2>
+      <p>Dónde se celebra cada actividad.</p>
     </div>
     <div id="mapa" class="mapa" role="region" aria-label="Mapa del barrio"></div>
     <ul id="lista-lugares" class="lista-lugares"></ul>
   </section>
 
   <section id="vista-gratitud" class="vista" aria-label="Gratitud" hidden>
-    <div class="gratitud-cabecera">
+    <div class="cab-vista">
       <h2>Gratitud</h2>
       <p>Gracias a quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p>
       <label class="buscador">
         <span class="sr">Buscar un nombre o familia</span>
         <span class="buscador-icono"></span>
-        <input id="buscar" type="search" placeholder="Busque su nombre o su familia" autocomplete="off">
+        <input id="buscar" type="search" placeholder="Buscar nombre o familia" autocomplete="off">
       </label>
     </div>
     <div id="gratitud" class="gratitud"></div>

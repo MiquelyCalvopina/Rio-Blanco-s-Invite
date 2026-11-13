@@ -1,5 +1,5 @@
 import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl } from './nucleo.js';
-import { torito, iglesia, virgen, iconos, iconosAct } from './ilustraciones.js';
+import { iglesia, virgen, iconos, iconosAct } from './ilustraciones.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -32,7 +32,9 @@ const lugar = (a) => D.lugares[a.lugar];
 const lugarTexto = (a) => (a.lugar === 'posada' ? a.detalle.replace(/\.$/, '') : lugar(a).nombre);
 const actividad = (id) => D.actividades.find((x) => x.id === id);
 const dias = () => [...new Set(D.actividades.map((a) => a.fecha))];
-const tile = (a, extra = '') => `<span class="tile k-${a.tipo} ${extra}">${iconosAct[a.icono] || ''}</span>`;
+const ic = (a) => `<span class="ic c-${a.tipo}">${iconosAct[a.icono] || ''}</span>`;
+const icPeq = (a) => `<span class="c-${a.tipo}">${iconosAct[a.icono] || ''}</span>`;
+const FOTOS = { plaza: 'img/lugares/plaza.jpg', plazaToros: 'img/lugares/plaza.jpg', barrio: 'img/lugares/cotopaxi.jpg' };
 
 /* ---------- Agregados al calendario (solo en este teléfono) ---------- */
 const agregados = new Set((() => { try { return JSON.parse(localStorage.getItem('agregados') || '[]'); } catch { return []; } })());
@@ -57,13 +59,9 @@ function splash() {
   let visto = false;
   try { visto = sessionStorage.getItem('splash') === '1'; } catch {}
   if (visto) { s.remove(); return; }
-  $('#splash-toro').innerHTML = torito;
-  $('#splash-iglesia').innerHTML = iglesia;
-  if (!reducido) {
-    prepararTrazos($('#splash-toro'), 0, 0.1, 0.7);
-    prepararTrazos($('#splash-iglesia'), 0.5, 0.07, 0.6);
-  }
-  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 1300);
+  $('#splash-ilus').innerHTML = iglesia;
+  if (!reducido) prepararTrazos($('#splash-ilus'), 0, 0.08, 0.7);
+  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 1100);
   const cerrar = () => {
     clearTimeout(t1); clearTimeout(t2);
     s.classList.add('textos', 'fuera');
@@ -76,13 +74,22 @@ function splash() {
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
+let vistaActual = 'inicio';
 function ir(vista) {
-  for (const v of VISTAS) $(`#vista-${v}`).hidden = v !== vista;
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
-  window.scrollTo(0, 0);
-  if (vista === 'programa') $('.dia[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' });
-  if (vista === 'lugares') mapa();
-  fabVisible();
+  if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  const antes = $(`#vista-${vistaActual}`);
+  const despues = $(`#vista-${vista}`);
+  vistaActual = vista;
+  antes.classList.remove('entra'); antes.classList.add('sale');
+  setTimeout(() => {
+    antes.hidden = true; antes.classList.remove('sale');
+    despues.hidden = false; despues.classList.remove('entra'); void despues.offsetWidth; despues.classList.add('entra');
+    window.scrollTo(0, 0);
+    if (vista === 'programa') $('.dia[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' });
+    if (vista === 'lugares') mapa();
+    fabVisible();
+  }, 150);
 }
 
 // En el inicio, el botón flotante aparece cuando ya pasó el botón principal (para no taparlo).
@@ -108,8 +115,8 @@ function cuando(a) {
 }
 
 function tarjetaEstado(a, vivo) {
-  return `<button class="tarjeta-estado" data-act="${a.id}">
-    ${tile(a)}
+  return `<button class="item tap-suave" data-act="${a.id}">
+    ${ic(a)}
     <span class="cuerpo">
       <span class="etq">${vivo ? '<i class="vivo"></i>En curso' : esc(cuando(a))}</span>
       <span class="tit">${esc(a.titulo)}</span>
@@ -122,13 +129,10 @@ function pintarEstado() {
   const e = estado(D.actividades, ahora());
   let html = '';
   if (e.fase === 'despues') {
-    html = `<p class="seccion-t">Gracias</p><p class="estado-texto">Las fiestas de 2026 terminaron. Gracias por acompañar a Nuestra Patrona.</p>`;
+    html = `<h2 class="bloque-t">Gracias</h2><p class="estado-texto">Las fiestas de 2026 terminaron. Gracias por acompañar a Nuestra Patrona.</p>`;
   } else {
-    if (e.ahora.length) html += `<p class="seccion-t">Ahora</p><div class="estado">${e.ahora.map((a) => tarjetaEstado(a, true)).join('')}</div>`;
-    if (e.proximo) {
-      const t = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : 'Lo próximo';
-      html += `<p class="seccion-t">${t}</p><div class="estado">${tarjetaEstado(e.proximo, false)}</div>`;
-    }
+    const t = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : 'Qué está pasando';
+    html += `<h2 class="bloque-t">${t}</h2><div class="estado">${e.ahora.map((a) => tarjetaEstado(a, true)).join('')}${e.proximo ? tarjetaEstado(e.proximo, false) : ''}</div>`;
   }
   $('#estado').innerHTML = html;
 }
@@ -162,11 +166,11 @@ function pintarFiltros() {
 function filaAct(a) {
   const ok = agregados.has(a.id);
   return `<li class="fila">
-    <button class="fila-main" data-act="${a.id}">
-      ${tile(a)}
+    <button class="fila-main tap-suave" data-act="${a.id}">
+      <span class="hora">${a.hora}</span>
       <span class="cuerpo">
-        <span class="tit">${esc(a.titulo)}</span>
-        <span class="met"><b>${a.hora}</b> · ${esc(lugarTexto(a))}${a.destacado ? ' · <span class="principal">Principal</span>' : ''}</span>
+        <span class="tit">${esc(a.titulo)}${a.destacado ? '<i class="principal" title="Actividad principal"></i>' : ''}</span>
+        <span class="met">${icPeq(a)}<span>${esc(lugarTexto(a))}</span></span>
       </span>
     </button>
     <button class="fila-cal${ok ? ' puesto' : ''}" data-agregar="${a.id}" aria-label="${ok ? 'Ya está en su calendario' : 'Agregar al calendario'}: ${esc(a.titulo)}">${ok ? iconos.calOk : iconos.calMas}</button>
@@ -200,7 +204,10 @@ function pintarLista() {
     html += filaAct(a);
   });
   if (pos === acts.length) html += linea;
-  $('#lista').innerHTML = html;
+  const l = $('#lista');
+  l.classList.remove('escalonado'); l.innerHTML = html;
+  [...l.children].forEach((li, i) => li.style.setProperty('--i', Math.min(i, 12)));
+  void l.offsetWidth; l.classList.add('escalonado');
 }
 
 /* ---------- Agregar al calendario (según el teléfono) ---------- */
@@ -223,7 +230,10 @@ function abrirHoja(html, id = '', modo = '') {
   h.scrollTop = 0;
 }
 function cerrarHoja() {
-  $('#hoja').hidden = true; $('#velo').hidden = true; $('#fab').hidden = false;
+  const h = $('#hoja'); const v = $('#velo');
+  if (h.hidden || h.classList.contains('sale')) return;
+  h.classList.add('sale'); v.classList.add('sale');
+  setTimeout(() => { h.hidden = true; v.hidden = true; h.classList.remove('sale'); v.classList.remove('sale'); $('#fab').hidden = false; }, 230);
   document.body.style.overflow = '';
   if (location.hash.startsWith('#a/')) history.replaceState(null, '', location.pathname + location.search);
 }
@@ -237,7 +247,7 @@ function detalle(id) {
   const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
   const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gentileza de<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
   abrirHoja(`
-    <div class="hoja-top">${tile(a, 'grande')}<div><p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div></div>
+    <div class="hoja-top">${ic(a)}<div><p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div></div>
     <ul class="datos">
       <li>${iconos.reloj}<span>${fechaLarga(a.fecha)}<span class="sub">${a.hora}</span></span></li>
       <li>${iconos.mapa}<span>${esc(lugarTexto(a))}${a.lugar === 'posada' ? '<span class="sub">Casa particular</span>' : ''}</span>${mapa}</li>
@@ -246,11 +256,11 @@ function detalle(id) {
     ${a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : ''}
     ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
     <div class="pie-hoja">
-      <button class="btn btn-noche" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Ya está en su calendario' : TEXTO_CAL.boton}</button>
+      <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Ya está en su calendario' : TEXTO_CAL.boton}</button>
       <p class="ayuda">${TEXTO_CAL.ayuda}</p>
       <div class="acciones-sec">
-        <button class="btn btn-borde" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
-        <button class="btn btn-borde" data-opciones="${a.id}">${iconos.calendario}Otro calendario</button>
+        <button class="btn btn-borde tap" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
+        <button class="btn btn-borde tap" data-opciones="${a.id}">${iconos.calendario}Otro calendario</button>
       </div>
     </div>`, a.id, 'detalle');
 }
@@ -262,10 +272,10 @@ function opciones(id) {
     <button class="enlace" data-act="${a.id}">${iconos.atras}Volver</button>
     <h2 id="hoja-titulo">Elija su calendario</h2>
     <div class="opciones">
-      <a class="opcion" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>iPhone, Samsung u Outlook<span class="sub">Esta actividad · archivo .ics</span></span><span class="rec">Con avisos</span></a>
-      <a class="opcion" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Esta actividad · active la notificación</span></span></a>
-      <a class="opcion" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${ndest} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
-      <a class="opcion" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
+      <a class="opcion tap-suave" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>iPhone, Samsung u Outlook<span class="sub">Esta actividad · archivo .ics</span></span><span class="rec">Con avisos</span></a>
+      <a class="opcion tap-suave" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Esta actividad · active la notificación</span></span></a>
+      <a class="opcion tap-suave" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${ndest} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
+      <a class="opcion tap-suave" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades en un archivo .ics</span></span><span class="rec">Con avisos</span></a>
     </div>`, a.id, 'opciones');
 }
 
@@ -285,13 +295,13 @@ function lugaresUsados() {
 }
 function pintarLugares() {
   const cuenta = lugaresUsados();
-  const orden = Object.keys(cuenta).sort((x, y) => cuenta[y] - cuenta[x]);
+  const orden = Object.keys(cuenta).sort((x, y) => (FOTOS[y] ? 1 : 0) - (FOTOS[x] ? 1 : 0) || cuenta[y] - cuenta[x]);
   $('#lista-lugares').innerHTML = orden.map((k) => {
     const l = D.lugares[k];
-    const extra = k === 'estadio' ? ' · con parqueadero' : '';
-    return `<li class="lugar"><span class="tile k-religioso">${iconosAct[l.icono] || iconos.mapa}</span>
-      <span class="cuerpo"><span class="tit">${esc(l.nombre)}</span><span class="met">${cuenta[k]} ${cuenta[k] === 1 ? 'actividad' : 'actividades'}${extra}</span></span>
-      ${l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : ''}</li>`;
+    const n = `${cuenta[k]} ${cuenta[k] === 1 ? 'actividad' : 'actividades'}${k === 'estadio' ? ' · con parqueadero' : ''}`;
+    const foto = FOTOS[k] ? `<img src="${FOTOS[k]}" alt="" loading="lazy">` : '';
+    return `<li><a class="lugar tap${foto ? '' : ' sin-foto'}" href="${l.mapa}" target="_blank" rel="noopener">${foto}
+      <span class="info"><span class="cuerpo"><span class="tit">${esc(l.nombre)}</span><span class="met">${n}</span></span><span class="ir">Cómo llegar</span></span></a></li>`;
   }).join('');
 }
 async function mapa() {
@@ -303,7 +313,7 @@ async function mapa() {
   } catch { $('#mapa').hidden = true; return; }
   const L = window.L;
   const m = L.map('mapa', { zoomControl: false, attributionControl: true, scrollWheelZoom: false });
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(m);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(m);
   const puntos = {};
   for (const [k, l] of Object.entries(D.lugares)) {
     if (l.lat == null) continue;
@@ -312,7 +322,8 @@ async function mapa() {
   }
   const grupo = [];
   for (const { l, nombres } of Object.values(puntos)) {
-    const icon = L.divIcon({ className: '', html: `<span class="pin k-cultural" style="background:var(--colcha);color:#fff">${iconosAct[l.icono] || ''}</span>`, iconSize: [36, 36], iconAnchor: [18, 36] });
+    const corto = l.corto || nombres[0];
+    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq">${esc(corto)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
     L.marker([l.lat, l.lng], { icon, title: nombres.join(' y ') }).addTo(m)
       .bindPopup(`<b>${esc(nombres.join(' y '))}</b><br><a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
     grupo.push([l.lat, l.lng]);
@@ -332,11 +343,11 @@ function pintarGratitud(q = '') {
   const fila = (n, ctx) => `<li class="nombre"><span>${marca(n)}</span><button data-gracias="${esc(n)}" data-ctx="${esc(ctx)}" aria-label="Compartir agradecimiento a ${esc(n)}">${iconos.compartir}</button></li>`;
   const grupos = [];
   const pri = D.fiesta.priostes.filter((n) => !nq || norm(n).includes(nq));
-  if (pri.length) grupos.push(`<article class="grupo"><div class="grupo-cab"><span class="tile k-religioso">${iconosAct.estandarte}</span><div><span class="ev">Toda la fiesta</span><h3>Priostes 2026</h3></div></div><ul class="nombres">${pri.map((n) => fila(n, 'como Prioste de las fiestas 2026')).join('')}</ul></article>`);
+  if (pri.length) grupos.push(`<article class="grupo"><div class="grupo-cab"><div><span class="ev">Toda la fiesta</span><h3>Priostes 2026</h3></div></div><ul class="nombres">${pri.map((n) => fila(n, 'como Prioste de las fiestas 2026')).join('')}</ul></article>`);
   for (const a of D.actividades) {
     const ns = a.gentileza.filter((n) => !nq || norm(n).includes(nq));
     if (!ns.length) continue;
-    grupos.push(`<article class="grupo"><div class="grupo-cab">${tile(a)}<div><span class="ev">${fechaLarga(a.fecha)} · ${a.hora}</span><h3>${esc(a.titulo)}</h3></div></div><ul class="nombres">${ns.map((n) => fila(n, `en «${a.titulo}»`)).join('')}</ul></article>`);
+    grupos.push(`<article class="grupo"><div class="grupo-cab"><div><span class="ev">${fechaLarga(a.fecha)} · ${a.hora}</span><h3>${esc(a.titulo)}</h3></div></div><ul class="nombres">${ns.map((n) => fila(n, `en «${a.titulo}»`)).join('')}</ul></article>`);
   }
   $('#gratitud').innerHTML = grupos.join('') || `<p class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</p>`;
 }
@@ -350,8 +361,9 @@ async function compartir({ title, text, url }) {
 }
 
 function aviso(t) {
-  const a = $('#aviso'); a.textContent = t; a.hidden = false;
-  clearTimeout(aviso.t); aviso.t = setTimeout(() => { a.hidden = true; }, 3500);
+  const a = $('#aviso'); a.textContent = t; a.classList.remove('sale'); a.hidden = false;
+  clearTimeout(aviso.t); clearTimeout(aviso.t2);
+  aviso.t = setTimeout(() => { a.classList.add('sale'); aviso.t2 = setTimeout(() => { a.hidden = true; }, 200); }, 3500);
 }
 
 /* ---------- Eventos ---------- */

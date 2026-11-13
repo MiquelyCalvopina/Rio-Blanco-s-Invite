@@ -38,12 +38,11 @@
 </div>
 
 <header class="barra">
-  <button class="marca" data-ir="inicio" aria-label="Ir al inicio"><span>Río Blanco Alto</span></button>
-  <button id="btn-compartir" class="btn-icono" aria-label="Compartir la invitación"></button>
+  <button class="marca" data-ir="inicio" aria-label="Ir al inicio">Río Blanco Alto · 2026</button>
 </header>
 
 <main>
-  <section id="vista-inicio" class="vista vista-inicio" aria-label="Inicio">
+  <section id="vista-inicio" class="vista" aria-label="Inicio">
     <div class="hero">
       <div class="hero-cab">
         <div id="hero-virgen" class="hero-virgen"></div>
@@ -53,9 +52,16 @@
       </div>
       <div id="estado" aria-live="polite"></div>
       <button class="btn btn-oro" data-ir="programa">Ver el programa completo</button>
-      <p class="lema">Raíces fuertes, tradiciones vivas</p>
-      <div id="hero-cotopaxi" class="hero-cotopaxi"></div>
     </div>
+    <section class="priostes-inicio" aria-labelledby="t-priostes">
+      <div class="cab">
+        <span class="tile" data-ico-act="estandarte"></span>
+        <div><h2 id="t-priostes">Priostes 2026</h2><p class="sub">Les invitan a celebrar a Nuestra Patrona</p></div>
+      </div>
+      <ul id="lista-priostes" class="lista-priostes"></ul>
+      <p class="organizan">Junto al Comité Promejoras y la Liga Deportiva Barrial Central Río Blanco Alto.</p>
+      <p class="lema">Raíces fuertes, tradiciones vivas</p>
+    </section>
   </section>
 
   <section id="vista-programa" class="vista" aria-label="Programa" hidden>
@@ -66,6 +72,15 @@
     <h2 id="dia-titulo" class="dia-titulo"></h2>
     <p id="dia-resumen" class="dia-resumen"></p>
     <ul id="lista" class="lista"></ul>
+  </section>
+
+  <section id="vista-lugares" class="vista" aria-label="Lugares" hidden>
+    <div class="lugares-cab">
+      <h2>Lugares de la fiesta</h2>
+      <p>Toque un punto o un lugar para ver cómo llegar.</p>
+    </div>
+    <div id="mapa" class="mapa" role="region" aria-label="Mapa del barrio"></div>
+    <ul id="lista-lugares" class="lista-lugares"></ul>
   </section>
 
   <section id="vista-gratitud" class="vista" aria-label="Gratitud" hidden>
@@ -82,16 +97,19 @@
   </section>
 </main>
 
+<button id="fab" class="fab" aria-label="Compartir la fiesta con su familia"><span data-ico="compartir"></span>Compartir la fiesta</button>
+
 <nav class="tabs" aria-label="Secciones">
   <button data-ir="inicio" class="tab" aria-current="page"><span data-ico="inicio"></span>Inicio</button>
   <button data-ir="programa" class="tab"><span data-ico="programa"></span>Programa</button>
+  <button data-ir="lugares" class="tab"><span data-ico="mapa"></span>Lugares</button>
   <button data-ir="gratitud" class="tab"><span data-ico="gratitud"></span>Gratitud</button>
 </nav>
 
 <div id="velo" class="velo" hidden></div>
 <section id="hoja" class="hoja" role="dialog" aria-modal="true" aria-labelledby="hoja-titulo" hidden>
   <div class="hoja-asa"></div>
-  <button id="hoja-cerrar" class="btn-icono hoja-cerrar" aria-label="Cerrar"></button>
+  <button id="hoja-cerrar" class="hoja-cerrar" aria-label="Cerrar"></button>
   <div id="hoja-contenido"></div>
 </section>
 

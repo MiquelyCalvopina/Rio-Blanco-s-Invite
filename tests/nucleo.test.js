@@ -97,3 +97,8 @@ test('los archivos .ics generados están al día', () => {
   const archivo = readFileSync(new URL('../ics/22-1200-misa-accion-gracias.ics', import.meta.url), 'utf8');
   assert.equal(archivo, esperado);
 });
+
+test('cada actividad tiene un ícono propio dibujado', async () => {
+  const { iconosAct } = await import('../js/ilustraciones.js');
+  for (const a of A) assert.ok(iconosAct[a.icono], `ícono faltante en ${a.id}: ${a.icono}`);
+});

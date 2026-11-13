@@ -27,11 +27,15 @@
 </svg>
 
 <div id="splash" class="splash" role="presentation">
+  <div class="splash-fotos" aria-hidden="true"><img src="img/fiesta/splash-3.jpg" alt=""><img src="img/fiesta/splash-1.jpg" alt=""><img src="img/fiesta/splash-2.jpg" alt=""></div>
+  <div class="splash-velo"></div>
+  <div class="splash-cont">
   <div id="splash-ilus"></div>
   <p class="splash-kicker">Fiestas en honor a la</p>
   <p class="splash-titulo">Santísima Virgen de El Quinche</p>
   <p class="splash-barrio">Río Blanco Alto</p>
   <p class="splash-fechas">13 al 22 de noviembre de 2026</p>
+  </div>
 </div>
 
 <header class="barra">
@@ -41,7 +45,8 @@
 
 <main>
   <section id="vista-inicio" class="vista" aria-label="Inicio">
-    <div class="hero">
+    <div class="hero hero-viva">
+      <div class="mosaico" aria-hidden="true"><img class="m1" src="img/fiesta/colchas-alta.jpg" alt=""><img class="m2" src="img/fiesta/danza.jpg" alt=""><img class="m3" src="img/fiesta/pirotecnia.jpg" alt=""></div>
       <div class="hero-cab">
         <div id="hero-virgen" class="hero-virgen"></div>
         <p class="kicker">Fiestas en honor a la</p>
@@ -52,6 +57,7 @@
       <button class="btn btn-oro tap" data-ir="programa">Ver el programa</button>
     </div>
     <section class="bloque" aria-live="polite" id="estado"></section>
+    <section class="bloque esperado" aria-labelledby="t-esperado"><h2 id="t-esperado" class="bloque-t">Lo más esperado</h2><div id="carrusel" class="carrusel"></div></section>
     <section class="priostes-card" aria-labelledby="t-priostes">
       <div class="cab"><span class="ic" data-ico-act="estandarte"></span><div><p class="kick">Gracias</p><h2 id="t-priostes">Priostes 2026</h2></div></div>
       <p class="msg">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p>
@@ -83,7 +89,7 @@
 
   <section id="vista-gratitud" class="vista" aria-label="Gratitud" hidden>
     <div class="cab-vista">
-      <p>Gracias a quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p>
+      <div class="grat-hero"><img src="img/actividades/colchas.jpg" alt=""><div class="grat-txt"><p class="grat-t">Gracias</p><p>A quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p></div></div>
       <label class="buscador">
         <span class="sr">Buscar un nombre o familia</span>
         <span class="buscador-icono"></span>

@@ -61,7 +61,8 @@ function splash() {
   if (visto) { s.remove(); return; }
   $('#splash-ilus').innerHTML = iglesia;
   if (!reducido) prepararTrazos($('#splash-ilus'), 0, 0.08, 0.7);
-  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 1100);
+  s.classList.add('anima');
+  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 900);
   const cerrar = () => {
     clearTimeout(t1); clearTimeout(t2);
     s.classList.add('textos', 'fuera');
@@ -79,6 +80,7 @@ let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
   $('#titulo-barra').textContent = TITULOS[vista];
+  document.body.classList.toggle('en-inicio', vista === 'inicio');
   $('#atras').hidden = vista === 'inicio';
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const antes = $(`#vista-${vistaActual}`);
@@ -156,6 +158,16 @@ function pintarEstado() {
 function diasFaltan() {
   const d = Math.ceil((inicioUTC(D.actividades[0]).getTime() - ahora().getTime()) / 864e5);
   return d <= 1 ? 'pocas horas' : `${d} días`;
+}
+
+function pintarCarrusel() {
+  const t = ahora().getTime();
+  const proximas = D.actividades.filter((a) => a.destacado && (a.foto || (a.lugar !== 'barrio' && FOTOS[a.lugar])) && inicioUTC(a).getTime() > t - 36e5).slice(0, 10);
+  $('.esperado').hidden = !proximas.length;
+  $('#carrusel').innerHTML = proximas.map((a) => `<button class="tarjeta-foto tap" data-act="${a.id}">
+      <img src="${a.foto || FOTOS[a.lugar]}" alt="" loading="lazy">
+      <span class="tf-txt"><span class="tf-cuando">${esc(cuando(a))}</span><span class="tf-tit">${esc(a.titulo)}</span></span>
+    </button>`).join('');
 }
 
 function pintarPriostes() {
@@ -263,15 +275,16 @@ function detalle(id) {
   const info = a.credito
     ? `<button class="info-foto" data-info aria-label="Créditos de la foto">${iconos.info}</button>
        <a class="credito" href="${a.credito.url}" target="_blank" rel="noopener" hidden>Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
+  const solemne = a.tipo === 'religioso';
+  const titulo = `<div class="cab-txt"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>`;
   const cabecera = src
-    ? `<div class="hoja-cab"><img class="hoja-foto" src="${src}" alt="">${info}</div>`
-    : `<div class="hoja-cab portada k-${a.tipo}">${iconosAct[a.icono] || ''}</div>`;
+    ? `<div class="hoja-cab afiche"><img class="hoja-foto" src="${src}" alt="">${titulo}${info}</div>`
+    : `<div class="hoja-cab afiche portada ${solemne ? 'solemne' : 'fiesta'} k-${a.tipo}"><span class="ico-fondo">${iconosAct[a.icono] || ''}</span>${titulo}</div>`;
   const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
   const donde = a.lugar === 'posada'
     ? fila(iconos.mapa, 'Dónde', `Posada de ${esc(a.anfitrion)}<span class="sub">Casa particular</span>`)
     : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a class="ext" href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar${iconos.externo}</a>` : '');
   abrirHoja(`${cabecera}
-    <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
     ${a.descripcion ? `<p class="det">${esc(a.descripcion)}</p>` : ''}
     <ul class="datos">
       ${fila(iconos.reloj, 'Cuándo', `${fechaLarga(a.fecha)} · ${a.hora}`)}
@@ -466,6 +479,7 @@ function eventos() {
 /* ---------- Arranque ---------- */
 async function iniciar() {
   splash();
+  document.body.classList.add('en-inicio');
   $('#hoja-cerrar').innerHTML = iconos.cerrar;
   $('.buscador-icono').innerHTML = iconos.buscar;
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
@@ -477,7 +491,7 @@ async function iniciar() {
   const ds = dias();
   ui.dia = ds.includes(hoy) ? hoy : (hoy < ds[0] ? ds[0] : ds[ds.length - 1]);
 
-  pintarEstado(); pintarPriostes(); pintarDias(); pintarFiltros(); pintarLista(); pintarLugares(); pintarGratitud();
+  pintarEstado(); pintarCarrusel(); pintarPriostes(); pintarDias(); pintarFiltros(); pintarLista(); pintarLugares(); pintarGratitud();
   eventos();
   observarCta(); observarScroll(); fabVisible();
   setInterval(() => { pintarEstado(); if (!$('#vista-programa').hidden) pintarLista(); }, 60000);

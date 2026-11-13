@@ -86,6 +86,7 @@ export const iconos = {
   programa: ico('<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M7.5 14h3M13.5 14h3M7.5 17h3"/>'),
   gratitud: ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'),
   cerrar: ico('<path d="M6 6l12 12M18 6L6 18"/>'),
+  whatsapp: ico('<path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.4-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9.2 8.3c-.3 1 .3 2.6 1.6 3.9s2.9 1.9 3.9 1.6l.6-1.2-1.6-.9-.7.6c-.7-.3-1.6-1.2-1.9-1.9l.6-.7-.9-1.6z"/>'),
   telefono: ico('<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'),
   buscar: ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/>'),
   chev: ico('<path d="M9 6l6 6-6 6"/>'),

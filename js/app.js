@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132117';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132117';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -545,7 +545,8 @@ async function iniciar() {
   $$('[data-ico-act]').forEach((e) => { e.innerHTML = iconosAct[e.dataset.icoAct]; });
   $('#hero-virgen').innerHTML = virgen;
 
-  D = await (await fetch('data/programa.json')).json();
+  // Los datos se revalidan en cada visita, para que un cambio de horario se vea de inmediato.
+  D = await (await fetch('data/programa.json', { cache: 'no-cache' })).json();
   const hoy = diaEcuador(ahora());
   const ds = dias();
   ui.dia = ds.includes(hoy) ? hoy : (hoy < ds[0] ? ds[0] : ds[ds.length - 1]);

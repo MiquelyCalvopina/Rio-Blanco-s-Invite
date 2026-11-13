@@ -443,7 +443,8 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 
 /* Contacto para invitaciones: una línea discreta al pie del inicio */
 .contacto { margin: var(--s6) var(--s4) 0; text-align: center; font-size: var(--t12); color: var(--tinta-2); }
-.contacto a { display: inline-block; padding: 14px 4px; color: inherit; }
+.contacto a { display: inline-flex; align-items: center; gap: 6px; padding: 14px 4px; color: inherit; }
+.contacto .ico { width: 16px; height: 16px; }
 
 /* ---------- Actividades: días más visibles ---------- */
 .dia { width: 48px; padding: 7px 0; border-radius: 12px; font-size: var(--t13); }

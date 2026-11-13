@@ -139,3 +139,46 @@ export function googleCalendarUrl(a, lugares, urlSitio) {
   });
   return `https://calendar.google.com/calendar/render?${p.toString()}`;
 }
+
+// Texto sin tildes ni mayúsculas, para comparar lo que escribe la persona.
+export function normalizar(t) {
+  return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+}
+
+// Busca actividades en todo el programa: título, descripción, lugar y personas nombradas.
+// Todas las palabras escritas deben aparecer. Devuelve en orden del programa.
+export function buscarActividades(actividades, lugares, texto) {
+  const palabras = normalizar(texto).split(/\s+/).filter(Boolean);
+  if (!palabras.length) return [];
+  return actividades.filter((a) => {
+    const l = lugares[a.lugar];
+    const campo = normalizar([a.titulo, a.descripcion, a.aCargo, a.anfitrion, l && l.nombre, ...(a.gentileza || []), ...(a.participan || []).map((p) => p.nombre)].filter(Boolean).join(' '));
+    return palabras.every((p) => campo.includes(p));
+  });
+}
+
+// Separa «Nombre (aporte)» en sus dos partes. El nombre no se modifica.
+export function separarAporte(texto) {
+  const m = String(texto).match(/^(.*?)\s*\(([^()]+)\)$/);
+  return m ? { nombre: m[1], aporte: m[2] } : { nombre: String(texto), aporte: '' };
+}
+
+// Todas las personas y grupos a quienes se agradece en una actividad:
+// posada, a cargo, participantes y gentilezas, en ese orden.
+export function reconocimientos(a) {
+  const r = [];
+  if (a.anfitrion) r.push({ nombre: a.anfitrion, rol: 'Posada', motivo: `por recibir a Nuestra Patrona en la posada, «${a.titulo}»` });
+  if (a.aCargo) {
+    let nombre = a.aCargo; let rol = 'A cargo';
+    const s = separarAporte(nombre);
+    if (nombre.startsWith('Comisionados: ')) { nombre = nombre.slice(14); rol = 'Comisionados'; }
+    else if (/Priostes 2025/.test(s.aporte)) { nombre = s.nombre; rol = 'Priostes salientes 2025'; }
+    r.push({ nombre, rol, motivo: `por estar a cargo de «${a.titulo}»` });
+  }
+  for (const p of a.participan || []) r.push({ nombre: p.nombre, rol: p.rol, motivo: `por su ${p.rol.toLowerCase()} en «${a.titulo}»` });
+  for (const g of a.gentileza || []) {
+    const s = separarAporte(g);
+    r.push({ nombre: s.nombre, rol: s.aporte ? s.aporte.charAt(0).toUpperCase() + s.aporte.slice(1) : '', motivo: `por su gentileza${s.aporte ? ` (${s.aporte})` : ''} en «${a.titulo}»` });
+  }
+  return r;
+}

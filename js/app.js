@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl } from './nucleo.js';
-import { iglesia, virgen, iconos, iconosAct } from './ilustraciones.js';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -18,7 +18,7 @@ const TEXTO_CAL = {
 }[SO];
 
 let D;
-const ui = { dia: null, filtro: 'todo' };
+const ui = { dia: null, filtro: 'todo', gdia: '' };
 
 // Para pruebas: ?ahora=2026-11-14T18:20 (hora del Ecuador)
 function ahora() {
@@ -44,44 +44,39 @@ function marcarAgregado(id) {
 }
 
 /* ---------- Splash ---------- */
-function prepararTrazos(cont, inicio, paso, dur) {
-  $$('.trazo path', cont).forEach((p, i) => {
-    p.style.setProperty('--l', Math.ceil(p.getTotalLength()) + 2);
-    p.style.setProperty('--retraso', `${inicio + i * paso}s`);
-    p.style.setProperty('--dur', `${dur}s`);
-  });
-  cont.classList.add('dibujar');
-}
-
 function splash() {
   const s = $('#splash');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let visto = false;
   try { visto = sessionStorage.getItem('splash:' + location.pathname) === '1'; } catch {}
   if (visto) { s.remove(); return; }
-  $('#splash-ilus').innerHTML = iglesia;
-  if (!reducido) prepararTrazos($('#splash-ilus'), 0, 0.08, 0.7);
+  document.body.classList.add('con-splash');
+  $('#splash-toro').innerHTML = toro;
+  $('.splash-chispas').innerHTML = Array.from({ length: 14 }, (_, i) => `<i style="left:${6 + i * 6.5}%;--t:${5 + (i * 7) % 5}s;--r:${(1.5 + (i * 1.3) % 6).toFixed(1)}s;--x:${(i % 2 ? 1 : -1) * (10 + i * 3)}px"></i>`).join('');
   s.classList.add('anima');
-  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 900);
+  const t1 = setTimeout(() => s.classList.add('textos'), reducido ? 0 : 1200);
+  // La portada pasa sola al inicio: se desvanece mientras el inicio sube.
   const cerrar = () => {
     clearTimeout(t1); clearTimeout(t2);
     s.classList.add('textos', 'fuera');
+    document.body.classList.add('dentro');
     try { sessionStorage.setItem('splash:' + location.pathname, '1'); } catch {}
-    setTimeout(() => s.remove(), 600);
+    setTimeout(() => { s.remove(); document.body.classList.remove('con-splash', 'dentro'); }, 2000);
   };
-  const t2 = setTimeout(cerrar, reducido ? 1200 : 3200);
+  const t2 = setTimeout(cerrar, reducido ? 1200 : 4600);
   s.addEventListener('click', cerrar, { once: true });
 }
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
-const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Mapa del barrio', gratitud: 'Gratitud' };
+const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
 let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
   $('#titulo-barra').textContent = TITULOS[vista];
   document.body.classList.toggle('en-inicio', vista === 'inicio');
   $('#atras').hidden = vista === 'inicio';
+  $('#abrir-busqueda').hidden = vista !== 'programa';
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const antes = $(`#vista-${vistaActual}`);
   const despues = $(`#vista-${vista}`);
@@ -413,25 +408,71 @@ function deseleccionar() {
   $('#tarjeta-lugar').hidden = true; $('#llegar').hidden = false;
 }
 
-/* ---------- Gratitud ---------- */
+/* ---------- Buscar en el programa ---------- */
+function pintarResultados(q = '') {
+  const r = $('#resultados');
+  if (!normalizar(q)) { r.innerHTML = `<li class="vacio">Escriba el nombre de una actividad, un lugar o una persona.</li>`; return; }
+  const acts = buscarActividades(D.actividades, D.lugares, q);
+  if (!acts.length) { r.innerHTML = `<li class="vacio">No encontramos actividades con ese nombre. Pruebe con otra palabra.</li>`; return; }
+  r.innerHTML = acts.map((a) => `<li class="fila${inicioUTC(a) < ahora() ? ' pasada' : ''}">
+    <button class="fila-main tap-suave" data-resultado="${a.id}">
+      <span class="cuerpo">
+        <span class="res-cuando">${fechaLarga(a.fecha)} · ${a.hora}</span>
+        <span class="tit">${esc(a.titulo)}</span>
+        <span class="met">${icPeq(a)}<span>${esc(lugarTexto(a))}</span></span>
+      </span>
+      <span class="chev">${iconos.chev}</span>
+    </button></li>`).join('');
+}
+function abrirBusqueda() {
+  $('#busqueda').hidden = false; document.body.style.overflow = 'hidden';
+  $('#buscar-act').value = ''; pintarResultados(); $('#buscar-act').focus();
+}
+function cerrarBusqueda() {
+  if ($('#busqueda').hidden) return;
+  $('#busqueda').hidden = true; document.body.style.overflow = '';
+}
+
+/* ---------- Gracias ---------- */
+// Se agradece a todos los que nombra el programa: priostes, posadas, quienes están a cargo,
+// quienes participan y cada gentileza. Los nombres se muestran tal como están en el programa.
 function pintarGratitud(q = '') {
-  const norm = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const nq = norm(q.trim());
+  const nq = normalizar(q);
+  const coincide = (n) => !nq || normalizar(n).includes(nq);
   const marca = (n) => {
     if (!nq) return esc(n);
-    const i = norm(n).indexOf(nq);
+    const i = normalizar(n).indexOf(nq);
     return i < 0 ? esc(n) : esc(n.slice(0, i)) + '<mark>' + esc(n.slice(i, i + nq.length)) + '</mark>' + esc(n.slice(i + nq.length));
   };
-  const fila = (n, ctx) => `<li><button class="nombre tap-suave" data-gracias="${esc(n)}" data-ctx="${esc(ctx)}" aria-label="Compartir agradecimiento a ${esc(n)}"><span>${marca(n)}</span>${iconos.compartir}</button></li>`;
-  const grupos = [];
-  const pri = D.fiesta.priostes.filter((n) => !nq || norm(n).includes(nq));
-  if (pri.length) grupos.push(`<article class="grupo"><div class="grupo-cab"><div><span class="ev">Toda la fiesta</span><h3>Priostes 2026</h3></div></div><ul class="nombres">${pri.map((n) => fila(n, 'como Prioste de las fiestas 2026')).join('')}</ul></article>`);
-  for (const a of D.actividades) {
-    const ns = a.gentileza.filter((n) => !nq || norm(n).includes(nq));
-    if (!ns.length) continue;
-    grupos.push(`<article class="grupo"><div class="grupo-cab"><div><span class="ev">${fechaLarga(a.fecha)} · ${a.hora}</span><h3>${esc(a.titulo)}</h3></div></div><ul class="nombres">${ns.map((n) => fila(n, `en «${a.titulo}»`)).join('')}</ul></article>`);
+  const fila = (r) => `<li><button class="nombre tap-suave" data-gracias="${esc(r.nombre)}" data-ctx="${esc(r.motivo)}"><span class="nom-txt"><span class="nom">${marca(r.nombre)}</span>${r.rol ? `<span class="rol">${esc(r.rol)}</span>` : ''}</span>${iconos.chev}</button></li>`;
+  let html = '';
+  const pri = D.fiesta.priostes.filter(coincide);
+  if (pri.length && (nq || !ui.gdia)) html += `<article class="grupo grupo-priostes"><h3>Priostes 2026</h3><p class="grupo-sub">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p><ul class="nombres">${pri.map((n) => fila({ nombre: n, rol: '', motivo: 'como Prioste de las fiestas 2026' })).join('')}</ul></article>`;
+  if (!nq) {
+    const chip = (f, t) => `<button class="chip" data-gdia="${f}" aria-pressed="${ui.gdia === f}">${t}</button>`;
+    html += `<p class="pista">Toque un nombre para enviarle su agradecimiento.</p><div class="dias-g" role="group" aria-label="Ver por día">${chip('', 'Todos')}${dias().map((f) => { const d = new Date(f + 'T12:00:00Z'); return chip(f, `${DIAS_SEM[d.getUTCDay()].slice(0, 3)} ${d.getUTCDate()}`); }).join('')}</div>`;
   }
-  $('#gratitud').innerHTML = grupos.join('') || `<p class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</p>`;
+  let hay = pri.length > 0;
+  for (const f of dias()) {
+    if (!nq && ui.gdia && ui.gdia !== f) continue;
+    const grupos = D.actividades.filter((a) => a.fecha === f).map((a) => ({ a, rs: reconocimientos(a).filter((r) => coincide(r.nombre)) })).filter((g) => g.rs.length);
+    if (!grupos.length) continue;
+    hay = true;
+    html += `<h3 class="dia-g">${fechaLarga(f)}</h3>` + grupos.map(({ a, rs }) => `<article class="grupo"><div class="grupo-cab"><span class="ev">${a.hora}</span><h4>${esc(a.titulo)}</h4></div><ul class="nombres">${rs.map(fila).join('')}</ul></article>`).join('');
+  }
+  $('#gratitud').innerHTML = hay ? html : `<p class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</p>`;
+}
+
+function tarjetaGracias(nombre, motivo) {
+  abrirHoja(`<div class="tarj-gracias">
+      <p class="tg-k">Fiestas de Río Blanco Alto 2026</p>
+      <p class="tg-t">Gracias</p>
+      <h2 id="hoja-titulo" class="tg-n">${esc(nombre)}</h2>
+      <p class="tg-c">${esc(motivo)}</p>
+    </div>
+    <div class="pie-hoja"><div class="pie-acciones">
+      <button class="btn btn-noche tap tg-btn" data-enviar-gracias="${esc(nombre)}" data-ctx="${esc(motivo)}">${iconos.compartir}Enviar agradecimiento</button>
+    </div></div>`, '', 'gracias');
 }
 
 /* ---------- Compartir ---------- */
@@ -453,6 +494,10 @@ function eventos() {
     if (d.dia) { ui.dia = d.dia; pintarDias(); pintarLista(); window.scrollTo(0, 0); return; }
     if (d.filtro) { ui.filtro = d.filtro; pintarFiltros(); pintarLista(); return; }
     if (d.agregar) return agregar(d.agregar);
+    if (d.resultado) { const a = actividad(d.resultado); cerrarBusqueda(); ui.dia = a.fecha; pintarDias(); pintarLista(); return detalle(a.id); }
+    if (b.id === 'abrir-busqueda') return abrirBusqueda();
+    if (b.id === 'cerrar-busqueda') return cerrarBusqueda();
+    if ('gdia' in d) { ui.gdia = d.gdia; pintarGratitud(); return; }
     if (d.act) return detalle(d.act);
     if (d.opciones) return opciones(d.opciones);
     if (d.ver) return seleccionar(d.ver);
@@ -463,8 +508,9 @@ function eventos() {
       const a = actividad(d.compartirAct);
       return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
     }
-    if (d.gracias) {
-      return compartir({ title: 'Gracias', text: `Gracias, ${d.gracias}, por su gentileza ${d.ctx} en las fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
+    if (d.gracias) return tarjetaGracias(d.gracias, d.ctx);
+    if (d.enviarGracias) {
+      return compartir({ title: 'Gracias', text: `Gracias, ${d.enviarGracias}, ${d.ctx}. Fiestas en honor a la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
     }
     if (b.id === 'fab') {
       return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí está el programa completo:', url: URL_SITIO });
@@ -472,7 +518,8 @@ function eventos() {
     if (b.id === 'hoja-cerrar') cerrarHoja();
   });
   $('#velo').addEventListener('click', cerrarHoja);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#hoja').hidden) cerrarHoja(); });
+  document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!$('#hoja').hidden) cerrarHoja(); else cerrarBusqueda(); });
+  $('#buscar-act').addEventListener('input', (e) => pintarResultados(e.target.value));
   $('#buscar').addEventListener('input', (e) => pintarGratitud(e.target.value));
 }
 
@@ -481,7 +528,7 @@ async function iniciar() {
   splash();
   document.body.classList.add('en-inicio');
   $('#hoja-cerrar').innerHTML = iconos.cerrar;
-  $('.buscador-icono').innerHTML = iconos.buscar;
+  $$('.buscador-icono').forEach((e) => { e.innerHTML = iconos.buscar; });
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
   $$('[data-ico-act]').forEach((e) => { e.innerHTML = iconosAct[e.dataset.icoAct]; });
   $('#hero-virgen').innerHTML = virgen;

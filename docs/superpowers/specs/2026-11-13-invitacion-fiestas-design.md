@@ -177,3 +177,16 @@ Contexto e investigación: `docs/research/rio-blanco-alto.md`. Programa fuente: 
 - Estructura de archivos, nombres internos y estilo de código.
 - Microanimaciones de transición (respetando `prefers-reduced-motion`).
 - Detección del sistema operativo para ordenar opciones del calendario.
+
+
+## Cambios decididos por la usuaria (13 de noviembre, tarde)
+
+Estos puntos reemplazan lo que diga el resto del documento.
+
+- **Color:** el azul noche pasa a **negro** (`--noche: #0A0908`); el dorado es el único acento. Los enlaces usan dorado oscuro (`#7A560E`).
+- **Portada:** fondo negro con la **cara de un toro** en línea dorada, de frente, serio pero no agresivo, sin cuerpo. Respira y resopla humo; suben chispas. Textos: «Fiestas de Río Blanco Alto» y el lema. Pasa sola al Inicio (~4,6 s; ~1,2 s con movimiento reducido), con desvanecido y desaceleración; un toque la salta.
+- **Inicio:** solo «Fiestas en honor a la Santísima Virgen de El Quinche» y las fechas. Tarjetas de «Lo más esperado» con degradado dorado sobre la foto. Sin banderines ni franjas decorativas.
+- **Programa:** la lista no cambia. Se agrega **Buscar** en la barra superior: busca en todo el programa por actividad, lugar o persona y abre el detalle.
+- **Detalle:** degradado dorado bajo el título. Las gentilezas dicen qué aportó cada quien cuando el tríptico lo indica.
+- **Gracias** (antes «Gratitud»): etiqueta visible en el buscador, Priostes en tarjeta crema, filtro por día, y cada nombre abre una tarjeta de agradecimiento para enviar. Incluye posadas, quienes están a cargo, quienes animan o se presentan y los Priostes salientes, además de las gentilezas. Cierra con el **agradecimiento textual** del tríptico. Sin botón «Quiero colaborar».
+- **Nombres:** se muestran tal como están en el programa impreso; no se cambia ninguno.

@@ -115,7 +115,7 @@ test('las fotos de las actividades existen y las de terceros tienen crédito', a
 
 test('todas las actividades siguen el mismo esquema de información', () => {
   const obligatorios = ['id', 'fecha', 'hora', 'titulo', 'tipo', 'icono', 'lugar', 'descripcion', 'aCargo', 'gentileza'];
-  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito']);
+  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito', 'participan']);
   for (const a of A) {
     for (const k of obligatorios) assert.ok(k in a, `${a.id} no tiene ${k}`);
     for (const k of Object.keys(a)) assert.ok(permitidos.has(k), `${a.id} tiene un campo fuera del esquema: ${k}`);
@@ -126,4 +126,35 @@ test('todas las actividades siguen el mismo esquema de información', () => {
 test('el .ics usa la descripción, quién está a cargo y la gentileza', () => {
   const ics = icsCalendario([porId('22-1200-misa-accion-gracias')], datos.lugares, SELLO_ICS).replace(/\r\n /g, '');
   assert.ok(ics.includes('A cargo de: Padre José Luis Tapia'));
+});
+
+import { buscarActividades, separarAporte, reconocimientos, normalizar } from '../js/nucleo.js';
+const DATOS = datos;
+
+test('buscarActividades ignora tildes y mayúsculas y busca en todo el programa', () => {
+  const r = buscarActividades(DATOS.actividades, DATOS.lugares, 'PROCESION');
+  assert.ok(r.some((a) => a.id === '22-1315-procesion'));
+  assert.deepEqual(buscarActividades(DATOS.actividades, DATOS.lugares, '   '), []);
+});
+
+test('buscarActividades encuentra por persona nombrada y exige todas las palabras', () => {
+  const r = buscarActividades(DATOS.actividades, DATOS.lugares, 'manolo escobar');
+  assert.deepEqual(r.map((a) => a.id), ['14-1745-premiacion-lazo', '15-0800-giro-rba', '21-1345-carpa', '22-1345-carpa']);
+  assert.equal(buscarActividades(DATOS.actividades, DATOS.lugares, 'novena toros').length, 0);
+});
+
+test('separarAporte no altera el nombre', () => {
+  assert.deepEqual(separarAporte('Sr. Segundo Tello y Sra. (voladores)'), { nombre: 'Sr. Segundo Tello y Sra.', aporte: 'voladores' });
+  assert.deepEqual(separarAporte('Flia. Albán Mena'), { nombre: 'Flia. Albán Mena', aporte: '' });
+});
+
+test('reconocimientos incluye posada, a cargo, participantes y gentilezas del tríptico', () => {
+  const de = (id) => reconocimientos(DATOS.actividades.find((a) => a.id === id));
+  assert.deepEqual(de('15-1800-novena-3').map((x) => [x.nombre, x.rol]), [['Sra. María Eugenia Jácome y Flia.', 'Posada']]);
+  assert.deepEqual(de('13-1730-priostazgo')[0].rol, 'Priostes salientes 2025');
+  assert.ok(de('21-1345-carpa').some((x) => x.nombre === 'Lic. Manolo Escobar' && x.rol === 'Animación'));
+  assert.ok(de('22-1600-colchas').some((x) => x.nombre === 'Lic. Silvia Zapata y Flia.' && x.rol === 'Tradicional Colcha de Caucara'));
+  const total = DATOS.actividades.reduce((n, a) => n + reconocimientos(a).length, 0);
+  assert.equal(total, 138 + 28);
+  assert.equal(normalizar('Canelázo '), 'canelazo');
 });

@@ -347,9 +347,9 @@ DESCRIPTION:Recorrido por las calles del barrio en honor a la Santísima Vi
  : examen de anemia infecciosa equina\, certificado de vacunación contra i
  nfluenza equina y certificado de movilización.\nA cargo de: Comisionados:
   Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Río Blanco A
- lto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas en honor a 
- la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar
- : https://maps.app.goo.gl/T2kfsPxNL3ET54o47
+ lto.\nGracias a: Grupo de Amigos de la Vieja Guardia (banda de músicos).\
+ nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto
+  2026.\nCómo llegar: https://maps.app.goo.gl/T2kfsPxNL3ET54o47
 LOCATION:Estadio Monumental Río Blanco Alto\, Río Blanco Alto\, Tanicuch
  í
 BEGIN:VALARM
@@ -379,9 +379,9 @@ DESCRIPTION:En la plaza central del barrio. Premios económicos y atuendos
  a caballos: examen de anemia infecciosa equina\, certificado de vacunació
  n contra influenza equina y certificado de movilización.\nA cargo de: Com
  isionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Rí
- o Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas e
- n honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nC
- ómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+ o Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Guardia (banda de m
+ úsicos).\nFiestas en honor a la Santísima Virgen de El Quinche · Río B
+ lanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
 LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -543,10 +543,10 @@ DTSTART:20261115T010000Z
 DTEND:20261115T020000Z
 SUMMARY:Serenata a Dulce María I
 DESCRIPTION:Con el Grupo Tercera Generación y la presentación especial de
- l Grupo Cotopaxi.\nGracias a: Lic. Martín Villamarín y Flia.\, Familia B
- anda Cueva.\nFiestas en honor a la Santísima Virgen de El Quinche · Río
-  Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L
- 9
+ l Grupo Cotopaxi.\nGracias a: Lic. Martín Villamarín y Flia. (Grupo Terc
+ era Generación)\, Familia Banda Cueva (Grupo Cotopaxi).\nFiestas en honor
+  a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo lle
+ gar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
 LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -1151,9 +1151,10 @@ DTSTART:20261121T183000Z
 DTEND:20261121T193000Z
 SUMMARY:Recibimiento de las ganaderías
 DESCRIPTION:Ganadería «San Ricardo» de Mocha y Ganadería «Rancho Alegr
- e» de Píllaro.\nGracias a: Hnos. Mena García.\nFiestas en honor a la Sa
- ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
- ps://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+ e» de Píllaro.\nGracias a: Hnos. Mena García (Ganadería «San Ricardo
+ » de Mocha).\nFiestas en honor a la Santísima Virgen de El Quinche · R
+ ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveS
+ sbQ7
 LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -1243,9 +1244,9 @@ DESCRIPTION:Incluye la tradicional Colcha de Caucara.\nGracias a: Mg. Natal
  \, Msc. Antonieta Lugo\, Msc. Carmita Narváez\, Ings. Katty y Marlene Bar
  riga A.\, Ing. Marisol Landívar B.\, Flia. Barragán Naranjo\, Mg. Mishel
  e Landázuri N.\, Mg. Karla Díaz P.\, Grupo de Danza "Santísima Virgen d
- e El Quinche".\nFiestas en honor a la Santísima Virgen de El Quinche · R
- ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveS
- sbQ7
+ e El Quinche" (tradicional Colcha de Caucara).\nFiestas en honor a la Sant
+ ísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https
+ ://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
 LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -1621,10 +1622,11 @@ DTSTART:20261122T183000Z
 DTEND:20261122T193000Z
 SUMMARY:Recibimiento de las ganaderías
 DESCRIPTION:Ganadería «San Ricardo» de Mocha y Ganadería «Santa Beatri
- z» de Sigchos.\nGracias a: Sr. Segundo Mena y Sra. Lina Jácome\, Niña C
- ataleya Soto Vargas.\nFiestas en honor a la Santísima Virgen de El Quinch
- e · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjh
- XWmveSsbQ7
+ z» de Sigchos.\nGracias a: Sr. Segundo Mena y Sra. Lina Jácome (Ganader
+ ía «San Ricardo» de Mocha)\, Niña Cataleya Soto Vargas (Ganadería «S
+ anta Beatriz» de Sigchos).\nFiestas en honor a la Santísima Virgen de El
+  Quinche · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/
+ VGYCZjhXWmveSsbQ7
 LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -1714,9 +1716,10 @@ DESCRIPTION:Incluye la tradicional Colcha de Caucara.\nGracias a: Niña Mar
  , Sr. Patricio Muñoz T. y Sra.\, Lic. Estefanía López\, Lic. Jennifer I
  caza\, Ing. Anabel Mena\, Mg. Diana Ramos P.\, Ing. Anahí Jácome G.\, Sr
  . Nelson Jácome\, Síndico de la Santísima Virgen de El Quinche\, Hnas. 
- Muñoz Moreno\, Lic. Miryam Pacheco y Flia.\, Lic. Silvia Zapata y Flia..\
- nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto
-  2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+ Muñoz Moreno\, Lic. Miryam Pacheco y Flia.\, Lic. Silvia Zapata y Flia. (
+ tradicional Colcha de Caucara).\nFiestas en honor a la Santísima Virgen d
+ e El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo
+ .gl/VGYCZjhXWmveSsbQ7
 LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
 BEGIN:VALARM
 ACTION:DISPLAY

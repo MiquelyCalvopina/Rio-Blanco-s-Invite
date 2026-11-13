@@ -135,3 +135,21 @@ export const iconosAct = {
   musica: ia('<path d="M9 18V6.5l10-2v11.5"/><circle cx="6.8" cy="18" r="2.2"/><circle cx="16.8" cy="16" r="2.2"/><path d="M9 10l10-2"/>'),
   personas: ia('<circle cx="8.2" cy="8" r="2.6"/><circle cx="16.2" cy="8.6" r="2.3"/><path d="M3 19.5c0-3 2.3-5.2 5.2-5.2s5.2 2.2 5.2 5.2M13.6 15c.8-.5 1.7-.7 2.6-.7 2.6 0 4.8 2 4.8 4.8"/>'),
 };
+
+// Toro de la portada: solo la cara, de frente. Se dibuja en línea dorada, respira y resopla.
+const mitadToro = `
+  <path class="tr-t tr-rel" pathLength="1" d="M266 140 C306 146 346 138 356 104 C360 88 362 70 362 50 C388 92 388 150 358 178 C336 200 300 198 276 188 Z"/>
+  <path class="tr-rel" d="M200 120 C230 120 256 128 270 144 L276 190 C292 190 306 200 310 216 C296 220 284 214 276 204 C280 240 270 270 256 296 C262 312 262 336 250 350 C238 362 220 366 200 366 Z"/>
+  <path class="tr-t" pathLength="1" d="M200 120 C230 120 256 128 270 144 L276 190 C292 190 306 200 310 216 C296 220 284 214 276 204 C280 240 270 270 256 296 C262 312 262 336 250 350 C238 362 220 366 200 366"/>
+  <path class="tr-t tr-ceja" pathLength="1" d="M208 220 C226 216 246 208 264 196"/>
+  <path class="tr-ojo" d="M222 228 L256 215 C256 227 246 235 233 235 C227 235 224 232 222 228 Z"/>
+  <path class="tr-t tr-fino" pathLength="1" d="M200 302 C220 302 242 298 256 292"/>
+  <ellipse class="tr-nar" cx="228" cy="334" rx="12" ry="8" transform="rotate(-18 228 334)"/>
+  <path class="tr-t tr-fino" pathLength="1" d="M207 140 C213 146 213 154 207 160 M221 144 C226 150 226 157 221 162 M210 170 C215 175 215 181 210 186"/>`;
+const resoplido = (x, dir) => Array.from({ length: 6 }, (_, i) => `<circle class="tr-puf" cx="${x}" cy="338" r="${10 + i * 2}" style="--dx:${dir * (40 + i * 22)}px;--dy:${70 + i * 26}px;--d:${(i * 0.12).toFixed(2)}s"/>`).join('');
+export const toro = `
+<svg viewBox="0 30 400 440" class="toro" aria-hidden="true">
+  <defs><filter id="toro-nube" x="-80%" y="-80%" width="260%" height="260%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" seed="4"/><feDisplacementMap in="SourceGraphic" scale="52"/><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <g class="tr-cabeza"><g>${mitadToro}</g><g transform="translate(400 0) scale(-1 1)">${mitadToro}</g></g>
+  <g class="tr-humo">${resoplido(172, -1)}${resoplido(228, 1)}</g>
+</svg>`;

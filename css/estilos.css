@@ -505,6 +505,7 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 .tg-t { font: 800 44px/1 var(--titulo); color: #8A6212; margin-top: 10px; }
 .hoja .tarj-gracias .tg-n { font: var(--w-s) 22px/1.2 var(--titulo); margin-top: 10px; text-wrap: balance; }
 .tg-c { font-size: var(--t14); color: #4A4A4A; margin-top: 6px; text-wrap: balance; }
+.tg-m { font-size: var(--t14); line-height: 1.5; margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid #E8D49A; text-wrap: pretty; }
 .tg-btn { flex: 1; }
 
 @media (prefers-reduced-motion: reduce) {

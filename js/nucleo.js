@@ -182,7 +182,7 @@ export function reconocimientos(a) {
   for (const p of a.participan || []) r.push({ nombre: p.nombre, rol: p.rol, motivo: `por su ${p.rol.toLowerCase()} en «${a.titulo}»` });
   for (const g of a.gentileza || []) {
     const s = separarAporte(g);
-    r.push({ nombre: s.nombre, rol: s.aporte ? s.aporte.charAt(0).toUpperCase() + s.aporte.slice(1) : '', motivo: `por su gentileza${s.aporte ? ` (${s.aporte})` : ''} en «${a.titulo}»` });
+    r.push({ nombre: s.nombre, rol: s.aporte ? s.aporte.charAt(0).toUpperCase() + s.aporte.slice(1) : '', motivo: `por su gentileza${s.aporte ? ` (${s.aporte})` : ''} en «${a.titulo}»`, mensaje: a.mensajeGracias || '' });
   }
   return r;
 }

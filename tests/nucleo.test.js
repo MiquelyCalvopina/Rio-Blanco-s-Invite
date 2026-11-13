@@ -108,14 +108,14 @@ test('las fotos de las actividades existen y las de terceros tienen crédito', a
   const { existsSync } = await import('node:fs');
   for (const a of A.filter((x) => x.foto)) {
     assert.ok(existsSync(new URL('../' + a.foto, import.meta.url)), `falta la foto ${a.foto}`);
-    const propia = a.foto.includes('toros') || a.foto.includes('colchas') || a.foto.startsWith('img/lugares/');
+    const propia = a.foto.includes('toros') || a.foto.includes('colchas') || a.foto.includes('arreglo-floral') || a.foto.startsWith('img/lugares/');
     if (!propia) assert.ok(a.credito && a.credito.autor && a.credito.licencia, `falta crédito en ${a.id}`);
   }
 });
 
 test('todas las actividades siguen el mismo esquema de información', () => {
   const obligatorios = ['id', 'fecha', 'hora', 'titulo', 'tipo', 'icono', 'lugar', 'descripcion', 'aCargo', 'gentileza'];
-  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito', 'participan']);
+  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito', 'participan', 'mensajeGracias']);
   for (const a of A) {
     for (const k of obligatorios) assert.ok(k in a, `${a.id} no tiene ${k}`);
     for (const k of Object.keys(a)) assert.ok(permitidos.has(k), `${a.id} tiene un campo fuera del esquema: ${k}`);

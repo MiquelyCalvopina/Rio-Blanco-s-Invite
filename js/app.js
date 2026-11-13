@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132120';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132120';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132148';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132148';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -456,7 +456,7 @@ function pintarGratitud(q = '') {
     const i = normalizar(n).indexOf(nq);
     return i < 0 ? esc(n) : esc(n.slice(0, i)) + '<mark>' + esc(n.slice(i, i + nq.length)) + '</mark>' + esc(n.slice(i + nq.length));
   };
-  const fila = (r) => `<li><button class="nombre tap-suave" data-gracias="${esc(r.nombre)}" data-ctx="${esc(r.motivo)}"><span class="nom-txt"><span class="nom">${marca(r.nombre)}</span>${r.rol ? `<span class="rol">${esc(r.rol)}</span>` : ''}</span>${iconos.chev}</button></li>`;
+  const fila = (r) => `<li><button class="nombre tap-suave" data-gracias="${esc(r.nombre)}" data-ctx="${esc(r.motivo)}" data-msj="${esc(r.mensaje || '')}"><span class="nom-txt"><span class="nom">${marca(r.nombre)}</span>${r.rol ? `<span class="rol">${esc(r.rol)}</span>` : ''}</span>${iconos.chev}</button></li>`;
   let html = '';
   const pri = D.fiesta.priostes.filter(coincide);
   if (pri.length && (nq || !ui.gdia)) html += `<article class="grupo grupo-priostes"><h3>Priostes 2026</h3><p class="grupo-sub">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p><ul class="nombres">${pri.map((n) => fila({ nombre: n, rol: '', motivo: 'como Prioste de las fiestas 2026' })).join('')}</ul></article>`;
@@ -475,12 +475,13 @@ function pintarGratitud(q = '') {
   $('#gratitud').innerHTML = hay ? html : `<p class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</p>`;
 }
 
-function tarjetaGracias(nombre, motivo) {
+function tarjetaGracias(nombre, motivo, mensaje = '') {
   abrirHoja(`<div class="tarj-gracias">
       <p class="tg-k">Fiestas de Río Blanco Alto 2026</p>
       <p class="tg-t">Gracias</p>
       <h2 id="hoja-titulo" class="tg-n">${esc(nombre)}</h2>
       <p class="tg-c">${esc(motivo)}</p>
+      ${mensaje ? `<p class="tg-m">${esc(mensaje)}</p>` : ''}
     </div>
     <div class="pie-hoja"><div class="pie-acciones">
       <button class="btn btn-noche tap tg-btn" data-enviar-gracias="${esc(nombre)}" data-ctx="${esc(motivo)}">${iconos.compartir}Enviar agradecimiento</button>
@@ -521,7 +522,7 @@ function eventos() {
       const a = actividad(d.compartirAct);
       return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
     }
-    if (d.gracias) return tarjetaGracias(d.gracias, d.ctx);
+    if (d.gracias) return tarjetaGracias(d.gracias, d.ctx, d.msj);
     if (d.enviarGracias) {
       return compartir({ title: 'Gracias', text: `Gracias, ${d.enviarGracias}, ${d.ctx}. Fiestas en honor a la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
     }

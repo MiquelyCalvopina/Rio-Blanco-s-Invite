@@ -249,17 +249,19 @@ function detalle(id) {
   const l = lugar(a);
   const ok = agregados.has(a.id);
   const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
-  const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gentileza de<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
+  const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gracias a<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
   const foto = FOTOS[a.lugar] ? `<img class="hoja-foto" src="${FOTOS[a.lugar]}" alt="">` : '';
+  const desc = a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : '';
+  // Orden: título → fecha → descripción → dónde (cómo llegar) → gracias a
   abrirHoja(`${foto}
     <div class="hoja-top">${ic(a)}<div><p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div></div>
+    <p class="fecha-det">${iconos.reloj}${fechaLarga(a.fecha)} · ${a.hora}</p>
+    ${desc}
+    ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
     <ul class="datos">
-      <li>${iconos.reloj}<span>${fechaLarga(a.fecha)}<span class="sub">${a.hora}</span></span></li>
       <li>${iconos.mapa}<span>${esc(lugarTexto(a))}${a.lugar === 'posada' ? '<span class="sub">Casa particular</span>' : ''}</span>${mapa}</li>
       ${gent}
     </ul>
-    ${a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : ''}
-    ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
     <button class="enlace" data-opciones="${a.id}">Usar otro calendario</button>
     <div class="pie-hoja">
       <div class="pie-acciones">

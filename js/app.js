@@ -98,7 +98,8 @@ let bajando = false;
 function fabVisible() {
   const enInicio = !$('#vista-inicio').hidden;
   const enMapa = !$('#vista-lugares').hidden; // en el mapa la acción principal es Llegar al barrio
-  $('#fab').classList.toggle('oculto', (enInicio && ctaVisible) || enMapa || bajando);
+  const enGracias = !$('#vista-gratitud').hidden; // en Gracias la acción es enviar un agradecimiento
+  $('#fab').classList.toggle('oculto', (enInicio && ctaVisible) || enMapa || enGracias || bajando);
 }
 // Al bajar se oculta para no tapar contenido; al subir vuelve a aparecer.
 function observarScroll() {

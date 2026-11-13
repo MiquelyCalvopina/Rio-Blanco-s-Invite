@@ -236,7 +236,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .quees { margin-top: var(--s3); padding: var(--s3); border-radius: 12px; background: var(--gris-1); font-size: var(--t13); }
 .quees b { font-weight: var(--w-s); }
 .pie-hoja { position: sticky; bottom: 0; margin: var(--s4) calc(-1 * var(--s4)) 0; padding: var(--s3) var(--s4) calc(var(--s3) + var(--abajo)); background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--linea); }
-.ayuda { font-size: var(--t12); color: var(--tinta-2); text-align: center; margin-top: 6px; }
 .acciones-sec { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); margin-top: var(--s2); }
 .acciones-sec .btn { height: 38px; font-size: var(--t13); }
 .opciones { margin: var(--s2) 0 var(--s4); }

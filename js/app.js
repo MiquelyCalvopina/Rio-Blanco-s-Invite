@@ -12,9 +12,9 @@ const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', '
 const SO = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
   ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : 'otro';
 const TEXTO_CAL = {
-  ios: { boton: 'Agregar a mi calendario', ayuda: 'Se abre el Calendario del iPhone. Toque «Agregar» y quedará con aviso 1 día antes y 2 horas antes.', aviso: 'Toque «Agregar» en la ventana del Calendario.' },
-  android: { boton: 'Agregar a Google Calendar', ayuda: 'Se abre Google Calendar. Toque «Guardar» y revise que tenga una notificación.', aviso: 'En Google Calendar, toque «Guardar».' },
-  otro: { boton: 'Descargar para mi calendario', ayuda: 'Se descarga un archivo .ics con aviso 1 día antes y 2 horas antes. Ábralo para guardarlo.', aviso: 'Abra el archivo descargado para guardarlo.' },
+  ios: { boton: 'Agregar a mi calendario', aviso: 'Toque «Agregar» para guardarlo' },
+  android: { boton: 'Agregar a Google Calendar', aviso: 'Toque «Guardar» en Google Calendar' },
+  otro: { boton: 'Agregar a mi calendario', aviso: 'Abra el archivo para guardarlo' },
 }[SO];
 
 let D;
@@ -257,7 +257,6 @@ function detalle(id) {
     ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
     <div class="pie-hoja">
       <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Ya está en su calendario' : TEXTO_CAL.boton}</button>
-      <p class="ayuda">${TEXTO_CAL.ayuda}</p>
       <div class="acciones-sec">
         <button class="btn btn-borde tap" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
         <button class="btn btn-borde tap" data-opciones="${a.id}">${iconos.calendario}Otro calendario</button>

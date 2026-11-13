@@ -131,7 +131,7 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .lista-priostes li { display: flex; align-items: center; gap: var(--s3); padding: 7px 0; font-size: 15px; font-weight: var(--w-m); border-top: 1px solid rgba(255,255,255,.14); }
 .lista-priostes li::before { content: ''; width: 6px; height: 6px; transform: rotate(45deg); background: var(--oro-claro); flex: 0 0 auto; margin: 0 3px; }
 .organizan { font-size: var(--t12); color: rgba(255,255,255,.7); margin-top: var(--s3); }
-.lema { font: var(--w-s) var(--t12) var(--titulo); color: var(--tinta-3); text-align: center; margin-top: var(--s8); letter-spacing: .04em; }
+.lema { font: var(--w-m) var(--t12) var(--titulo); color: var(--oro-claro); margin-top: var(--s2); letter-spacing: .04em; }
 
 /* ---------- Programa ---------- */
 .programa-cabecera { position: sticky; top: var(--barra); z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linea); }

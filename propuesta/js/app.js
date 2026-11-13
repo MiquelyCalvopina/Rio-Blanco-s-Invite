@@ -34,7 +34,7 @@ const actividad = (id) => D.actividades.find((x) => x.id === id);
 const dias = () => [...new Set(D.actividades.map((a) => a.fecha))];
 const ic = (a) => `<span class="ic c-${a.tipo}">${iconosAct[a.icono] || ''}</span>`;
 const icPeq = (a) => `<span class="c-${a.tipo}">${iconosAct[a.icono] || ''}</span>`;
-const FOTOS = { plaza: 'img/lugares/plaza.jpg', plazaToros: 'img/lugares/plaza.jpg', barrio: 'img/lugares/cotopaxi.jpg' };
+const FOTOS = { iglesia: 'img/lugares/iglesia.jpg', plaza: 'img/lugares/plaza.jpg', plazaToros: 'img/lugares/plaza.jpg', barrio: 'img/lugares/cotopaxi.jpg' };
 
 /* ---------- Agregados al calendario (solo en este teléfono) ---------- */
 const agregados = new Set((() => { try { return JSON.parse(localStorage.getItem('agregados') || '[]'); } catch { return []; } })());

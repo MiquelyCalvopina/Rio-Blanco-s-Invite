@@ -157,7 +157,7 @@ function pintarDias() {
     const d = new Date(f + 'T12:00:00Z');
     const cls = ['dia', grandes.has(f) ? 'grande' : '', f === hoy ? 'hoy-d' : ''].join(' ');
     return `<button class="${cls}" role="tab" data-dia="${f}" aria-selected="${f === ui.dia}" aria-label="${fechaLarga(f)}${f === hoy ? ', hoy' : ''}">
-      ${f === hoy ? 'Hoy' : DIAS_SEM[d.getUTCDay()].slice(0, 3)}<b>${d.getUTCDate()}</b><i class="punto"></i></button>`;
+      ${f === hoy ? 'Hoy' : DIAS_SEM[d.getUTCDay()].slice(0, 3)}<b>${d.getUTCDate()}</b></button>`;
   }).join('');
 }
 
@@ -172,7 +172,7 @@ function filaAct(a, enCurso) {
       <span class="hora">${a.hora}</span>
       <span class="cuerpo">
         ${enCurso ? '<span class="en-curso-etq"><i class="vivo"></i>En curso</span>' : ''}
-        <span class="tit">${esc(a.titulo)}${a.destacado ? '<i class="principal" title="Actividad principal"></i>' : ''}</span>
+        <span class="tit">${esc(a.titulo)}${a.destacado ? '<span class="principal">Principal</span>' : ''}</span>
         <span class="met">${icPeq(a)}<span>${esc(lugarTexto(a))}</span></span>
       </span>
       <span class="chev">${iconos.chev}</span>

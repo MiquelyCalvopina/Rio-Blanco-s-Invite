@@ -142,8 +142,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .dia[aria-selected="true"] { background: var(--noche); color: rgba(255,255,255,.7); }
 .dia[aria-selected="true"] b { color: #fff; }
 .dia:active { transform: scale(1.06); }
-.dia .punto { width: 4px; height: 4px; border-radius: 50%; }
-.dia.grande .punto { background: var(--chuquiragua); }
 .dia.hoy-d:not([aria-selected="true"]) b { color: var(--colcha); }
 .filtros { display: flex; gap: 6px; overflow-x: auto; padding: var(--s1) var(--s4) var(--s2); scrollbar-width: none; }
 .filtros::-webkit-scrollbar { display: none; }
@@ -164,7 +162,8 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .fila .met { display: flex; align-items: center; gap: 4px; font-size: var(--t12); color: var(--tinta-2); margin-top: 1px; white-space: nowrap; overflow: hidden; }
 .fila .met .ico { width: 13px; height: 13px; }
 .fila .met span { overflow: hidden; text-overflow: ellipsis; }
-.principal { width: 6px; height: 6px; border-radius: 50%; background: var(--chuquiragua); display: inline-block; margin-left: 6px; vertical-align: 2px; }
+.principal { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px; background: #FBEFD6; color: #8A5A10; font-size: var(--t12); font-weight: var(--w-m); line-height: 18px; vertical-align: 1px; white-space: nowrap; }
+.fila.en-curso .principal { background: rgba(241,214,140,.18); color: var(--oro-claro); }
 .fila .chev { color: var(--tinta-3); flex: 0 0 auto; }
 .fila.en-curso { margin: var(--s2) 0; }
 .fila.en-curso .fila-main { margin: 0; padding: var(--s3); border-radius: 14px; background: var(--noche); color: #fff; box-shadow: 0 8px 20px rgba(11,22,54,.22); }

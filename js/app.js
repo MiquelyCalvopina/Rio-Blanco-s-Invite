@@ -269,7 +269,7 @@ function detalle(id) {
   const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
   const donde = a.lugar === 'posada'
     ? fila(iconos.mapa, 'Dónde', `Posada de ${esc(a.anfitrion)}<span class="sub">Casa particular</span>`)
-    : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '');
+    : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a class="ext" href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar${iconos.externo}</a>` : '');
   abrirHoja(`${cabecera}
     <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
     ${a.descripcion ? `<p class="det">${esc(a.descripcion)}</p>` : ''}
@@ -317,25 +317,30 @@ const SRV_ICO = { parqueo: 'parqueo', banos: 'banos', comida: 'comida' };
 const pinSrv = (tipo) => `<span class="pin-srv s-${tipo}">${iconos[SRV_ICO[tipo]]}</span>`;
 let mapaL = null; const marcadores = {};
 
+// Cada punto del mapa (lugar o servicio) con los datos que muestra su tarjeta.
+function puntos() {
+  const lista = D.servicios.map((x) => ({ id: x.id, nombre: x.nombre, detalle: x.detalle, mapa: x.mapa, ico: `<span class="ic s-${x.tipo}">${iconos[SRV_ICO[x.tipo]]}</span>`, grupo: 'servicios' }));
+  const usados = new Set(D.actividades.map((a) => a.lugar));
+  const vistos = new Set();
+  for (const [k, l] of Object.entries(D.lugares)) {
+    if (l.lat == null || !usados.has(k) || vistos.has(`${l.lat},${l.lng}`)) continue;
+    vistos.add(`${l.lat},${l.lng}`);
+    lista.push({ id: k, nombre: k === 'plaza' ? 'Plaza central y plaza de toros' : l.nombre, detalle: '', mapa: l.mapa, ico: `<span class="ic s-lugar">${iconosAct[l.icono] || iconos.mapa}</span>`, grupo: 'lugares' });
+  }
+  return lista;
+}
+
 function pintarLugares() {
   const ll = D.llegada;
   $('#llegar').href = `https://www.google.com/maps/dir/?api=1&destination=${ll.lat}%2C${ll.lng}`;
-  $('#lista-servicios').innerHTML = D.servicios.map((x) => `<li><div class="srv-fila">
-      <button class="srv tap-suave" data-ver="${x.id}">
-        <span class="ic s-${x.tipo}">${iconos[SRV_ICO[x.tipo]]}</span>
-        <span class="cuerpo"><span class="tit">${esc(x.nombre)}</span><span class="met">${esc(x.detalle)}</span></span>
-      </button>
-      <a class="ir" href="${x.mapa}" target="_blank" rel="noopener">Ir</a></div></li>`).join('');
-  const usados = new Set(D.actividades.map((a) => a.lugar));
-  const vistos = new Set();
-  $('#lista-lugares').innerHTML = Object.entries(D.lugares)
-    .filter(([k, l]) => l.lat != null && usados.has(k) && !vistos.has(`${l.lat},${l.lng}`) && vistos.add(`${l.lat},${l.lng}`))
-    .map(([k, l]) => `<li><div class="srv-fila">
-      <button class="srv tap-suave" data-ver="${k}">
-        <span class="ic s-lugar">${iconosAct[l.icono] || iconos.mapa}</span>
-        <span class="cuerpo"><span class="tit">${esc(l.corto && k === 'plaza' ? 'Plaza central y plaza de toros' : l.nombre)}</span></span>
-      </button>
-      <a class="ir" href="${l.mapa}" target="_blank" rel="noopener">Ir</a></div></li>`).join('');
+  const fila = (p) => `<li><button class="srv tap-suave" data-ver="${p.id}" aria-pressed="false">
+      ${p.ico}
+      <span class="cuerpo"><span class="tit">${esc(p.nombre)}</span>${p.detalle ? `<span class="met">${esc(p.detalle)}</span>` : ''}</span>
+      <span class="ubicar">${iconos.ubicar}</span>
+    </button></li>`;
+  const ps = puntos();
+  $('#lista-servicios').innerHTML = ps.filter((p) => p.grupo === 'servicios').map(fila).join('');
+  $('#lista-lugares').innerHTML = ps.filter((p) => p.grupo === 'lugares').map(fila).join('');
 }
 
 async function mapa() {
@@ -359,8 +364,7 @@ async function mapa() {
     const clave = `${l.lat},${l.lng}`;
     if (vistos[clave]) { marcadores[k] = vistos[clave]; continue; }
     const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq${l.etiqueta === 'arriba' ? ' arriba' : ''}">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
-    const mk = L.marker([l.lat, l.lng], { icon, title: l.nombre }).addTo(m)
-      .bindPopup(`<b>${esc(l.nombre)}</b><br><a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
+    const mk = L.marker([l.lat, l.lng], { icon, title: l.nombre }).addTo(m).on('click', () => seleccionar(k));
     vistos[clave] = mk; marcadores[k] = mk; grupo.push([l.lat, l.lng]);
   }
   // Servicios (agrupados si comparten punto)
@@ -369,8 +373,7 @@ async function mapa() {
   for (const xs of Object.values(porPunto)) {
     const x = xs[0];
     const icon = L.divIcon({ className: '', html: `<span class="pin-grupo">${xs.map((y) => pinSrv(y.tipo)).join('')}</span>`, iconSize: [28 * xs.length, 26], iconAnchor: x.ancla || [-6, 30] });
-    const mk = L.marker([x.lat, x.lng], { icon, title: xs.map((y) => y.nombre).join(' y ') }).addTo(m)
-      .bindPopup(xs.map((y) => `<b>${esc(y.nombre)}</b><br>${esc(y.detalle)}`).join('<br><br>') + `<br><a href="${x.mapa}" target="_blank" rel="noopener">Cómo llegar</a>`);
+    const mk = L.marker([x.lat, x.lng], { icon, title: xs.map((y) => y.nombre).join(' y ') }).addTo(m).on('click', () => seleccionar(x.id));
     for (const y of xs) marcadores[y.id] = mk;
     grupo.push([x.lat, x.lng]);
   }
@@ -378,11 +381,23 @@ async function mapa() {
   setTimeout(() => m.invalidateSize(), 50);
 }
 
-function verEnMapa(id) {
+// Una sola acción por fila: ubicar en el mapa y mostrar la tarjeta del lugar.
+// Salir a Google Maps solo ocurre desde el botón con ↗ de la tarjeta.
+function seleccionar(id) {
+  const p = puntos().find((x) => x.id === id);
+  if (!p) return;
+  $$('[data-ver]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ver === id)));
+  const t = $('#tarjeta-lugar');
+  t.innerHTML = `${p.ico}<span class="cuerpo"><span class="tit">${esc(p.nombre)}</span>${p.detalle ? `<span class="met">${esc(p.detalle)}</span>` : ''}</span>
+    <button class="cerrar-t" data-deseleccionar aria-label="Cerrar">${iconos.cerrar}</button>
+    <a class="btn btn-noche tap ext" href="${p.mapa}" target="_blank" rel="noopener">Abrir en Google Maps${iconos.externo}</a>`;
+  t.hidden = false; $('#llegar').hidden = true;
   const mk = marcadores[id];
-  if (!mapaL || !mk) return;
-  mapaL.flyTo(mk.getLatLng(), 18, { duration: .6 });
-  setTimeout(() => mk.openPopup(), 650);
+  if (mapaL && mk) mapaL.flyTo(mk.getLatLng(), 18, { duration: .6 });
+}
+function deseleccionar() {
+  $$('[data-ver]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+  $('#tarjeta-lugar').hidden = true; $('#llegar').hidden = false;
 }
 
 /* ---------- Gratitud ---------- */
@@ -427,7 +442,8 @@ function eventos() {
     if (d.agregar) return agregar(d.agregar);
     if (d.act) return detalle(d.act);
     if (d.opciones) return opciones(d.opciones);
-    if (d.ver) return verEnMapa(d.ver);
+    if (d.ver) return seleccionar(d.ver);
+    if ('deseleccionar' in d) return deseleccionar();
     if ('info' in d) { const c = b.parentElement.querySelector('.credito'); c.hidden = !c.hidden; return; }
     if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {

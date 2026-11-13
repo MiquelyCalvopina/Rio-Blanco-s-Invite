@@ -98,6 +98,8 @@ export const iconos = {
   comida: ico('<path d="M7 3v7a2 2 0 0 0 2 2v9M11 3v7a2 2 0 0 1-2 2M9 3v6"/><path d="M16.5 21V3c-2 1.5-3 4-3 7 0 1.5.8 2.5 3 2.5"/>'),
   ruta: ico('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><path d="M9.5 10.2l1.8 1.8 3.4-3.6"/>'),
   info: ico('<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8h.01"/>'),
+  externo: ico('<path d="M14 5h5v5M19 5l-8 8M17 14v4a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 5 18V8.5A1.5 1.5 0 0 1 6.5 7H10"/>'),
+  ubicar: ico('<circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>'),
   descargar: ico('<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'),
 };
 

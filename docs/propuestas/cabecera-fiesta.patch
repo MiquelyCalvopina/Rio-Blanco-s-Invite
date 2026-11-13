@@ -1,0 +1,57 @@
+diff --git a/css/estilos.css b/css/estilos.css
+index ac76978..820b249 100644
+--- a/css/estilos.css
++++ b/css/estilos.css
+@@ -269,6 +269,24 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
+ .hoja.con-foto .hoja-cerrar { background: rgba(255,255,255,.9); color: var(--tinta); border-radius: 50%; top: 10px; right: 10px; width: 36px; height: 36px; }
+ .hoja-cab { position: relative; margin: 0 -16px; height: 170px; overflow: hidden; }
+ .hoja-cab.portada { height: 120px; }
++/* Cabecera tipo afiche: título sobre la imagen o el color */
++.hoja-cab.afiche { height: 210px; }
++.hoja-cab.afiche::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.65)); pointer-events: none; }
++.cab-txt { position: absolute; z-index: 2; left: var(--s4); right: var(--s4); bottom: var(--s4); color: #fff; }
++.cab-txt h2 { font: var(--w-s) 24px/1.12 var(--titulo); letter-spacing: -0.01em; color: #fff; margin: 0; text-wrap: balance; text-shadow: 0 2px 12px rgba(0,0,0,.35); }
++.banderines { position: absolute; z-index: 2; top: 10px; left: 0; width: 100%; height: 26px; }
++.portada.fiesta.k-popular { background: radial-gradient(80% 90% at 90% 10%, #F2C230 0, transparent 55%), linear-gradient(135deg, #DE7A2C, #B5322B 70%); }
++.portada.fiesta.k-cultural { background: radial-gradient(80% 90% at 90% 10%, #F2C230 0, transparent 55%), linear-gradient(135deg, #C43A30, #7E1F4F 75%); }
++.portada.fiesta.k-deportivo { background: radial-gradient(80% 90% at 90% 10%, #9BD27A 0, transparent 55%), linear-gradient(135deg, #2F7A55, #2C4A7A 75%); }
++.portada.solemne.k-religioso { background: radial-gradient(90% 90% at 50% 0%, #26407E, #0B1636 70%); }
++.portada.solemne::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 18% 25%, #fff9, transparent), radial-gradient(1px 1px at 72% 18%, #fff8, transparent), radial-gradient(1.5px 1.5px at 85% 45%, #fff7, transparent), radial-gradient(1px 1px at 35% 12%, #fffa, transparent); }
++.portada.afiche::after { background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,.25)); }
++.ico-fondo { position: absolute; right: -18px; top: 18px; color: rgba(255,255,255,.22); }
++.ico-fondo .ico { width: 170px; height: 170px; stroke-width: 1; }
++.portada.solemne .ico-fondo { color: rgba(241,214,140,.35); left: 50%; right: auto; top: 22px; transform: translateX(-50%); }
++.portada.solemne .ico-fondo .ico { width: 84px; height: 84px; }
++.hoja.con-foto .hoja-asa { z-index: 3; }
++.hoja-cab.afiche + .det { margin-top: var(--s4); }
+ .hoja-foto { display: block; width: 100%; height: 100%; object-fit: cover; }
+ .portada { display: grid; place-items: center; }
+ .portada .ico { width: 52px; height: 52px; stroke-width: 1.2; opacity: .9; }
+diff --git a/js/app.js b/js/app.js
+index 166dcdb..0108010 100644
+--- a/js/app.js
++++ b/js/app.js
+@@ -263,15 +263,20 @@ function detalle(id) {
+   const info = a.credito
+     ? `<button class="info-foto" data-info aria-label="Créditos de la foto">${iconos.info}</button>
+        <a class="credito" href="${a.credito.url}" target="_blank" rel="noopener" hidden>Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
++  // Dos registros: lo religioso es solemne; lo popular, cultural y deportivo es afiche de fiesta.
++  const solemne = a.tipo === 'religioso';
++  const banderines = solemne ? '' : `<svg class="banderines" viewBox="0 0 390 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q195 22 390 4" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1"/>${
++    ['#F2C230', '#2C4A7A', '#C43A30', '#2F5D46', '#DE7A2C', '#F2C230', '#2C4A7A', '#C43A30', '#2F5D46', '#DE7A2C', '#F2C230', '#2C4A7A', '#C43A30']
++      .map((c, i) => { const x = 8 + i * 29.5; const y = 4 + 14 * Math.sin(Math.PI * (x / 390)) * 0.9; return `<path d="M${x} ${y} l14 0 l-7 13 z" fill="${c}"/>`; }).join('')}</svg>`;
++  const titulo = `<div class="cab-txt"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>`;
+   const cabecera = src
+-    ? `<div class="hoja-cab"><img class="hoja-foto" src="${src}" alt="">${info}</div>`
+-    : `<div class="hoja-cab portada k-${a.tipo}">${iconosAct[a.icono] || ''}</div>`;
++    ? `<div class="hoja-cab afiche ${solemne ? 'solemne' : 'fiesta'}"><img class="hoja-foto" src="${src}" alt="">${banderines}${titulo}${info}</div>`
++    : `<div class="hoja-cab afiche portada ${solemne ? 'solemne' : 'fiesta'} k-${a.tipo}"><span class="ico-fondo">${iconosAct[a.icono] || ''}</span>${banderines}${titulo}</div>`;
+   const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
+   const donde = a.lugar === 'posada'
+     ? fila(iconos.mapa, 'Dónde', `Posada de ${esc(a.anfitrion)}<span class="sub">Casa particular</span>`)
+     : fila(iconos.mapa, 'Dónde', esc(l.nombre), l.mapa ? `<a class="ext" href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar${iconos.externo}</a>` : '');
+   abrirHoja(`${cabecera}
+-    <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
+     ${a.descripcion ? `<p class="det">${esc(a.descripcion)}</p>` : ''}
+     <ul class="datos">
+       ${fila(iconos.reloj, 'Cuándo', `${fechaLarga(a.fecha)} · ${a.hora}`)}

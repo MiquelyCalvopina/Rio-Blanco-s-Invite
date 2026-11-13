@@ -57,7 +57,7 @@ function splash() {
   const s = $('#splash');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let visto = false;
-  try { visto = sessionStorage.getItem('splash') === '1'; } catch {}
+  try { visto = sessionStorage.getItem('splash:' + location.pathname) === '1'; } catch {}
   if (visto) { s.remove(); return; }
   $('#splash-ilus').innerHTML = iglesia;
   if (!reducido) prepararTrazos($('#splash-ilus'), 0, 0.08, 0.7);
@@ -65,7 +65,7 @@ function splash() {
   const cerrar = () => {
     clearTimeout(t1); clearTimeout(t2);
     s.classList.add('textos', 'fuera');
-    try { sessionStorage.setItem('splash', '1'); } catch {}
+    try { sessionStorage.setItem('splash:' + location.pathname, '1'); } catch {}
     setTimeout(() => s.remove(), 600);
   };
   const t2 = setTimeout(cerrar, reducido ? 1200 : 3200);

@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:22-1315-procesion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T181500Z
+DTEND:20261122T191500Z
+SUMMARY:Procesión de la Santísima Virgen de El Quinche
+DESCRIPTION:Por la plazoleta del barrio\, acompañada de sus fieles devotos
+ .\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Al
+ to 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

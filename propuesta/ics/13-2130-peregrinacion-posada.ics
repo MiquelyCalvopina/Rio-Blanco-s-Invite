@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:13-2130-peregrinacion-posada@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T023000Z
+DTEND:20261114T033000Z
+SUMMARY:Peregrinación con la Virgen a la posada
+DESCRIPTION:La Santísima Virgen de El Quinche es llevada a la posada.\nPos
+ ada: Sr. Segundo Casa y Flia.\nFiestas en honor a la Santísima Virgen de 
+ El Quinche · Río Blanco Alto 2026.
+LOCATION:Posada en casa de la familia anfitriona\, Río Blanco Alto\, Tanic
+ uchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación con la Virgen a la posada
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación con la Virgen a la posada
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación con la Virgen a la posada
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

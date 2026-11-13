@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-1500-colchas@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T200000Z
+DTEND:20261121T210000Z
+SUMMARY:Desfile de colchas\, ponchos y presentes taurinos
+DESCRIPTION:Incluye la tradicional Colcha de Caucara.\nGracias a: Mg. Natal
+ y Bayas\, Srta. Rafaela Hidalgo\, Hnos. Vega Palma\, Lic. Solange Tapia\, 
+ Sr. Oscar Moreno y Flia.\, Sr. Fabián Moreno y Flia.\, Sra. Lilian Moreno
+  y Flia.\, Sra. Blanquita Caizapanta\, Sr. Enrique Toaquiza\, Lic. Andrea 
+ Morales\, Lic. Miryam Almache\, Ing. Nayely Vaca\, Sra. Anita Acosta de Ac
+ uña\, Sr. Lenín Acuña\, Mg. Carolina Mena P.\, Ing. Nadin Jácome G.\, 
+ Sr. Rafael Morales\, Lic. Giovanna Jaramillo\, Msc. Andrea Manosalvas\, Ms
+ c. Frandila Melo\, Dra. Jennifer Saa\, Msc. Doris Nieto\, Lic. Luis Granda
+ \, Msc. Antonieta Lugo\, Msc. Carmita Narváez\, Ings. Katty y Marlene Bar
+ riga A.\, Ing. Marisol Landívar B.\, Flia. Barragán Naranjo\, Mg. Mishel
+ e Landázuri N.\, Mg. Karla Díaz P.\, Grupo de Danza "Santísima Virgen d
+ e El Quinche".\nFiestas en honor a la Santísima Virgen de El Quinche · R
+ ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveS
+ sbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

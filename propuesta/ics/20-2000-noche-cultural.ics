@@ -1,0 +1,38 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:20-2000-noche-cultural@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T010000Z
+DTEND:20261121T020000Z
+SUMMARY:Noche Cultural Río Blanco Alto
+DESCRIPTION:3ra edición. Grupos de danza invitados del GAD Parroquial de T
+ anicuchí\, de Guaytacama y de Pastocalle. Ameniza un disco móvil\; hay r
+ efrigerios.\nA cargo de: Comité Promejoras del Barrio Río Blanco Alto.\n
+ Gracias a: Familia Jácome Arboleda (disco móvil)\, Sra. Norma Vilca\, vo
+ cal del GAD Parroquial Tanicuchí (refrigerios).\nFiestas en honor a la Sa
+ ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
+ ps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

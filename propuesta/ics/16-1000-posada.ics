@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:16-1000-posada@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261116T150000Z
+DTEND:20261116T160000Z
+SUMMARY:Posada con Nuestra Patrona
+DESCRIPTION:Posada: Sr. Hugo Plazarte y Flia.\nFiestas en honor a la Santí
+ sima Virgen de El Quinche · Río Blanco Alto 2026.
+LOCATION:Posada en casa de la familia anfitriona\, Río Blanco Alto\, Tanic
+ uchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Posada con Nuestra Patrona
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Posada con Nuestra Patrona
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Posada con Nuestra Patrona
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-1330-ganaderias@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T183000Z
+DTEND:20261121T193000Z
+SUMMARY:Recibimiento de las ganaderías
+DESCRIPTION:Ganadería «San Ricardo» de Mocha y Ganadería «Rancho Alegr
+ e» de Píllaro.\nGracias a: Hnos. Mena García.\nFiestas en honor a la Sa
+ ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
+ ps://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de las ganaderías
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de las ganaderías
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Recibimiento de las ganaderías
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

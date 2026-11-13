@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:19-1500-arreglo-floral@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261119T200000Z
+DTEND:20261119T210000Z
+SUMMARY:Arreglo floral de la Iglesia del Barrio
+DESCRIPTION:Gracias a: Sr. Anderson Acuña y Flia..\nFiestas en honor a la 
+ Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: h
+ ttps://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Arreglo floral de la Iglesia del Barrio
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Arreglo floral de la Iglesia del Barrio
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Arreglo floral de la Iglesia del Barrio
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

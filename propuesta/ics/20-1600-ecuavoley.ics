@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:20-1600-ecuavoley@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261120T210000Z
+DTEND:20261120T220000Z
+SUMMARY:Encuentro de ecuavóley
+DESCRIPTION:Con el equipo femenino «Las Amazonas»: Silvy\, Yami y Cynthia
+  la Ricitos del Ecuavóley.\nA cargo de: Sres. Teodoro Velásquez y Erik M
+ olina (Nobita).\nFiestas en honor a la Santísima Virgen de El Quinche · 
+ Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/rfMhf9NwCNY8
+ qQ2D6
+LOCATION:Coliseo del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Encuentro de ecuavóley
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Encuentro de ecuavóley
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Encuentro de ecuavóley
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

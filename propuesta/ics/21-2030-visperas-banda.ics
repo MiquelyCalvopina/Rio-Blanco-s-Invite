@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:21-2030-visperas-banda@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T013000Z
+DTEND:20261122T023000Z
+SUMMARY:Vísperas con la Banda de Músicos de Aloguincho
+DESCRIPTION:Vísperas en honor a la Santísima Virgen de El Quinche con la 
+ Banda de Músicos de Aloguincho.\nGracias a: Señores Priostes 2026\, Dr. 
+ César Vicente Bohórquez\, Ing. Carmen Paspuel\, Eco. Iván Maldonado.\nF
+ iestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2
+ 026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

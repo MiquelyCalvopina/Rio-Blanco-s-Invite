@@ -1,0 +1,692 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Rio Blanco Alto//Fiestas Virgen de El Quinche 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fiestas Río Blanco Alto 2026
+X-WR-TIMEZONE:America/Guayaquil
+BEGIN:VEVENT
+UID:13-1530-concentracion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T203000Z
+DTEND:20261113T213000Z
+SUMMARY:Concentración de los devotos en Tanicuchí
+DESCRIPTION:Concentración de los devotos y público en general en el Parqu
+ e Central de Tanicuchí. Voladores para la peregrinación.\nGracias a: Sr.
+  Segundo Tello y Sra. (voladores).\nFiestas en honor a la Santísima Virge
+ n de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://www.googl
+ e.com/maps/search/?api=1&query=Parque%20Central%20Tanicuch%C3%AD%2C%20Lata
+ cunga
+LOCATION:Parque Central de la Parroquia Tanicuchí\, Río Blanco Alto\, Tan
+ icuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Concentración de los devotos en Tanicuchí
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1600-peregrinacion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T210000Z
+DTEND:20261113T220000Z
+SUMMARY:Peregrinación de Tanicuchí a Río Blanco Alto
+DESCRIPTION:Desde el centro parroquial de Tanicuchí\, por los barrios Caj
+ ón Veracruz\, Santa Ana y el sector Aglomerados\, con ingreso por la Call
+ e Río Blanco Alto hacia la iglesia. Acompaña una banda de músicos.\nGra
+ cias a: Sr. Segundo Casa y Flia. (banda de músicos).\nFiestas en honor a 
+ la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar
+ : https://www.google.com/maps/search/?api=1&query=Parque%20Central%20Tanic
+ uch%C3%AD%2C%20Latacunga
+LOCATION:Parque Central de la Parroquia Tanicuchí\, Río Blanco Alto\, Tan
+ icuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación de Tanicuchí a Río Blanco Alto
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación de Tanicuchí a Río Blanco Alto
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Peregrinación de Tanicuchí a Río Blanco Alto
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1730-priostazgo@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T223000Z
+DTEND:20261113T233000Z
+SUMMARY:Entrega y recibimiento del priostazgo
+DESCRIPTION:Los Priostes salientes 2025 entregan el priostazgo a los Priost
+ es entrantes 2026.\nA cargo de: Usuarios del Canal de Riego Alumíes Río 
+ Blanco Alto (Priostes 2025).\nFiestas en honor a la Santísima Virgen de E
+ l Quinche · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl
+ /6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrega y recibimiento del priostazgo
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1800-novena-1@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261113T230000Z
+DTEND:20261114T000000Z
+SUMMARY:Novena · Día 1
+DESCRIPTION:Inicio de la novena en honor a la Santísima Virgen de El Quinc
+ he.\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco 
+ Alto 2026.\nCómo llegar: https://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Novena · Día 1
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:13-1930-serenata@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T003000Z
+DTEND:20261114T013000Z
+SUMMARY:Serenata a la Santísima Virgen de El Quinche
+DESCRIPTION:Gracias a: Flia. Albán Mena.\nFiestas en honor a la Santísima
+  Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: https://map
+ s.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:14-1000-paseo-chagra@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T150000Z
+DTEND:20261114T160000Z
+SUMMARY:Paseo Procesional del Chagra
+DESCRIPTION:Recorrido por las calles del barrio en honor a la Santísima Vi
+ rgen de El Quinche. Concentración en el parqueadero del Estadio Monumenta
+ l. Ameniza una banda de pueblo con sonido Jatari. Requisitos para caballos
+ : examen de anemia infecciosa equina\, certificado de vacunación contra i
+ nfluenza equina y certificado de movilización.\nA cargo de: Comisionados:
+  Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Río Blanco A
+ lto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas en honor a 
+ la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar
+ : https://maps.app.goo.gl/T2kfsPxNL3ET54o47
+LOCATION:Estadio Monumental Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Paseo Procesional del Chagra
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Paseo Procesional del Chagra
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Paseo Procesional del Chagra
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:14-1200-concurso-lazo@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261114T170000Z
+DTEND:20261114T180000Z
+SUMMARY:Gran Concurso de Lazo
+DESCRIPTION:En la plaza central del barrio. Premios económicos y atuendos 
+ chacarreros. Ameniza una banda de pueblo con sonido Jatari. Requisitos par
+ a caballos: examen de anemia infecciosa equina\, certificado de vacunació
+ n contra influenza equina y certificado de movilización.\nA cargo de: Com
+ isionados: Sres. Vinicio Yánez\, Javier Mena y el Grupo de Chagras de Rí
+ o Blanco Alto.\nGracias a: Grupo de Amigos de la Vieja Guardia.\nFiestas e
+ n honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nC
+ ómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran Concurso de Lazo
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran Concurso de Lazo
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Gran Concurso de Lazo
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:14-1930-coronacion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261115T003000Z
+DTEND:20261115T013000Z
+SUMMARY:Coronación de Dulce María I\, Reina del Barrio
+DESCRIPTION:Coronación y exaltación de Dulce María I\, Reina del Barrio 
+ Río Blanco Alto 2026\, y su Corte de Honor. Ameniza un disco móvil de la
+  provincia. Conduce Fernando Erazo.\nA cargo de: Comité Promejoras del Ba
+ rrio Río Blanco Alto.\nFiestas en honor a la Santísima Virgen de El Quin
+ che · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU
+ 43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Coronación de Dulce María I\, Reina del Barrio
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Coronación de Dulce María I\, Reina del Barrio
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Coronación de Dulce María I\, Reina del Barrio
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:15-0800-giro-rba@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261115T130000Z
+DTEND:20261115T140000Z
+SUMMARY:GIRO-RBA 2026 · Vuelta ciclística
+DESCRIPTION:La Vuelta Río Blanco Alto: ruta de 25 km con salida desde el P
+ arque Central del barrio. Modalidad abierta: montañeras\, ruteras y grave
+ l. Categorías: Juvenil (15 a 18 años)\, Máster A (29 a 39)\, Máster B 
+ (40 a 49)\, Máster C (50 a 59)\, Élite (abierta) y Leyendas (60 en adela
+ nte)\, para varones y damas.\nA cargo de: Liga Deportiva Barrial Central R
+ ío Blanco Alto.\nGracias a: Lic. María Fernanda Tipán\, Sra. Eva Mena G
+ .\, Sra. Zoila Freire M.\, Sr. Arnulfo Mena G.\, Sr. Jaime Trávez\, Ing. 
+ Fernando Rosero\, Ing. Saúl Mena\, Sr. Luis Mena V.\, Dr. William Tapia\,
+  Ing. Alejandro Gallardo\, Sr. Nelson Jácome\, Sr. Carlos Martínez\, Lic
+ . Manolo Escobar\, Arq. Patricio Luje y Flia.\, Ing. Juan Carlos Pinto\, D
+ r. Jorge Pinto\, GIRO-RBA (auspicio)\, Mega Speed Corp. (auspicio)\, Cotop
+ axi (auspicio)\, Mutualista Pichincha (auspicio).\nFiestas en honor a la S
+ antísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: ht
+ tps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GIRO-RBA 2026 · Vuelta ciclística
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GIRO-RBA 2026 · Vuelta ciclística
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GIRO-RBA 2026 · Vuelta ciclística
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20-2000-noche-cultural@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T010000Z
+DTEND:20261121T020000Z
+SUMMARY:Noche Cultural Río Blanco Alto
+DESCRIPTION:3ra edición. Grupos de danza invitados del GAD Parroquial de T
+ anicuchí\, de Guaytacama y de Pastocalle. Ameniza un disco móvil\; hay r
+ efrigerios.\nA cargo de: Comité Promejoras del Barrio Río Blanco Alto.\n
+ Gracias a: Familia Jácome Arboleda (disco móvil)\, Sra. Norma Vilca\, vo
+ cal del GAD Parroquial Tanicuchí (refrigerios).\nFiestas en honor a la Sa
+ ntísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar: htt
+ ps://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Noche Cultural Río Blanco Alto
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-1400-corrida-1@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T190000Z
+DTEND:20261121T200000Z
+SUMMARY:Primera corrida de toros populares
+DESCRIPTION:Apertura de la plaza a cargo de Dulce María I\, Reina del Barr
+ io Río Blanco Alto 2026\, y su Corte de Honor\, junto a los Priostes 2026
+ \, el Comité Promejoras\, la Liga Deportiva Barrial Central\, familiares 
+ y acompañantes.\nGracias a: Sr. Álvaro Yánez A. y Flia. (barreras).\nFi
+ estas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 20
+ 26.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Primera corrida de toros populares
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Primera corrida de toros populares
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Primera corrida de toros populares
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-1500-colchas@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T200000Z
+DTEND:20261121T210000Z
+SUMMARY:Desfile de colchas\, ponchos y presentes taurinos
+DESCRIPTION:Incluye la tradicional Colcha de Caucara.\nGracias a: Mg. Natal
+ y Bayas\, Srta. Rafaela Hidalgo\, Hnos. Vega Palma\, Lic. Solange Tapia\, 
+ Sr. Oscar Moreno y Flia.\, Sr. Fabián Moreno y Flia.\, Sra. Lilian Moreno
+  y Flia.\, Sra. Blanquita Caizapanta\, Sr. Enrique Toaquiza\, Lic. Andrea 
+ Morales\, Lic. Miryam Almache\, Ing. Nayely Vaca\, Sra. Anita Acosta de Ac
+ uña\, Sr. Lenín Acuña\, Mg. Carolina Mena P.\, Ing. Nadin Jácome G.\, 
+ Sr. Rafael Morales\, Lic. Giovanna Jaramillo\, Msc. Andrea Manosalvas\, Ms
+ c. Frandila Melo\, Dra. Jennifer Saa\, Msc. Doris Nieto\, Lic. Luis Granda
+ \, Msc. Antonieta Lugo\, Msc. Carmita Narváez\, Ings. Katty y Marlene Bar
+ riga A.\, Ing. Marisol Landívar B.\, Flia. Barragán Naranjo\, Mg. Mishel
+ e Landázuri N.\, Mg. Karla Díaz P.\, Grupo de Danza "Santísima Virgen d
+ e El Quinche".\nFiestas en honor a la Santísima Virgen de El Quinche · R
+ ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveS
+ sbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-1600-frutas-confites@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T210000Z
+DTEND:20261121T220000Z
+SUMMARY:Tradicional entrada de frutas y confites
+DESCRIPTION:Gracias a: Sra. Charito Mena J. y Flia.\, Sra. Rosita Naranjo y
+  Flia.\, Asociación de Pequeños Comerciantes "Trainorte".\nFiestas en ho
+ nor a la Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo 
+ llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tradicional entrada de frutas y confites
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tradicional entrada de frutas y confites
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tradicional entrada de frutas y confites
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-1800-misa-visperas@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261121T230000Z
+DTEND:20261122T000000Z
+SUMMARY:Misa de Vísperas · Novena Día 9
+DESCRIPTION:Último día de la novena\, en honor a la Santísima Virgen de 
+ El Quinche.\nA cargo de: Padre José Luis Tapia\, Párroco de la Parroquia
+  Tanicuchí.\nFiestas en honor a la Santísima Virgen de El Quinche · Rí
+ o Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/6BTtiLrkM3r29Rh
+ X8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Vísperas · Novena Día 9
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Vísperas · Novena Día 9
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Vísperas · Novena Día 9
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-2000-pirotecnia-yumbada@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T010000Z
+DTEND:20261122T020000Z
+SUMMARY:Juegos pirotécnicos y Yumbada Rioblanquense
+DESCRIPTION:Con la tradicional Yumbada Rioblanquense: bailarines que danzan
+  música nacional alrededor de la chamarasca.\nGracias a: Señores Prioste
+ s 2026 (juegos pirotécnicos)\, Hnos. Jácome Mena y Sra. Rosita Mena Jác
+ ome y Flia. (Yumbada).\nFiestas en honor a la Santísima Virgen de El Quin
+ che · Río Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU
+ 43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juegos pirotécnicos y Yumbada Rioblanquense
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juegos pirotécnicos y Yumbada Rioblanquense
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juegos pirotécnicos y Yumbada Rioblanquense
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:21-2030-visperas-banda@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T013000Z
+DTEND:20261122T023000Z
+SUMMARY:Vísperas con la Banda de Músicos de Aloguincho
+DESCRIPTION:Vísperas en honor a la Santísima Virgen de El Quinche con la 
+ Banda de Músicos de Aloguincho.\nGracias a: Señores Priostes 2026\, Dr. 
+ César Vicente Bohórquez\, Ing. Carmen Paspuel\, Eco. Iván Maldonado.\nF
+ iestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 2
+ 026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vísperas con la Banda de Músicos de Aloguincho
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1200-misa-accion-gracias@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T170000Z
+DTEND:20261122T180000Z
+SUMMARY:Misa de Acción de Gracias
+DESCRIPTION:A la Santísima Virgen de El Quinche\, Patrona del Barrio Río 
+ Blanco Alto.\nA cargo de: Padre José Luis Tapia\, Párroco de la Parroqui
+ a Tanicuchí.\nFiestas en honor a la Santísima Virgen de El Quinche · R
+ ío Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/6BTtiLrkM3r29
+ RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Acción de Gracias
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Acción de Gracias
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Misa de Acción de Gracias
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1300-serenata@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T180000Z
+DTEND:20261122T190000Z
+SUMMARY:Serenata a la Santísima Virgen de El Quinche
+DESCRIPTION:Gracias a: Ing. Verónica Vargas y Flia..\nFiestas en honor a l
+ a Santísima Virgen de El Quinche · Río Blanco Alto 2026.\nCómo llegar:
+  https://maps.app.goo.gl/6BTtiLrkM3r29RhX8
+LOCATION:Iglesia del Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuch
+ í
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Serenata a la Santísima Virgen de El Quinche
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1315-procesion@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T181500Z
+DTEND:20261122T191500Z
+SUMMARY:Procesión de la Santísima Virgen de El Quinche
+DESCRIPTION:Por la plazoleta del barrio\, acompañada de sus fieles devotos
+ .\nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Al
+ to 2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza central del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Procesión de la Santísima Virgen de El Quinche
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1400-corrida-2@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T190000Z
+DTEND:20261122T200000Z
+SUMMARY:Segunda corrida de toros populares
+DESCRIPTION:Apertura de la plaza a cargo de Dulce María I\, Reina del Barr
+ io Río Blanco Alto 2026\, y su Corte de Honor\, junto a los Priostes 2026
+ \, el Comité Promejoras\, la Liga Deportiva Barrial Central\, familiares 
+ y acompañantes.\nGracias a: Sr. Álvaro Yánez A. y Flia. (barreras).\nFi
+ estas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto 20
+ 26.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segunda corrida de toros populares
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segunda corrida de toros populares
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segunda corrida de toros populares
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1600-colchas@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T210000Z
+DTEND:20261122T220000Z
+SUMMARY:Desfile de colchas\, ponchos y presentes taurinos
+DESCRIPTION:Incluye la tradicional Colcha de Caucara.\nGracias a: Niña Mar
+ ía Amelia Chancúsig V.\, Niño Aarón Herrera D.\, Hnos. Rosero Mena\, H
+ nos. Curillo Albán\, Sr. Freddy Zapata y Flia.\, Sr. Rodrigo Díaz y Flia
+ .\, Lic. Pamela Maldonado\, Hnas. Pruna Tapia\, Ing. Jhair Mena J.\, Ing. 
+ Kelvin Mena J.\, Ing. Miquely Calvopiña Jácome\, Dra. Amparito Jácome\,
+  Hnas. Reyes Muñoz\, Sr. Pablo Tapia y Sra.\, Sra. Rosa Jácome\, Familia
+  Balseca Muñoz\, Sr. Cristian Cueva y Flia.\, Sr. William López y Flia.\
+ , Sr. Patricio Muñoz T. y Sra.\, Lic. Estefanía López\, Lic. Jennifer I
+ caza\, Ing. Anabel Mena\, Mg. Diana Ramos P.\, Ing. Anahí Jácome G.\, Sr
+ . Nelson Jácome\, Síndico de la Santísima Virgen de El Quinche\, Hnas. 
+ Muñoz Moreno\, Lic. Miryam Pacheco y Flia.\, Lic. Silvia Zapata y Flia..\
+ nFiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto
+  2026.\nCómo llegar: https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7
+LOCATION:Plaza de toros del barrio\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Desfile de colchas\, ponchos y presentes taurinos
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1630-frutas-confites@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T213000Z
+DTEND:20261122T223000Z
+SUMMARY:Entrada de frutas y confites
+DESCRIPTION:Gracias a: Señores Priostes 2026\, sus familiares y demás aco
+ mpañantes.\nFiestas en honor a la Santísima Virgen de El Quinche · Río
+  Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7L
+ 9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrada de frutas y confites
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrada de frutas y confites
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Entrada de frutas y confites
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:22-1800-baile-cierre@rioblancoalto-fiestas-2026
+DTSTAMP:20261113T000000Z
+DTSTART:20261122T230000Z
+DTEND:20261123T000000Z
+SUMMARY:Baile popular y fin de fiestas
+DESCRIPTION:Con la Banda de Músicos de Aloguincho.\nGracias a: Señores Pr
+ iostes 2026.\nFiestas en honor a la Santísima Virgen de El Quinche · Rí
+ o Blanco Alto 2026.\nCómo llegar: https://maps.app.goo.gl/G3GdU43uRN7eSn7
+ L9
+LOCATION:Barrio Río Blanco Alto\, Río Blanco Alto\, Tanicuchí
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Baile popular y fin de fiestas
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Baile popular y fin de fiestas
+TRIGGER:-PT2H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Baile popular y fin de fiestas
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -99,7 +99,8 @@ function ir(vista) {
 let ctaVisible = true;
 function fabVisible() {
   const enInicio = !$('#vista-inicio').hidden;
-  $('#fab').classList.toggle('oculto', enInicio && ctaVisible);
+  const enMapa = !$('#vista-lugares').hidden; // en el mapa la acción principal es Llegar al barrio
+  $('#fab').classList.toggle('oculto', (enInicio && ctaVisible) || enMapa);
 }
 function observarCta() {
   if (!('IntersectionObserver' in window)) return;
@@ -355,13 +356,13 @@ async function mapa() {
     for (const y of xs) marcadores[y.id] = mk;
     grupo.push([x.lat, x.lng]);
   }
-  m.fitBounds(grupo, { padding: [30, 30], maxZoom: 18 });
+  m.fitBounds(grupo, { paddingTopLeft: [30, 30], paddingBottomRight: [30, 70], maxZoom: 18 });
+  setTimeout(() => m.invalidateSize(), 50);
 }
 
 function verEnMapa(id) {
   const mk = marcadores[id];
   if (!mapaL || !mk) return;
-  $('#mapa').scrollIntoView({ behavior: 'smooth', block: 'center' });
   mapaL.flyTo(mk.getLatLng(), 18, { duration: .6 });
   setTimeout(() => mk.openPopup(), 650);
 }

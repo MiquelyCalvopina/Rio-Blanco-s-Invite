@@ -86,6 +86,7 @@ export const iconos = {
   programa: ico('<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M7.5 14h3M13.5 14h3M7.5 17h3"/>'),
   gratitud: ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'),
   cerrar: ico('<path d="M6 6l12 12M18 6L6 18"/>'),
+  telefono: ico('<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'),
   buscar: ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/>'),
   chev: ico('<path d="M9 6l6 6-6 6"/>'),
   abajo: ico('<path d="M6 9l6 6 6-6"/>'),

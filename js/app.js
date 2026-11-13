@@ -69,7 +69,7 @@ function splash() {
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
-const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
+const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Actividades', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
 let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
@@ -319,7 +319,7 @@ function opciones(id) {
       <a class="opcion tap-suave" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>iPhone, Samsung u Outlook<span class="sub">Solo esta actividad</span></span></a>
       <a class="opcion tap-suave" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Solo esta actividad</span></span></a>
       <a class="opcion tap-suave" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${ndest} actividades</span></span></a>
-      <a class="opcion tap-suave" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades</span></span></a>
+      <a class="opcion tap-suave" href="ics/todo.ics">${iconos.descargar}<span>Todas las actividades<span class="sub">${D.actividades.length} actividades</span></span></a>
     </div>`, a.id, 'opciones');
 }
 
@@ -525,7 +525,7 @@ function eventos() {
       return compartir({ title: 'Gracias', text: `Gracias, ${d.enviarGracias}, ${d.ctx}. Fiestas en honor a la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
     }
     if (b.id === 'fab') {
-      return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí está el programa completo:', url: URL_SITIO });
+      return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí están todas las actividades y horarios:', url: URL_SITIO });
     }
     if (b.id === 'hoja-cerrar') cerrarHoja();
   });

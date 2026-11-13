@@ -158,3 +158,13 @@ test('reconocimientos incluye posada, a cargo, participantes y gentilezas del tr
   assert.equal(total, 138 + 28);
   assert.equal(normalizar('Canelázo '), 'canelazo');
 });
+
+test('cada recordatorio lleva el enlace a su actividad en la invitación', () => {
+  const misa = porId('22-1200-misa-accion-gracias');
+  const ics = icsCalendario([misa], datos.lugares, SELLO_ICS).replace(/\r\n /g, '');
+  const enlace = 'https://miquelycalvopina.github.io/Rio-Blanco-s-Invite/#a/22-1200-misa-accion-gracias';
+  assert.ok(ics.includes('URL:' + enlace));
+  assert.ok(ics.includes('Ver detalle y posibles cambios de horario: ' + enlace));
+  const g = new URL(googleCalendarUrl(misa, datos.lugares, 'https://ejemplo.org/')).searchParams.get('details');
+  assert.ok(g.endsWith('Ver detalle y posibles cambios de horario: https://ejemplo.org/#a/22-1200-misa-accion-gracias'));
+});

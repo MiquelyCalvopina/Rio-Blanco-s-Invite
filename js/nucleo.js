@@ -4,6 +4,9 @@
 export const ZONA = 'America/Guayaquil';
 const DESFASE_MS = 5 * 60 * 60 * 1000; // Ecuador continental: UTC-5, sin horario de verano
 const DURACION_MS = 60 * 60 * 1000; // si el programa no da hora de fin
+// Dirección pública de la invitación: va en cada recordatorio para ver el detalle y los cambios de horario.
+export const URL_PUBLICA = 'https://miquelycalvopina.github.io/Rio-Blanco-s-Invite/';
+export const enlaceDetalle = (a, urlSitio) => `Ver detalle y posibles cambios de horario: ${urlSitio}#a/${a.id}`;
 export const SELLO_ICS = new Date('2026-11-13T00:00:00Z');
 export const RECORDATORIOS = ['-P1D', '-PT2H', 'PT0M']; // 1 día antes, 2 horas antes y a la hora
 
@@ -87,7 +90,7 @@ export function descripcion(a, lugares) {
   return lineas.join('\n');
 }
 
-function vevento(a, lugares, sello) {
+function vevento(a, lugares, sello, urlSitio) {
   const lugar = lugares[a.lugar];
   const lineas = [
     'BEGIN:VEVENT',
@@ -96,7 +99,8 @@ function vevento(a, lugares, sello) {
     `DTSTART:${fechaICS(inicioUTC(a))}`,
     `DTEND:${fechaICS(finUTC(a))}`,
     `SUMMARY:${escapar(a.titulo)}`,
-    `DESCRIPTION:${escapar(descripcion(a, lugares))}`,
+    `DESCRIPTION:${escapar(descripcion(a, lugares) + (urlSitio ? '\n' + enlaceDetalle(a, urlSitio) : ''))}`,
+    ...(urlSitio ? [`URL:${urlSitio}#a/${a.id}`] : []),
     `LOCATION:${escapar(lugar ? lugar.nombre + ', Río Blanco Alto, Tanicuchí' : 'Río Blanco Alto, Tanicuchí')}`,
   ];
   for (const disparo of RECORDATORIOS) {
@@ -112,7 +116,7 @@ function vevento(a, lugares, sello) {
   return lineas;
 }
 
-export function icsCalendario(actividades, lugares, sello = new Date()) {
+export function icsCalendario(actividades, lugares, sello = new Date(), urlSitio = URL_PUBLICA) {
   const lineas = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -122,7 +126,7 @@ export function icsCalendario(actividades, lugares, sello = new Date()) {
     'X-WR-CALNAME:Fiestas Río Blanco Alto 2026',
     `X-WR-TIMEZONE:${ZONA}`,
   ];
-  for (const a of actividades) lineas.push(...vevento(a, lugares, sello));
+  for (const a of actividades) lineas.push(...vevento(a, lugares, sello, urlSitio));
   lineas.push('END:VCALENDAR');
   return lineas.map(plegar).join('\r\n') + '\r\n';
 }
@@ -133,7 +137,7 @@ export function googleCalendarUrl(a, lugares, urlSitio) {
     action: 'TEMPLATE',
     text: a.titulo,
     dates: `${fechaICS(inicioUTC(a))}/${fechaICS(finUTC(a))}`,
-    details: descripcion(a, lugares) + (urlSitio ? `\n${urlSitio}#a/${a.id}` : ''),
+    details: descripcion(a, lugares) + (urlSitio ? '\n' + enlaceDetalle(a, urlSitio) : ''),
     location: lugar ? `${lugar.nombre}, Río Blanco Alto, Tanicuchí` : 'Río Blanco Alto, Tanicuchí',
     ctz: ZONA,
   });

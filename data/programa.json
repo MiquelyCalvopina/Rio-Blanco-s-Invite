@@ -114,25 +114,7 @@
       "lng": -78.6141981,
       "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
     },
-    {
-      "id": "comida",
-      "tipo": "comida",
-      "nombre": "Comida",
-      "detalle": "Carpas de la iglesia a la plaza (lado izquierdo) y detrás de la plaza",
-      "lat": -0.7485343,
-      "lng": -78.6145484,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7485343%2C-78.6145484",
-      "tramo": [
-        [
-          -0.7490455,
-          -78.6154423
-        ],
-        [
-          -0.7487619,
-          -78.6146614
-        ]
-      ]
-    }
+    {"id": "comida", "tipo": "comida", "nombre": "Comida", "detalle": "Puestos alrededor de la plaza central", "lat": -0.7485383, "lng": -78.6144866, "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7485383%2C-78.6144866", "tramo": [[-0.7487223, -78.6147919], [-0.7485988, -78.6147919], [-0.7485592, -78.6146987], [-0.7485173, -78.6142746]]}
   ],
   "llegada": {
     "nombre": "Iglesia del Barrio Río Blanco Alto",

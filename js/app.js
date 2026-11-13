@@ -12,9 +12,9 @@ const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', '
 const SO = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
   ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : 'otro';
 const TEXTO_CAL = {
-  ios: { boton: 'Agregar a mi calendario', aviso: 'Toque «Agregar» para guardarlo' },
-  android: { boton: 'Agregar a Google Calendar', aviso: 'Toque «Guardar» en Google Calendar' },
-  otro: { boton: 'Agregar a mi calendario', aviso: 'Abra el archivo para guardarlo' },
+  ios: { boton: 'Agregar a mi calendario' },
+  android: { boton: 'Agregar a Google Calendar' },
+  otro: { boton: 'Agregar a mi calendario' },
 }[SO];
 
 let D;
@@ -230,7 +230,6 @@ function agregar(id) {
   marcarAgregado(id);
   if (SO === 'android') window.open(googleCalendarUrl(a, D.lugares, URL_SITIO), '_blank', 'noopener');
   else location.href = `ics/${a.id}.ics`;
-  aviso(TEXTO_CAL.aviso);
   if (!$('#hoja').hidden && $('#hoja').dataset.id === id && $('#hoja').dataset.modo === 'detalle') detalle(id);
 }
 
@@ -415,11 +414,6 @@ async function compartir({ title, text, url }) {
   window.open(`https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`, '_blank', 'noopener');
 }
 
-function aviso(t) {
-  const a = $('#aviso'); a.textContent = t; a.classList.remove('sale'); a.hidden = false;
-  clearTimeout(aviso.t); clearTimeout(aviso.t2);
-  aviso.t = setTimeout(() => { a.classList.add('sale'); aviso.t2 = setTimeout(() => { a.hidden = true; }, 200); }, 3500);
-}
 
 /* ---------- Eventos ---------- */
 function eventos() {

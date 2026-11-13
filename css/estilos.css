@@ -293,8 +293,6 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .enlace { display: inline-flex; align-items: center; gap: 2px; min-height: 40px; font-size: var(--t13); font-weight: var(--w-m); color: var(--poncho); }
 
 /* ---------- Aviso ---------- */
-.aviso { position: fixed; left: 50%; bottom: calc(var(--tabs) + var(--abajo) + 60px); z-index: 40; transform: translateX(-50%); background: var(--noche); color: #fff; padding: var(--s2) var(--s4); border-radius: 12px; font-size: var(--t13); box-shadow: 0 8px 24px rgba(0,0,0,.18); width: max-content; max-width: calc(100% - 32px); text-align: center; animation: entrar .3s var(--ease-out); }
-.aviso.sale { animation: salir .2s var(--ease-in) forwards; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001s !important; animation-delay: 0s !important; transition-duration: .001s !important; }

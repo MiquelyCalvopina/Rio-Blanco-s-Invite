@@ -80,6 +80,7 @@ let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
   $('#titulo-barra').textContent = TITULOS[vista];
+  document.body.classList.toggle('en-inicio', vista === 'inicio');
   $('#atras').hidden = vista === 'inicio';
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const antes = $(`#vista-${vistaActual}`);
@@ -161,7 +162,7 @@ function diasFaltan() {
 
 function pintarCarrusel() {
   const t = ahora().getTime();
-  const proximas = D.actividades.filter((a) => a.destacado && (a.foto || FOTOS[a.lugar]) && inicioUTC(a).getTime() > t - 36e5).slice(0, 10);
+  const proximas = D.actividades.filter((a) => a.destacado && (a.foto || (a.lugar !== 'barrio' && FOTOS[a.lugar])) && inicioUTC(a).getTime() > t - 36e5).slice(0, 10);
   $('.esperado').hidden = !proximas.length;
   $('#carrusel').innerHTML = proximas.map((a) => `<button class="tarjeta-foto tap" data-act="${a.id}">
       <img src="${a.foto || FOTOS[a.lugar]}" alt="" loading="lazy">
@@ -478,6 +479,7 @@ function eventos() {
 /* ---------- Arranque ---------- */
 async function iniciar() {
   splash();
+  document.body.classList.add('en-inicio');
   $('#hoja-cerrar').innerHTML = iconos.cerrar;
   $('.buscador-icono').innerHTML = iconos.buscar;
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });

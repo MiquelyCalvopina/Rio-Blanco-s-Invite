@@ -74,9 +74,12 @@ function splash() {
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
+const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Programa', lugares: 'Lugares', gratitud: 'Gratitud' };
 let vistaActual = 'inicio';
 function ir(vista) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
+  $('#titulo-barra').textContent = TITULOS[vista];
+  $('#atras').hidden = vista === 'inicio';
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const antes = $(`#vista-${vistaActual}`);
   const despues = $(`#vista-${vista}`);
@@ -163,17 +166,17 @@ function pintarFiltros() {
   $('#filtros').innerHTML = ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
 }
 
-function filaAct(a) {
-  const ok = agregados.has(a.id);
-  return `<li class="fila">
+function filaAct(a, enCurso) {
+  return `<li class="fila${enCurso ? ' en-curso' : ''}">
     <button class="fila-main tap-suave" data-act="${a.id}">
       <span class="hora">${a.hora}</span>
       <span class="cuerpo">
+        ${enCurso ? '<span class="en-curso-etq"><i class="vivo"></i>En curso</span>' : ''}
         <span class="tit">${esc(a.titulo)}${a.destacado ? '<i class="principal" title="Actividad principal"></i>' : ''}</span>
         <span class="met">${icPeq(a)}<span>${esc(lugarTexto(a))}</span></span>
       </span>
+      <span class="chev">${iconos.chev}</span>
     </button>
-    <button class="fila-cal${ok ? ' puesto' : ''}" data-agregar="${a.id}" aria-label="${ok ? 'Ya está en su calendario' : 'Agregar al calendario'}: ${esc(a.titulo)}">${ok ? iconos.calOk : iconos.calMas}</button>
   </li>`;
 }
 
@@ -192,7 +195,8 @@ function pintarLista() {
   if (!acts.length) { $('#lista').innerHTML = `<li class="vacio">Este día no hay actividades de tipo ${TIPOS[ui.filtro].toLowerCase()}.</li>`; return; }
   let pos = -1;
   if (ui.dia === hoy) { pos = acts.findIndex((a) => a.hora > hora); if (pos < 0) pos = acts.length; }
-  const linea = `<li class="ahora-linea" id="ahora">Ahora · ${hora}</li>`;
+  const linea = `<li class="ahora-linea" id="ahora"><span class="pill">Ahora · ${hora}</span></li>`;
+  const enCurso = new Set(estado(D.actividades, ahora()).ahora.map((x) => x.id));
   let html = ''; let f = '';
   acts.forEach((a, i) => {
     if (franja(a.hora) !== f) {
@@ -201,7 +205,7 @@ function pintarLista() {
       html += `<li class="franja">${f === 'Noche' ? iconos.luna : iconos.sol}${f}</li>`;
     }
     if (i === pos) html += linea;
-    html += filaAct(a);
+    html += filaAct(a, enCurso.has(a.id));
   });
   if (pos === acts.length) html += linea;
   const l = $('#lista');
@@ -217,13 +221,13 @@ function agregar(id) {
   if (SO === 'android') window.open(googleCalendarUrl(a, D.lugares, URL_SITIO), '_blank', 'noopener');
   else location.href = `ics/${a.id}.ics`;
   aviso(TEXTO_CAL.aviso);
-  pintarLista();
   if (!$('#hoja').hidden && $('#hoja').dataset.id === id && $('#hoja').dataset.modo === 'detalle') detalle(id);
 }
 
 /* ---------- Hoja inferior ---------- */
-function abrirHoja(html, id = '', modo = '') {
+function abrirHoja(html, id = '', modo = '', conFoto = false) {
   const h = $('#hoja');
+  h.classList.toggle('con-foto', conFoto);
   $('#hoja-contenido').innerHTML = html;
   h.dataset.id = id; h.dataset.modo = modo;
   if (h.hidden) { h.hidden = false; $('#velo').hidden = false; $('#fab').hidden = true; document.body.style.overflow = 'hidden'; }
@@ -246,7 +250,8 @@ function detalle(id) {
   const ok = agregados.has(a.id);
   const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
   const gent = a.gentileza.length ? `<li>${iconos.personas}<span>Gentileza de<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
-  abrirHoja(`
+  const foto = FOTOS[a.lugar] ? `<img class="hoja-foto" src="${FOTOS[a.lugar]}" alt="">` : '';
+  abrirHoja(`${foto}
     <div class="hoja-top">${ic(a)}<div><p class="met-sup">${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div></div>
     <ul class="datos">
       <li>${iconos.reloj}<span>${fechaLarga(a.fecha)}<span class="sub">${a.hora}</span></span></li>
@@ -255,13 +260,13 @@ function detalle(id) {
     </ul>
     ${a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : ''}
     ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
+    <button class="enlace" data-opciones="${a.id}">Usar otro calendario</button>
     <div class="pie-hoja">
-      <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Ya está en su calendario' : TEXTO_CAL.boton}</button>
-      <div class="acciones-sec">
-        <button class="btn btn-borde tap" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
-        <button class="btn btn-borde tap" data-opciones="${a.id}">${iconos.calendario}Otro calendario</button>
+      <div class="pie-acciones">
+        <button class="btn btn-noche tap" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Agregado a su calendario' : TEXTO_CAL.boton}</button>
+        <button class="btn btn-borde tap" data-compartir-act="${a.id}" aria-label="Compartir esta actividad">${iconos.compartir}Compartir</button>
       </div>
-    </div>`, a.id, 'detalle');
+    </div>`, a.id, 'detalle', !!foto);
 }
 
 function opciones(id) {
@@ -377,7 +382,7 @@ function eventos() {
     if (d.agregar) return agregar(d.agregar);
     if (d.act) return detalle(d.act);
     if (d.opciones) return opciones(d.opciones);
-    if (d.marcar) { marcarAgregado(d.marcar); pintarLista(); return; }
+    if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {
       const a = actividad(d.compartirAct);
       return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });

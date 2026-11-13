@@ -35,7 +35,8 @@
 </div>
 
 <header class="barra">
-  <button class="marca" data-ir="inicio" aria-label="Ir al inicio">Río Blanco Alto · 2026</button>
+  <button id="atras" class="atras-barra" data-ir="inicio" hidden><span data-ico="atras"></span>Inicio</button>
+  <p id="titulo-barra" class="marca" aria-live="polite">Río Blanco Alto · 2026</p>
 </header>
 
 <main>
@@ -50,9 +51,9 @@
       <button class="btn btn-oro tap" data-ir="programa">Ver el programa</button>
     </div>
     <section class="bloque" aria-live="polite" id="estado"></section>
-    <section class="bloque" aria-labelledby="t-priostes">
-      <h2 id="t-priostes" class="bloque-t">Priostes 2026</h2>
-      <p class="bloque-sub">Les invitan a celebrar a Nuestra Patrona</p>
+    <section class="priostes-card" aria-labelledby="t-priostes">
+      <div class="cab"><span class="ic" data-ico-act="estandarte"></span><div><p class="kick">Gracias</p><h2 id="t-priostes">Priostes 2026</h2></div></div>
+      <p class="msg">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p>
       <ul id="lista-priostes" class="lista-priostes"></ul>
       <p class="organizan">Junto al Comité Promejoras y la Liga Deportiva Barrial Central Río Blanco Alto.</p>
     </section>
@@ -71,7 +72,6 @@
 
   <section id="vista-lugares" class="vista" aria-label="Lugares" hidden>
     <div class="cab-vista">
-      <h2>Lugares</h2>
       <p>Dónde se celebra cada actividad.</p>
     </div>
     <div id="mapa" class="mapa" role="region" aria-label="Mapa del barrio"></div>
@@ -80,7 +80,6 @@
 
   <section id="vista-gratitud" class="vista" aria-label="Gratitud" hidden>
     <div class="cab-vista">
-      <h2>Gratitud</h2>
       <p>Gracias a quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p>
       <label class="buscador">
         <span class="sr">Buscar un nombre o familia</span>

@@ -7,13 +7,13 @@ const URL_SITIO = location.origin + location.pathname;
 const TIPOS = { religioso: 'Religioso', cultural: 'Cultural', popular: 'Popular', deportivo: 'Deportivo' };
 const DIAS_SEM = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-const so = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+const SO = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
   ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : 'otro';
 
-let D; // datos
+let D;
 const ui = { dia: null, filtro: 'todo' };
 
-// Permite fijar la hora en pruebas: ?ahora=2026-11-14T18:20 (hora del Ecuador)
+// Para pruebas: ?ahora=2026-11-14T18:20 (hora del Ecuador)
 function ahora() {
   const p = new URLSearchParams(location.search).get('ahora');
   return p ? new Date(p + ':00-05:00') : new Date();
@@ -23,13 +23,20 @@ const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 const fechaLarga = (f) => { const d = new Date(f + 'T12:00:00Z'); return `${DIAS_SEM[d.getUTCDay()]} ${d.getUTCDate()} de ${MESES[d.getUTCMonth()]}`; };
 const lugar = (a) => D.lugares[a.lugar];
 const lugarTexto = (a) => (a.lugar === 'posada' ? a.detalle.replace(/\.$/, '') : lugar(a).nombre);
+const actividad = (id) => D.actividades.find((x) => x.id === id);
 const dias = () => [...new Set(D.actividades.map((a) => a.fecha))];
 
+/* ---------- Agregados al calendario (solo en este teléfono) ---------- */
+const agregados = new Set((() => { try { return JSON.parse(localStorage.getItem('agregados') || '[]'); } catch { return []; } })());
+function marcarAgregado(id) {
+  agregados.add(id);
+  try { localStorage.setItem('agregados', JSON.stringify([...agregados])); } catch {}
+}
+
 /* ---------- Splash ---------- */
-function prepararTrazos(cont, inicio = 0, paso = 0.12, dur = 0.9) {
+function prepararTrazos(cont, inicio, paso, dur) {
   $$('.trazo path', cont).forEach((p, i) => {
-    const l = Math.ceil(p.getTotalLength()) + 2;
-    p.style.setProperty('--l', l);
+    p.style.setProperty('--l', Math.ceil(p.getTotalLength()) + 2);
     p.style.setProperty('--retraso', `${inicio + i * paso}s`);
     p.style.setProperty('--dur', `${dur}s`);
   });
@@ -60,47 +67,50 @@ function splash() {
 }
 
 /* ---------- Navegación ---------- */
-function ir(vista, { sinScroll } = {}) {
+function ir(vista) {
   for (const v of ['inicio', 'programa', 'gratitud']) $(`#vista-${v}`).hidden = v !== vista;
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
-  if (!sinScroll) window.scrollTo(0, 0);
-  if (vista === 'programa') {
-    const sel = $('.dia[aria-selected="true"]');
-    if (sel) sel.scrollIntoView({ inline: 'center', block: 'nearest' });
-  }
+  window.scrollTo(0, 0);
+  if (vista === 'programa') $('.dia[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' });
 }
 
 /* ---------- Inicio ---------- */
-function pintarEstado() {
-  const e = estado(D.actividades, ahora());
-  const caja = $('#estado');
-  const fila = (etq, a, vivo) => `
-    <button data-act="${a.id}">
-      <span class="etq">${vivo ? '<i class="vivo"></i>' : ''}${etq}</span>
-      <p class="tit">${esc(a.titulo)}</p>
-      <p class="met">${esc(fechaCorta(a))} · ${esc(lugarTexto(a))}</p>
-    </button>`;
-  let html = '';
-  if (e.fase === 'despues') {
-    html = `<div style="padding:14px 16px"><p class="etq">Gracias</p><p class="tit">Las fiestas de 2026 terminaron</p><p class="met">Gracias por acompañar a Nuestra Patrona. Raíces fuertes, tradiciones vivas.</p></div>`;
-  } else {
-    if (e.fase === 'antes') html += `<div style="padding:14px 16px 0"><p class="etq">Faltan ${diasFaltan()}</p></div>`;
-    e.ahora.forEach((a) => { html += fila('Ahora', a, true); });
-    if (e.proximo) html += fila('Lo próximo', e.proximo, false);
-  }
-  caja.innerHTML = html;
-}
-
-function fechaCorta(a) {
+function cuando(a) {
   const hoy = diaEcuador(ahora());
   const manana = diaEcuador(new Date(ahora().getTime() + 864e5));
-  const dia = a.fecha === hoy ? 'Hoy' : a.fecha === manana ? 'Mañana' : fechaLarga(a.fecha);
-  return `${dia} · ${a.hora}`;
+  if (a.fecha === hoy) return a.hora;
+  if (a.fecha === manana) return `Mañana ${a.hora}`;
+  const d = new Date(a.fecha + 'T12:00:00Z');
+  return `${DIAS_SEM[d.getUTCDay()].slice(0, 3)} ${d.getUTCDate()} · ${a.hora}`;
+}
+
+function tarjetaEstado(a, vivo) {
+  return `<button class="tarjeta-estado" data-act="${a.id}">
+    <span class="cuerpo">
+      <span class="etq">${vivo ? '<i class="vivo"></i>En curso' : esc(cuando(a))}</span>
+      <span class="tit">${esc(a.titulo)}</span>
+      <span class="met">${esc(lugarTexto(a))}</span>
+    </span>
+    <span class="chev">${iconos.chev}</span></button>`;
+}
+
+function pintarEstado() {
+  const e = estado(D.actividades, ahora());
+  let html = '';
+  if (e.fase === 'despues') {
+    html = `<p class="seccion-t">Gracias</p><p class="estado-texto">Las fiestas de 2026 terminaron. Gracias por acompañar a Nuestra Patrona.</p>`;
+  } else {
+    if (e.ahora.length) html += `<p class="seccion-t">Ahora</p><div class="estado">${e.ahora.map((a) => tarjetaEstado(a, true)).join('')}</div>`;
+    if (e.proximo) {
+      const titulo = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : 'Lo próximo';
+      html += `<p class="seccion-t">${titulo}</p><div class="estado">${tarjetaEstado(e.proximo, false)}</div>`;
+    }
+  }
+  $('#estado').innerHTML = html;
 }
 
 function diasFaltan() {
-  const ms = inicioUTC(D.actividades[0]).getTime() - ahora().getTime();
-  const d = Math.ceil(ms / 864e5);
+  const d = Math.ceil((inicioUTC(D.actividades[0]).getTime() - ahora().getTime()) / 864e5);
   return d <= 1 ? 'pocas horas' : `${d} días`;
 }
 
@@ -110,8 +120,9 @@ function pintarDias() {
   const grandes = new Set(D.actividades.filter((a) => a.destacado).map((a) => a.fecha));
   $('#dias').innerHTML = dias().map((f) => {
     const d = new Date(f + 'T12:00:00Z');
-    return `<button class="dia${grandes.has(f) ? ' grande' : ''}" role="tab" data-dia="${f}" aria-selected="${f === ui.dia}" aria-label="${fechaLarga(f)}">
-      ${DIAS_SEM[d.getUTCDay()].slice(0, 3)}<b>${d.getUTCDate()}</b>${f === hoy ? '<span class="hoy">HOY</span>' : ''}</button>`;
+    const cls = ['dia', grandes.has(f) ? 'grande' : '', f === hoy ? 'hoy-d' : ''].join(' ');
+    return `<button class="${cls}" role="tab" data-dia="${f}" aria-selected="${f === ui.dia}" aria-label="${fechaLarga(f)}${f === hoy ? ', hoy' : ''}">
+      ${f === hoy ? 'Hoy' : DIAS_SEM[d.getUTCDay()].slice(0, 3)}<b>${d.getUTCDate()}</b><i class="punto"></i></button>`;
   }).join('');
 }
 
@@ -121,41 +132,69 @@ function pintarFiltros() {
 }
 
 function filaAct(a) {
-  const lugTxt = lugarTexto(a);
-  return `<li><button class="act${a.destacado ? ' destacada' : ''}" data-act="${a.id}">
-    <span class="hora">${a.hora}</span>
-    <span><span class="tipo t-${a.tipo}">${TIPOS[a.tipo]}</span>
-    <p class="tit">${esc(a.titulo)}</p>
-    <p class="lug">${esc(lugTxt)}</p></span></button></li>`;
+  const ok = agregados.has(a.id);
+  return `<li class="fila">
+    <button class="fila-main" data-act="${a.id}">
+      <span class="hora">${a.hora}</span>
+      <span class="cuerpo">
+        <span class="tit">${esc(a.titulo)}${a.destacado ? '<span class="insignia">Principal</span>' : ''}</span>
+        <span class="met"><i class="punto-t p-${a.tipo}"></i><span>${TIPOS[a.tipo]} · ${esc(lugarTexto(a))}</span></span>
+      </span>
+    </button>
+    <button class="fila-cal${ok ? ' puesto' : ''}" data-agregar="${a.id}" aria-label="${ok ? 'Ya agregado' : 'Agregar al calendario'}: ${esc(a.titulo)}">${ok ? iconos.calOk : iconos.calMas}</button>
+  </li>`;
 }
+
+const franja = (h) => (h < '12:00' ? 'Mañana' : h < '18:00' ? 'Tarde' : 'Noche');
 
 function pintarLista() {
   const hoy = diaEcuador(ahora());
   const hora = horaEcuador(ahora());
-  const acts = D.actividades.filter((a) => a.fecha === ui.dia && (ui.filtro === 'todo' || a.tipo === ui.filtro));
+  const delDia = D.actividades.filter((a) => a.fecha === ui.dia);
+  const acts = delDia.filter((a) => ui.filtro === 'todo' || a.tipo === ui.filtro);
   $('#dia-titulo').textContent = fechaLarga(ui.dia);
+  const n = delDia.length;
+  $('#dia-resumen').textContent = `${n} ${n === 1 ? 'actividad' : 'actividades'}${ui.filtro !== 'todo' ? ` · ${acts.length} de tipo ${TIPOS[ui.filtro].toLowerCase()}` : ''}`;
   if (!acts.length) { $('#lista').innerHTML = `<li class="vacio">No hay actividades de este tipo este día.</li>`; return; }
-  const linea = `<li class="ahora-linea" id="ahora">Ahora · ${hora}</li>`;
-  const dia = acts.filter((a) => a.hora < '18:00');
-  const noche = acts.filter((a) => a.hora >= '18:00');
-  // Posición de la línea "Ahora": antes de la primera actividad que aún no empieza.
   let pos = -1;
   if (ui.dia === hoy) { pos = acts.findIndex((a) => a.hora > hora); if (pos < 0) pos = acts.length; }
-  const enDia = pos >= 0 && (pos < dia.length || (pos === dia.length && (hora < '18:00' || !noche.length)));
-  const enNoche = pos >= 0 && !enDia;
-  const pintar = (lista, desde, poner) => lista.map((a, i) => (poner && desde + i === pos ? linea : '') + filaAct(a)).join('')
-    + (poner && pos === desde + lista.length ? linea : '');
-  let html = pintar(dia, 0, enDia);
-  if (noche.length) html += `<li class="bloque-noche"><p>Noche</p><ol>${pintar(noche, dia.length, enNoche)}</ol></li>`;
+  const linea = `<li class="ahora-linea" id="ahora">Ahora · ${hora}</li>`;
+  let html = ''; let f = '';
+  acts.forEach((a, i) => {
+    if (franja(a.hora) !== f) {
+      f = franja(a.hora);
+      if (i === pos && franja(hora) !== f) { html += linea; pos = -2; }
+      html += `<li class="franja">${f === 'Noche' ? iconos.luna : iconos.sol}${f}</li>`;
+    }
+    if (i === pos) html += linea;
+    html += filaAct(a);
+  });
+  if (pos === acts.length) html += linea;
   $('#lista').innerHTML = html;
 }
 
-/* ---------- Hoja: detalle y calendario ---------- */
-function abrirHoja(html) {
+/* ---------- Agregar al calendario ---------- */
+function agregar(id) {
+  const a = actividad(id);
+  marcarAgregado(id);
+  if (SO === 'android') {
+    window.open(googleCalendarUrl(a, D.lugares, URL_SITIO), '_blank', 'noopener');
+    aviso('Al guardar en Google Calendar, active la alerta.');
+  } else {
+    location.href = `ics/${a.id}.ics`;
+    aviso('Con recordatorio 1 día antes y 2 horas antes.');
+  }
+  pintarLista();
+  if (!$('#hoja').hidden && $('#hoja').dataset.id === id) detalle(id);
+}
+
+/* ---------- Hoja inferior ---------- */
+function abrirHoja(html, id = '') {
+  const h = $('#hoja');
   $('#hoja-contenido').innerHTML = html;
-  $('#hoja').hidden = false; $('#velo').hidden = false;
-  document.body.style.overflow = 'hidden';
-  $('#hoja-cerrar').focus();
+  h.dataset.id = id;
+  if (h.hidden) { h.hidden = false; $('#velo').hidden = false; document.body.style.overflow = 'hidden'; }
+  h.scrollTop = 0;
 }
 function cerrarHoja() {
   $('#hoja').hidden = true; $('#velo').hidden = true;
@@ -164,40 +203,45 @@ function cerrarHoja() {
 }
 
 function detalle(id) {
-  const a = D.actividades.find((x) => x.id === id);
+  const a = actividad(id);
   if (!a) return;
-  history.replaceState(null, '', `#a/${a.id}`);
+  history.replaceState(null, '', `#a/${a.id}${location.search ? '' : ''}`);
   const l = lugar(a);
-  const gent = a.gentileza.length ? `<div class="gent"><p>Gentileza de</p><ul>${a.gentileza.map((g) => `<li>${esc(g)}</li>`).join('')}</ul></div>` : '';
-  const quees = a.queEs ? `<div class="quees"><b>Qué es</b>${esc(a.queEs)}</div>` : '';
-  const mapa = l.mapa ? `<a class="accion" href="${l.mapa}" target="_blank" rel="noopener">${iconos.mapa}Cómo llegar</a>` : '';
+  const ok = agregados.has(a.id);
+  const mapa = l.mapa ? `<a href="${l.mapa}" target="_blank" rel="noopener">Cómo llegar</a>` : '';
+  const gent = a.gentileza.length
+    ? `<li>${iconos.personas}<span>Gentileza de<span class="sub">${a.gentileza.map(esc).join(' · ')}</span></span></li>` : '';
   abrirHoja(`
-    <p class="tipo t-${a.tipo}">${TIPOS[a.tipo]}</p>
+    <p class="met-sup"><i class="punto-t p-${a.tipo}"></i>${TIPOS[a.tipo]}${a.destacado ? ' · Principal' : ''}</p>
     <h2 id="hoja-titulo">${esc(a.titulo)}</h2>
-    <p class="cuando">${fechaLarga(a.fecha)} · ${a.hora}</p>
-    <p class="donde">${esc(l.nombre)}</p>
-    ${a.detalle ? `<p class="det">${esc(a.detalle)}</p>` : ''}
-    ${quees}${gent}
+    <ul class="datos">
+      <li>${iconos.reloj}<span>${fechaLarga(a.fecha)}<span class="sub">${a.hora}</span></span></li>
+      <li>${iconos.mapa}<span>${esc(lugarTexto(a))}${a.lugar === 'posada' ? '<span class="sub">Casa particular</span>' : ''}</span>${mapa}</li>
+      ${gent}
+    </ul>
+    ${a.detalle && a.lugar !== 'posada' ? `<p class="det">${esc(a.detalle)}</p>` : ''}
+    ${a.queEs ? `<p class="quees"><b>Qué es: </b>${esc(a.queEs)}</p>` : ''}
     <div class="acciones">
-      <button class="accion principal" data-cal="${a.id}">${iconos.calendario}Calendario</button>
-      ${mapa}
-      <button class="accion" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
-    </div>`);
+      <button class="btn btn-noche" data-agregar="${a.id}">${ok ? iconos.calOk + 'Agregar de nuevo al calendario' : iconos.calMas + 'Agregar al calendario'}</button>
+      <p class="ayuda">Recordatorio 1 día antes y 2 horas antes</p>
+      <div class="acciones-sec">
+        <button class="btn btn-borde" data-compartir-act="${a.id}">${iconos.compartir}Compartir</button>
+        <button class="btn btn-borde" data-opciones="${a.id}">${iconos.calendario}Otras opciones</button>
+      </div>
+    </div>`, a.id);
 }
 
-function calendario(id) {
-  const a = D.actividades.find((x) => x.id === id);
-  const ios = `<a class="opcion${so !== 'android' ? ' primera' : ''}" href="ics/${a.id}.ics">${iconos.apple}<span><b>iPhone · Calendario</b><span>Incluye los dos recordatorios</span></span></a>`;
-  const goo = `<a class="opcion${so === 'android' ? ' primera' : ''}" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener">${iconos.google}<span><b>Google Calendar</b><span>Al guardar, active la alerta</span></span></a>`;
+function opciones(id) {
+  const a = actividad(id);
   abrirHoja(`
-    <button class="volver" data-act="${a.id}">‹ Volver</button>
+    <button class="enlace" data-act="${a.id}">${iconos.atras} Volver</button>
     <h2 id="hoja-titulo">Agregar al calendario</h2>
-    <p class="cuando">${esc(a.titulo)}</p>
-    <p class="donde">${fechaLarga(a.fecha)} · ${a.hora}</p>
-    <div class="recordatorio">Le recordaremos <b>un día antes</b> y <b>2 horas antes</b>, para que llegue con tiempo.</div>
-    ${so === 'android' ? goo + ios.replace('iPhone · Calendario', 'Otro calendario (.ics)') : ios + goo}
-    <p class="nota">Google Calendar no siempre guarda los recordatorios: revise que la alerta esté activada.</p>
-    <div class="enlaces"><a href="ics/destacados.ics">Agregar solo lo principal</a><a href="ics/todo.ics">Agregar todo el programa</a></div>`);
+    <div class="opciones">
+      <a class="opcion" href="ics/${a.id}.ics" data-marcar="${a.id}">${iconos.calendario}<span>Calendario del iPhone u otro<span class="sub">Archivo .ics con 2 recordatorios</span></span></a>
+      <a class="opcion" href="${googleCalendarUrl(a, D.lugares, URL_SITIO)}" target="_blank" rel="noopener" data-marcar="${a.id}">${iconos.google}<span>Google Calendar<span class="sub">Al guardar, active la alerta</span></span></a>
+      <a class="opcion" href="ics/destacados.ics">${iconos.descargar}<span>Solo las actividades principales<span class="sub">${D.actividades.filter((x) => x.destacado).length} actividades, un solo archivo</span></span></a>
+      <a class="opcion" href="ics/todo.ics">${iconos.descargar}<span>Todo el programa<span class="sub">${D.actividades.length} actividades, un solo archivo</span></span></a>
+    </div>`, a.id);
 }
 
 /* ---------- Gratitud ---------- */
@@ -209,69 +253,69 @@ function pintarGratitud(q = '') {
     const i = norm(n).indexOf(nq);
     return i < 0 ? esc(n) : esc(n.slice(0, i)) + '<mark>' + esc(n.slice(i, i + nq.length)) + '</mark>' + esc(n.slice(i + nq.length));
   };
-  const chip = (n, ctx) => `<button class="nombre" data-gracias="${esc(n)}" data-ctx="${esc(ctx)}">${marca(n)}</button>`;
+  const fila = (n, ctx) => `<li class="nombre"><span>${marca(n)}</span><button data-gracias="${esc(n)}" data-ctx="${esc(ctx)}" aria-label="Compartir agradecimiento a ${esc(n)}">${iconos.compartir}</button></li>`;
   const grupos = [];
   const pri = D.fiesta.priostes.filter((n) => !nq || norm(n).includes(nq));
-  if (pri.length) grupos.push(`<article class="grupo priostes"><p class="ev">Priostes 2026</p><h3>Santísima Virgen de El Quinche</h3><div class="nombres">${pri.map((n) => chip(n, 'como Prioste de las fiestas 2026')).join('')}</div></article>`);
+  if (pri.length) grupos.push(`<article class="grupo priostes"><div class="grupo-cab"><p class="ev">Priostes 2026</p><h3>Santísima Virgen de El Quinche</h3></div><ul class="nombres">${pri.map((n) => fila(n, 'como Prioste de las fiestas 2026')).join('')}</ul></article>`);
   for (const a of D.actividades) {
     const ns = a.gentileza.filter((n) => !nq || norm(n).includes(nq));
     if (!ns.length) continue;
-    grupos.push(`<article class="grupo"><p class="ev">${fechaLarga(a.fecha)} · ${a.hora}</p><h3>${esc(a.titulo)}</h3><div class="nombres">${ns.map((n) => chip(n, `en «${a.titulo}»`)).join('')}</div></article>`);
+    grupos.push(`<article class="grupo"><div class="grupo-cab"><p class="ev">${cuandoCompleto(a)}</p><h3>${esc(a.titulo)}</h3></div><ul class="nombres">${ns.map((n) => fila(n, `en «${a.titulo}»`)).join('')}</ul></article>`);
   }
-  $('#gratitud').innerHTML = grupos.join('') || `<p class="vacio">No encontramos ese nombre. Revise cómo está escrito o busque por apellido.</p>`;
+  $('#gratitud').innerHTML = grupos.join('') || `<p class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</p>`;
 }
+const cuandoCompleto = (a) => `${fechaLarga(a.fecha)} · ${a.hora}`;
 
 /* ---------- Compartir ---------- */
 async function compartir({ title, text, url }) {
   if (navigator.share) {
     try { await navigator.share({ title, text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
   }
-  const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
-  window.open(wa, '_blank', 'noopener');
+  window.open(`https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`, '_blank', 'noopener');
 }
 
 function aviso(t) {
   const a = $('#aviso'); a.textContent = t; a.hidden = false;
-  clearTimeout(aviso.t); aviso.t = setTimeout(() => { a.hidden = true; }, 2600);
+  clearTimeout(aviso.t); aviso.t = setTimeout(() => { a.hidden = true; }, 3200);
 }
 
-/* ---------- Arranque ---------- */
+/* ---------- Eventos ---------- */
 function eventos() {
   document.addEventListener('click', (ev) => {
     const b = ev.target.closest('button, a');
     if (!b) return;
-    if (b.dataset.ir) { ir(b.dataset.ir); return; }
-    if (b.dataset.dia) { ui.dia = b.dataset.dia; pintarDias(); pintarLista(); window.scrollTo(0, 0); return; }
-    if (b.dataset.filtro) { ui.filtro = b.dataset.filtro; pintarFiltros(); pintarLista(); return; }
-    if (b.dataset.act) { detalle(b.dataset.act); return; }
-    if (b.dataset.cal) { calendario(b.dataset.cal); return; }
-    if (b.dataset.compartirAct) {
-      const a = D.actividades.find((x) => x.id === b.dataset.compartirAct);
-      compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
-      return;
+    const d = b.dataset;
+    if (d.ir) return ir(d.ir);
+    if (d.dia) { ui.dia = d.dia; pintarDias(); pintarLista(); window.scrollTo(0, 0); return; }
+    if (d.filtro) { ui.filtro = d.filtro; pintarFiltros(); pintarLista(); return; }
+    if (d.agregar) return agregar(d.agregar);
+    if (d.act) return detalle(d.act);
+    if (d.opciones) return opciones(d.opciones);
+    if (d.marcar) { marcarAgregado(d.marcar); pintarLista(); return; }
+    if (d.compartirAct) {
+      const a = actividad(d.compartirAct);
+      return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
     }
-    if (b.dataset.gracias) {
-      compartir({ title: 'Gracias', text: `Gracias, ${b.dataset.gracias}, por su gentileza ${b.dataset.ctx} en las fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
-      return;
+    if (d.gracias) {
+      return compartir({ title: 'Gracias', text: `Gracias, ${d.gracias}, por su gentileza ${d.ctx} en las fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto 2026.`, url: URL_SITIO });
     }
     if (b.id === 'btn-compartir') {
-      compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Fiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto, del 13 al 22 de noviembre. Vea el programa y agregue las actividades a su calendario:', url: URL_SITIO });
-      return;
+      return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Fiestas en honor a la Santísima Virgen de El Quinche · Río Blanco Alto, del 13 al 22 de noviembre. Vea el programa y agregue las actividades a su calendario:', url: URL_SITIO });
     }
     if (b.id === 'hoja-cerrar') cerrarHoja();
-    if (b.closest('.opcion') || b.closest('.enlaces')) aviso('Abriendo su calendario…');
   });
   $('#velo').addEventListener('click', cerrarHoja);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#hoja').hidden) cerrarHoja(); });
   $('#buscar').addEventListener('input', (e) => pintarGratitud(e.target.value));
 }
 
+/* ---------- Arranque ---------- */
 async function iniciar() {
   splash();
   $('#btn-compartir').innerHTML = iconos.compartir;
   $('#hoja-cerrar').innerHTML = iconos.cerrar;
   $('.buscador-icono').innerHTML = iconos.buscar;
-  $$('[data-ico]').forEach((e) => { e.innerHTML = iconos[e.dataset.ico]; });
+  $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
   $('#hero-virgen').innerHTML = virgen;
   $('#hero-cotopaxi').innerHTML = cotopaxi;
 
@@ -285,8 +329,8 @@ async function iniciar() {
   setInterval(() => { pintarEstado(); if (!$('#vista-programa').hidden) pintarLista(); }, 60000);
 
   const m = location.hash.match(/^#a\/(.+)$/);
-  if (m && D.actividades.some((a) => a.id === m[1])) {
-    ui.dia = D.actividades.find((a) => a.id === m[1]).fecha;
+  if (m && actividad(m[1])) {
+    ui.dia = actividad(m[1]).fecha;
     pintarDias(); pintarLista(); ir('programa'); detalle(m[1]);
   }
 }

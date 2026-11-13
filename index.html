@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="img/icono-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -45,12 +45,14 @@
 <main>
   <section id="vista-inicio" class="vista vista-inicio" aria-label="Inicio">
     <div class="hero">
-      <div id="hero-virgen" class="hero-virgen"></div>
-      <p class="kicker">Fiestas en honor a la</p>
-      <h1>Santísima Virgen<br>de El Quinche</h1>
-      <p class="hero-sub">Río Blanco Alto · 13 al 22 de noviembre</p>
-      <div id="estado" class="estado" aria-live="polite"></div>
-      <button class="btn btn-oro" data-ir="programa">Ver el programa</button>
+      <div class="hero-cab">
+        <div id="hero-virgen" class="hero-virgen"></div>
+        <p class="kicker">Fiestas en honor a la</p>
+        <h1>Santísima Virgen de El Quinche</h1>
+        <p class="hero-sub">Río Blanco Alto · 13 al 22 de noviembre de 2026</p>
+      </div>
+      <div id="estado" aria-live="polite"></div>
+      <button class="btn btn-oro" data-ir="programa">Ver el programa completo</button>
       <p class="lema">Raíces fuertes, tradiciones vivas</p>
       <div id="hero-cotopaxi" class="hero-cotopaxi"></div>
     </div>
@@ -62,7 +64,8 @@
       <div id="filtros" class="filtros" role="group" aria-label="Filtrar por tipo"></div>
     </div>
     <h2 id="dia-titulo" class="dia-titulo"></h2>
-    <ol id="lista" class="lista"></ol>
+    <p id="dia-resumen" class="dia-resumen"></p>
+    <ul id="lista" class="lista"></ul>
   </section>
 
   <section id="vista-gratitud" class="vista" aria-label="Gratitud" hidden>
@@ -74,16 +77,15 @@
         <span class="buscador-icono"></span>
         <input id="buscar" type="search" placeholder="Busque su nombre o su familia" autocomplete="off">
       </label>
-      <p class="pista">Toque un nombre para compartir el agradecimiento.</p>
     </div>
     <div id="gratitud" class="gratitud"></div>
   </section>
 </main>
 
 <nav class="tabs" aria-label="Secciones">
-  <button data-ir="inicio" class="tab" aria-current="page"><span class="tab-ico" data-ico="inicio"></span>Inicio</button>
-  <button data-ir="programa" class="tab"><span class="tab-ico" data-ico="programa"></span>Programa</button>
-  <button data-ir="gratitud" class="tab"><span class="tab-ico" data-ico="gratitud"></span>Gratitud</button>
+  <button data-ir="inicio" class="tab" aria-current="page"><span data-ico="inicio"></span>Inicio</button>
+  <button data-ir="programa" class="tab"><span data-ico="programa"></span>Programa</button>
+  <button data-ir="gratitud" class="tab"><span data-ico="gratitud"></span>Gratitud</button>
 </nav>
 
 <div id="velo" class="velo" hidden></div>

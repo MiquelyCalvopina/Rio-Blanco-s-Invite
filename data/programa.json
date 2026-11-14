@@ -205,12 +205,12 @@
       "id": "comida-2",
       "tipo": "comida",
       "nombre": "Comida",
-      "detalle": "Puestos en la esquina de la plaza",
-      "lat": -0.7486,
-      "lng": -78.615,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486%2C-78.615",
+      "detalle": "Puestos al costado de la plaza",
+      "lat": -0.7487,
+      "lng": -78.61505,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7487%2C-78.61505",
       "ancla": [
-        13,
+        7,
         13
       ]
     },
@@ -223,8 +223,8 @@
       "lng": -78.61525,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.74892%2C-78.61525",
       "ancla": [
-        7,
-        16
+        13,
+        10
       ]
     }
   ],

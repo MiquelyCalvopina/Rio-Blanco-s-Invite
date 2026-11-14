@@ -196,8 +196,10 @@ export function claveOrden(nombre) {
   while (TRATAMIENTO.test(n)) n = n.replace(TRATAMIENTO, '');
   return normalizar(n);
 }
-export function colaboradores(actividades) {
+export function colaboradores(actividades, generales = []) {
   const mapa = new Map();
+  // Aportes a toda la fiesta, que no pertenecen a una actividad.
+  for (const g of generales) mapa.set(g.nombre, { nombre: g.nombre, aportes: [{ rol: 'Gentileza', titulo: g.aporte, fecha: null, hora: null, id: null, mensaje: '' }] });
   for (const a of actividades) {
     for (const r of reconocimientos(a)) {
       if (/^Señores Priostes 2026/.test(r.nombre)) continue;

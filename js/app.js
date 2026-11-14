@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611142055';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611142055';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611142059';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611142059';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -507,10 +507,10 @@ function pintarGratitud(q = '') {
     const i = normalizar(n).indexOf(nq);
     return i < 0 ? esc(n) : esc(n.slice(0, i)) + '<mark>' + esc(n.slice(i, i + nq.length)) + '</mark>' + esc(n.slice(i + nq.length));
   };
-  const lista = colaboradores(D.actividades).filter((c) => !nq || normalizar(c.nombre).includes(nq));
+  const lista = colaboradores(D.actividades, D.fiesta.colaboradores).filter((c) => !nq || normalizar(c.nombre).includes(nq));
   $('#gratitud').innerHTML = lista.map((c) => `<li>
       <button class="nombre tap-suave" data-colab aria-expanded="false"><span class="nom">${marca(c.nombre)}</span>${iconos.abajo}</button>
-      <ul class="aportes" hidden>${c.aportes.map((p) => `<li><span class="ap-act">${esc(p.titulo)}</span><span class="ap-rol">${esc(p.rol)} · ${fechaLarga(p.fecha)}</span>${p.mensaje ? `<span class="ap-msj">${esc(p.mensaje)}</span>` : ''}</li>`).join('')}</ul>
+      <ul class="aportes" hidden>${c.aportes.map((p) => `<li><span class="ap-act">${esc(p.titulo)}</span><span class="ap-rol">${esc(p.rol)} · ${p.fecha ? fechaLarga(p.fecha) : 'Toda la fiesta'}</span>${p.mensaje ? `<span class="ap-msj">${esc(p.mensaje)}</span>` : ''}</li>`).join('')}</ul>
     </li>`).join('') || `<li class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</li>`;
 }
 

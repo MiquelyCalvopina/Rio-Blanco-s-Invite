@@ -188,3 +188,11 @@ test('colaboradores: una fila por nombre, con todos sus aportes, en orden alfab�
   const claves = c.map((x) => claveOrden(x.nombre));
   assert.deepEqual(claves, [...claves].sort((a, b) => a.localeCompare(b, 'es')));
 });
+
+test('colaboradores incluye los aportes a toda la fiesta', () => {
+  const c = colaboradores(A, datos.fiesta.colaboradores);
+  const m = c.find((x) => x.nombre === 'Ing. Miquely Calvopiña Jácome');
+  assert.deepEqual(m.aportes.map((p) => [p.titulo, p.fecha]), [['Cronograma digital', null]]);
+  assert.ok(c.some((x) => x.nombre === 'Sra. Jacqueline Jácome y Sr. Eduardo Calvopiña'));
+  assert.ok(!c.some((x) => x.nombre === 'Familia Calvopiña Jácome'));
+});

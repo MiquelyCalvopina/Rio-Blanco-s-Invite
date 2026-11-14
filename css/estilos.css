@@ -769,3 +769,11 @@ main { padding-top: env(safe-area-inset-top, 0px); }
 .hero-viva { padding-bottom: 48px; }
 .acceso-priostes { margin-top: var(--s5); }
 .esperado { padding-top: 40px; }
+
+/* Inicio: todas las flechas en la misma columna, a 32 px del borde, y del mismo tamaño */
+.hero-viva .btn-oro { position: relative; }
+.hero-viva .btn-oro .ico:last-child { position: absolute; right: 16px; top: 50%; margin: -9px 0 0; width: 18px; height: 18px; }
+#vista-inicio .chev .ico, .acceso-priostes > .ico { width: 18px; height: 18px; display: block; }
+#vista-inicio .item { padding-right: var(--s2); }
+.acceso-priostes { padding-right: var(--s4); }
+#vista-inicio .esperado .item-foto { padding-right: 24px; }

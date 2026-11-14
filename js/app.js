@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141916';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141916';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141919';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141919';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -71,7 +71,7 @@ function splash() {
 
 /* ---------- Navegación ---------- */
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
-const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Actividades', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
+const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Cronograma', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
 let vistaActual = 'inicio';
 // Al entrar a Actividades se muestra el momento actual: el día de hoy y, dentro de él,
 // la actividad en curso; si no hay ninguna, la línea de «Ahora».
@@ -559,7 +559,7 @@ function eventos() {
       return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
     }
     if (b.id === 'fab') {
-      return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí están todas las actividades y horarios:', url: URL_SITIO });
+      return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí está todo el cronograma:', url: URL_SITIO });
     }
     if (b.id === 'hoja-cerrar') cerrarHoja();
   });

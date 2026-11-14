@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611142059';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611142059';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611142103';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611142103';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];

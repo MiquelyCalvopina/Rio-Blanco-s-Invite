@@ -191,7 +191,7 @@ test('colaboradores: una fila por nombre, con todos sus aportes, en orden alfab�
 
 test('colaboradores incluye los aportes a toda la fiesta', () => {
   const c = colaboradores(A, datos.fiesta.colaboradores);
-  const m = c.find((x) => x.nombre === 'Ing. Miquely Calvopiña Jácome');
+  const m = c.find((x) => x.nombre === 'Miquely Calvopiña');
   assert.deepEqual(m.aportes.map((p) => [p.titulo, p.fecha]), [['Cronograma digital', null]]);
   assert.ok(c.some((x) => x.nombre === 'Sra. Jacqueline Jácome y Sr. Eduardo Calvopiña'));
   assert.ok(!c.some((x) => x.nombre === 'Familia Calvopiña Jácome'));

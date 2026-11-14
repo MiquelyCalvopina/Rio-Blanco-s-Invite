@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilos.css?v=202611140401">
+<link rel="stylesheet" href="css/estilos.css?v=202611140427">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -36,7 +36,7 @@
 </div>
 
 <header class="barra">
-  <span class="barra-virgen" data-ico-act="virgen" aria-hidden="true"></span>
+  <span id="barra-virgen" class="barra-virgen" aria-hidden="true"></span>
   <p id="titulo-barra" class="marca" aria-live="polite">Río Blanco Alto · 2026</p>
   <button id="abrir-busqueda" class="buscar-barra" hidden><span data-ico="buscar"></span>Buscar</button>
 </header>
@@ -54,12 +54,12 @@
       <button class="btn btn-oro tap" data-ir="programa"><span data-ico="calendario"></span>Ver actividades y horarios</button>
     </div>
     <section class="bloque" aria-live="polite" id="estado"></section>
-    <section class="bloque esperado" aria-labelledby="t-esperado"><h2 id="t-esperado" class="bloque-t">Lo más esperado</h2><div id="carrusel" class="carrusel"></div></section>
     <button class="acceso-priostes tap" data-ir="gratitud">
       <span class="ic" data-ico-act="estandarte"></span>
       <span class="ap-txt"><span class="ap-k">Priostes 2026</span><span class="ap-t">Conozca a quienes hacen posible la fiesta</span></span>
       <span data-ico="chev"></span>
     </button>
+    <section class="bloque esperado" aria-labelledby="t-esperado"><h2 id="t-esperado" class="bloque-t">Lo más esperado</h2><div id="carrusel" class="esperado-lista"></div></section>
     <p class="contacto">¿Quisiera una invitación digital como esta? <a href="https://wa.me/593963212258?text=Hola%2C%20quisiera%20una%20invitaci%C3%B3n%20digital%20como%20la%20de%20las%20fiestas%20de%20R%C3%ADo%20Blanco%20Alto." target="_blank" rel="noopener"><span data-ico="whatsapp"></span>Contáctese por WhatsApp al 0963212258</a></p>
   </section>
 
@@ -141,6 +141,6 @@
 </section>
 
 
-<script type="module" src="js/app.js?v=202611140401"></script>
+<script type="module" src="js/app.js?v=202611140427"></script>
 </body>
 </html>

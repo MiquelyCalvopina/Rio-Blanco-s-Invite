@@ -201,8 +201,11 @@ export function colaboradores(actividades) {
   for (const a of actividades) {
     for (const r of reconocimientos(a)) {
       if (/^Señores Priostes 2026/.test(r.nombre)) continue;
-      if (!mapa.has(r.nombre)) mapa.set(r.nombre, { nombre: r.nombre, aportes: [] });
-      mapa.get(r.nombre).aportes.push({ rol: r.rol || 'Gentileza', titulo: a.titulo, fecha: a.fecha, hora: a.hora, id: a.id, mensaje: r.mensaje || '' });
+      // «Nombre» y «Nombre, cargo» son la misma persona: se juntan y se muestra la forma más completa.
+      const clave = r.nombre.split(', ')[0];
+      if (!mapa.has(clave)) mapa.set(clave, { nombre: r.nombre, aportes: [] });
+      if (r.nombre.length > mapa.get(clave).nombre.length) mapa.get(clave).nombre = r.nombre;
+      mapa.get(clave).aportes.push({ rol: r.rol || 'Gentileza', titulo: a.titulo, fecha: a.fecha, hora: a.hora, id: a.id, mensaje: r.mensaje || '' });
     }
   }
   return [...mapa.values()].sort((x, y) => claveOrden(x.nombre).localeCompare(claveOrden(y.nombre), 'es'));

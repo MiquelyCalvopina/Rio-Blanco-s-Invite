@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140401';
-import { virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140401';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140427';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140427';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -12,9 +12,9 @@ const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', '
 const SO = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
   ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : 'otro';
 const TEXTO_CAL = {
-  ios: { boton: 'Agregar a mi calendario' },
-  android: { boton: 'Agregar a Google Calendar' },
-  otro: { boton: 'Agregar a mi calendario' },
+  ios: { boton: 'Agregar recordatorio' },
+  android: { boton: 'Agregar recordatorio' },
+  otro: { boton: 'Agregar recordatorio' },
 }[SO];
 
 let D;
@@ -142,6 +142,7 @@ function tarjetaEstado(a, vivo) {
     <span class="chev">${iconos.chev}</span></button>`;
 }
 
+let ultimoEstado = '';
 function pintarEstado() {
   const e = estado(D.actividades, ahora());
   let html = '';
@@ -152,7 +153,7 @@ function pintarEstado() {
     const t = e.fase === 'antes' ? `Empieza en ${diasFaltan()}` : e.ahora.length ? 'Qué está pasando' : 'Lo que sigue';
     html += `<h2 class="bloque-t">${t}</h2><div class="estado">${e.ahora.map((a) => tarjetaEstado(a, true)).join('')}${e.proximo ? tarjetaEstado(e.proximo, false) : ''}</div>`;
   }
-  $('#estado').innerHTML = html;
+  if (ultimoEstado !== html) { ultimoEstado = html; $('#estado').innerHTML = html; } // sin repintar si nada cambió
 }
 
 function diasFaltan() {
@@ -164,10 +165,13 @@ function pintarCarrusel() {
   const t = ahora().getTime();
   const proximas = D.actividades.filter((a) => a.destacado && (a.foto || (a.lugar !== 'barrio' && FOTOS[a.lugar])) && inicioUTC(a).getTime() > t - 36e5).slice(0, 10);
   $('.esperado').hidden = !proximas.length;
-  $('#carrusel').innerHTML = proximas.map((a) => `<button class="tarjeta-foto tap" data-act="${a.id}">
+  // Lista corta con foto pequeña: la información primero, la imagen acompaña.
+  const html = proximas.slice(0, 4).map((a) => `<button class="item item-foto tap-suave" data-act="${a.id}">
       <img src="${a.foto || FOTOS[a.lugar]}" alt="" loading="lazy">
-      <span class="tf-txt"><span class="tf-cuando">${esc(cuando(a))}</span><span class="tf-tit">${esc(a.titulo)}</span></span>
+      <span class="cuerpo"><span class="etq">${esc(cuando(a))}</span><span class="tit">${esc(a.titulo)}</span><span class="met">${esc(lugarTexto(a))}</span></span>
+      <span class="chev">${iconos.chev}</span>
     </button>`).join('');
+  if ($('#carrusel').innerHTML !== html) $('#carrusel').innerHTML = html;
 }
 
 function pintarPriostes() {
@@ -207,7 +211,8 @@ function filaAct(a, enCurso, pasada) {
 
 const franja = (h) => (h < '12:00' ? 'Mañana' : h < '18:00' ? 'Tarde' : 'Noche');
 
-function pintarLista() {
+// animar=false es el refresco de cada minuto: actualiza sin volver a animar la lista.
+function pintarLista(animar = true) {
   const hoy = diaEcuador(ahora());
   const hora = horaEcuador(ahora());
   const delDia = D.actividades.filter((a) => a.fecha === ui.dia);
@@ -231,6 +236,8 @@ function pintarLista() {
   });
   if (pos === acts.length) html += linea;
   const l = $('#lista');
+  if (!animar) { if (l.dataset.html !== html) { l.dataset.html = html; l.classList.remove('escalonado'); l.innerHTML = html; } return; }
+  l.dataset.html = html;
   l.classList.remove('escalonado'); l.innerHTML = html;
   [...l.children].forEach((li, i) => li.style.setProperty('--i', Math.min(i, 12)));
   void l.offsetWidth; l.classList.add('escalonado');
@@ -322,7 +329,9 @@ function detalle(id) {
   const info = a.credito
     ? `<button class="info-foto" data-info aria-label="Créditos de la foto">${iconos.info}</button>
        <a class="credito" href="${a.credito.url}" target="_blank" rel="noopener" hidden>Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
-  const titulo = `<div class="cab-txt"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>`;
+  // En las corridas, el toro de línea dorada respira junto al título.
+  const conToro = a.id.includes('corrida');
+  const titulo = `<div class="cab-txt${conToro ? ' con-toro' : ''}"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>${conToro ? `<div class="toro-detalle" aria-hidden="true">${toro}</div>` : ''}`;
   const cabecera = src
     ? `<div class="hoja-cab afiche"><img class="hoja-foto" src="${src}" alt="">${titulo}${info}</div>`
     : `<h2 id="hoja-titulo" class="titulo-simple">${esc(a.titulo)}</h2>`;
@@ -341,7 +350,7 @@ function detalle(id) {
     <div class="pie-hoja">
       <div class="pie-acciones">
         <div class="grupo-cal tap">
-          <button class="btn btn-noche" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Agregado a su calendario' : TEXTO_CAL.boton}</button>
+          <button class="btn btn-noche" data-agregar="${a.id}">${ok ? iconos.calOk : iconos.calMas}${ok ? 'Recordatorio agregado' : TEXTO_CAL.boton}</button>
           <button class="btn btn-noche btn-caret" data-opciones="${a.id}" aria-label="Elegir otro calendario">${iconos.abajo}</button>
         </div>
         <button class="btn btn-borde tap" data-compartir-act="${a.id}" aria-label="Compartir esta actividad">${iconos.compartir}Compartir</button>
@@ -436,6 +445,10 @@ async function mapa() {
     grupo.push([x.lat, x.lng]);
   }
   m.fitBounds(grupo, { paddingTopLeft: [30, 30], paddingBottomRight: [30, 70], maxZoom: 18 });
+  // El mapa no sale del barrio: no se puede alejar ni arrastrar fuera de la zona de la fiesta.
+  m.setMinZoom(m.getZoom());
+  m.setMaxBounds(m.getBounds().pad(0.25));
+  m.options.maxBoundsViscosity = 1;
   setTimeout(() => m.invalidateSize(), 50);
 }
 
@@ -564,6 +577,7 @@ async function iniciar() {
   $$('.buscador-icono').forEach((e) => { e.innerHTML = iconos.buscar; });
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
   $$('[data-ico-act]').forEach((e) => { e.innerHTML = iconosAct[e.dataset.icoAct]; });
+  $('#barra-virgen').innerHTML = virgen;
   $('#hero-virgen').innerHTML = virgen + '<i class="brillo b1"></i><i class="brillo b2"></i><i class="brillo b3"></i>';
 
   // Los datos se revalidan en cada visita, para que un cambio de horario se vea de inmediato.
@@ -575,7 +589,7 @@ async function iniciar() {
   pintarEstado(); pintarCarrusel(); pintarPriostes(); pintarDias(); pintarFiltros(); pintarLista(); pintarLugares(); pintarGratitud();
   eventos();
   observarScroll(); fabVisible(); arrastreHoja();
-  setInterval(() => { pintarEstado(); if (!$('#vista-programa').hidden) pintarLista(); }, 60000);
+  setInterval(() => { pintarEstado(); pintarCarrusel(); if (!$('#vista-programa').hidden) pintarLista(false); }, 60000);
 
   const m = location.hash.match(/^#a\/(.+)$/);
   if (m && actividad(m[1])) {

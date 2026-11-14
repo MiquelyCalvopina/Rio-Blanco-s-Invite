@@ -181,6 +181,10 @@ test('colaboradores: una fila por nombre, con todos sus aportes, en orden alfab�
   assert.deepEqual(ivan.aportes.map((p) => p.rol), ['Gentileza', 'Posada']);
   assert.ok(ivan.aportes[0].mensaje.startsWith('Mil gracias a Ivancito Mena'));
   assert.equal(claveOrden('Sr. Nelson Jácome'), 'nelson jacome');
+  const nelson = c.filter((x) => x.nombre.startsWith('Sr. Nelson Jácome'));
+  assert.equal(nelson.length, 1);
+  assert.deepEqual(nelson[0].aportes.map((p) => p.id), ['15-0800-giro-rba', '22-1600-colchas']);
+  assert.ok(nelson[0].nombre.includes('Síndico'));
   const claves = c.map((x) => claveOrden(x.nombre));
   assert.deepEqual(claves, [...claves].sort((a, b) => a.localeCompare(b, 'es')));
 });

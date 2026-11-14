@@ -609,3 +609,38 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
   .splash-virgen::before { animation: none; }
 }
 .pie-acciones .btn { font-size: 14px; white-space: nowrap; }
+
+/* ============ Segunda ronda de ajustes ============ */
+
+/* Inicio más compacto: cabecera, lo que sigue y priostes caben en la primera pantalla */
+.hero-foto { height: 200px; }
+.hero-viva .hero-cab { margin-top: -118px !important; }
+.hero-viva .hero-virgen { width: 76px; }
+.hero-viva h1 { font-size: 24px; }
+.hero-viva .kicker { margin-top: var(--s3); }
+.hero-viva .btn-oro { margin-top: var(--s4); }
+.hero-viva { padding-bottom: 40px; }
+.acceso-priostes { margin-top: var(--s4); }
+.esperado { padding-top: var(--s8); padding-bottom: var(--s2); }
+.esperado-lista { margin-top: var(--s2); }
+.item-foto { gap: var(--s3); padding: 10px var(--s2); border-top: 1px solid var(--linea); border-radius: 0; }
+.item-foto:first-child { border-top: 0; }
+.item-foto img { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex: 0 0 auto; background: var(--gris-1); }
+.contacto { margin-top: var(--s8); }
+
+/* La Virgen en la barra: el mismo dibujo del inicio, en pequeño */
+.barra-virgen svg { height: 34px; width: auto; overflow: visible; }
+.barra-virgen .trazo path { stroke: var(--oro-fondo); stroke-width: 5; filter: none; }
+.barra-virgen .halo circle { stroke: var(--oro-fondo); stroke-width: 3; opacity: .55; }
+.barra-virgen .halo path { display: none; }
+
+/* Portada: la misma aura del inicio */
+.splash-virgen::before { inset: -30% -42%; background: radial-gradient(circle, transparent 0 42%, rgba(242,194,48,.36) 57%, transparent 72%); }
+
+/* Detalle: la foto un poco más baja */
+.hoja-cab.afiche { height: 200px; }
+.cab-txt.con-toro { right: 104px; }
+.toro-detalle { position: absolute; z-index: 2; right: 10px; bottom: 6px; width: 92px; pointer-events: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+.toro-detalle .tr-t { stroke-width: 6; }
+.toro-detalle .tr-fino { stroke-width: 3.5; }
+.toro-detalle .tr-ceja { stroke-width: 9; }

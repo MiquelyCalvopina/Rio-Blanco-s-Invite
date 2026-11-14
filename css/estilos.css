@@ -647,3 +647,35 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 
 /* Mapa: juegos */
 .s-juegos { background: #EFE3F3; color: #6B3A86; }
+
+/* ============ Tercera ronda ============ */
+
+/* Colores más livianos: menú en crema y acentos dorados; el negro queda para la cabecera del inicio */
+.tabs { background: #F7EFD9; box-shadow: 0 -1px 0 #E6D7AE; }
+.tab { color: var(--crema-tinta); }
+.tab[aria-current="page"] { color: var(--tinta); }
+.tab[aria-current="page"] .ico { background: var(--oro-vivo); color: var(--tinta); }
+.btn-noche { background: var(--oro-vivo); color: var(--tinta); }
+.grupo-cal .btn-caret { border-left: 1px solid rgba(20,20,20,.18); }
+.grupo-cal .btn-caret .ico { color: var(--tinta); }
+.fab { background: #fff; color: var(--tinta); border: 1px solid #E6D7AE; box-shadow: 0 6px 16px rgba(20,20,20,.12); }
+.fab .ico { color: var(--oro-fondo); }
+.dia[aria-selected="true"] { background: var(--oro-vivo); color: var(--tinta); }
+.dia[aria-selected="true"] b { color: var(--tinta); }
+.btn-llegar { background: var(--oro-vivo); color: var(--tinta); }
+.btn-llegar .ico { color: var(--tinta); }
+
+/* Detalle: más aire en la barra de botones, un poco más abajo que arriba */
+.pie-hoja { padding: var(--s4) var(--s4) calc(var(--s5) + var(--abajo)); }
+
+/* Mapa: la etiqueta puede ir a un lado para no toparse con otros elementos */
+.pin-etq.izquierda { left: auto; right: 18px; top: -3px; transform: none; }
+.pin-etq.derecha { left: 18px; top: -3px; transform: none; }
+
+/* Gracias: un punto menos en todo, salvo en los textos más pequeños */
+#vista-gratitud { --t13: 13px; --t14: 14px; --t16: 16px; --t18: 18px; --t22: 22px; }
+#vista-gratitud .agr-texto { font-size: 14px; }
+#vista-gratitud .lista-priostes li { font-size: 15px; }
+#vista-gratitud .nombre .nom { font-size: 15px; }
+#vista-gratitud .grat-t { font-size: 32px; }
+#vista-gratitud .colaboradores h2 { font-size: 20px; }

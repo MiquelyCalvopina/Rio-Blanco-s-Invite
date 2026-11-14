@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140430';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140430';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140443';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140443';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -379,7 +379,6 @@ function cargar(src, tipo) {
   });
 }
 const SRV_ICO = { parqueo: 'parqueo', banos: 'banos', comida: 'comida', juegos: 'juegos' };
-const ZONA_COLOR = { parqueo: ['#2F5D46', '#CFE3D8'], comida: ['#A9531B', '#F7D9BF'], juegos: ['#6B3A86', '#E6D5EE'] };
 const pinSrv = (tipo) => `<span class="pin-srv s-${tipo}">${iconos[SRV_ICO[tipo]]}</span>`;
 let mapaL = null; const marcadores = {};
 
@@ -424,16 +423,13 @@ async function mapa() {
   // Tramo de las carpas de comida
   // Contorno de los lugares grandes, con el mismo gris con que el mapa dibuja la iglesia.
   for (const l of Object.values(D.lugares)) if (l.forma) L.polygon(l.forma, { color: '#8F8F8F', weight: 1, fillColor: '#B5B5B5', fillOpacity: .75, interactive: false }).addTo(m);
-  // Zonas de servicio (parqueo, comidas, juegos), con el color de su ícono.
-  for (const z of D.zonas || []) { const [borde, fondo] = ZONA_COLOR[z.tipo]; L.polygon(z.forma, { color: borde, weight: 1, dashArray: '4 3', fillColor: fondo, fillOpacity: .7, interactive: false }).addTo(m); }
-  for (const x of D.servicios) if (x.tramo) L.polyline(x.tramo, { color: '#DE7A2C', weight: 6, opacity: .75, lineCap: 'round' }).addTo(m);
   // Lugares de la fiesta (un punto por coordenada)
   const vistos = {};
   for (const [k, l] of Object.entries(D.lugares)) {
     if (l.lat == null) continue;
     const clave = `${l.lat},${l.lng}`;
     if (vistos[clave]) { marcadores[k] = vistos[clave]; continue; }
-    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq${l.etiqueta === 'arriba' ? ' arriba' : ''}">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
+    const icon = L.divIcon({ className: '', html: `<span class="pin"></span><span class="pin-etq${l.etiqueta ? ' ' + l.etiqueta : ''}">${esc(l.corto || l.nombre)}</span>`, iconSize: [14, 14], iconAnchor: [7, 7] });
     const mk = L.marker([l.lat, l.lng], { icon, title: l.nombre }).addTo(m).on('click', () => seleccionar(k));
     vistos[clave] = mk; marcadores[k] = mk; grupo.push([l.lat, l.lng]);
   }

@@ -27,7 +27,7 @@
       "lat": -0.7490455,
       "lng": -78.6154423,
       "icono": "iglesia",
-      "etiqueta": "arriba"
+      "etiqueta": "izquierda"
     },
     "plaza": {
       "nombre": "Plaza central del barrio",
@@ -35,30 +35,30 @@
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
       "forma": [
         [
-          -0.7485977,
-          -78.615071
+          -0.7486463,
+          -78.6149903
         ],
         [
-          -0.7485786,
-          -78.6145135
+          -0.7486325,
+          -78.6145889
         ],
         [
-          -0.7489398,
-          -78.6144942
+          -0.7488926,
+          -78.614575
         ],
         [
-          -0.748969,
-          -78.6150518
+          -0.7489136,
+          -78.6149764
         ]
       ],
-      "lat": -0.7487713,
+      "lat": -0.7487712,
       "lng": -78.6147826,
       "icono": "bandera"
     },
     "plazaToros": {
       "nombre": "Plaza de toros del barrio",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
-      "lat": -0.7487713,
+      "lat": -0.7487712,
       "lng": -78.6147826,
       "icono": "toro"
     },
@@ -68,28 +68,24 @@
       "icono": "balon",
       "forma": [
         [
-          -0.747147,
-          -78.6146794
+          -0.7471306,
+          -78.6144894
         ],
         [
-          -0.7469423,
-          -78.6143114
+          -0.7471252,
+          -78.6138725
         ],
         [
-          -0.746938,
-          -78.6137032
+          -0.7481229,
+          -78.613835
         ],
         [
-          -0.7481887,
-          -78.6136939
-        ],
-        [
-          -0.7482203,
-          -78.6145936
+          -0.7481444,
+          -78.6144787
         ]
       ],
-      "lat": -0.747494,
-      "lng": -78.6141981,
+      "lat": -0.7476308,
+      "lng": -78.6141689,
       "corto": "Estadio"
     },
     "coliseo": {
@@ -98,24 +94,24 @@
       "mapa": "https://maps.app.goo.gl/rfMhf9NwCNY8qQ2D6",
       "forma": [
         [
-          -0.7487924,
-          -78.6136848
+          -0.7487981,
+          -78.6136784
         ],
         [
-          -0.7487388,
-          -78.6134434
+          -0.7487466,
+          -78.6134467
         ],
         [
-          -0.7490767,
-          -78.6133629
+          -0.749071,
+          -78.6133694
         ],
         [
-          -0.7491304,
-          -78.6136124
+          -0.7491226,
+          -78.6136089
         ]
       ],
-      "lat": -0.7486908,
-      "lng": -78.613664,
+      "lat": -0.7489346,
+      "lng": -78.6135259,
       "icono": "voley"
     },
     "gallera": {
@@ -145,11 +141,11 @@
       "tipo": "parqueo",
       "nombre": "Parqueadero",
       "detalle": "Terreno junto al Coliseo del barrio",
-      "lat": -0.749077,
-      "lng": -78.6140574,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.749077%2C-78.6140574",
+      "lat": -0.748864,
+      "lng": -78.613838,
+      "mapa": "https://maps.app.goo.gl/9JEwjitPs4oZeHmj6",
       "ancla": [
-        14,
+        13,
         13
       ]
     },
@@ -162,7 +158,7 @@
       "lng": -78.6149639,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7480165%2C-78.6149639",
       "ancla": [
-        14,
+        13,
         13
       ]
     },
@@ -175,18 +171,22 @@
       "lng": -78.6153353,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7492236%2C-78.6153353",
       "ancla": [
-        -4,
-        -4
+        3,
+        -9
       ]
     },
     {
       "id": "banos-estadio",
       "tipo": "banos",
       "nombre": "Baños",
-      "detalle": "En el Estadio Monumental",
-      "lat": -0.747494,
-      "lng": -78.6141981,
-      "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
+      "detalle": "Junto al Estadio Monumental",
+      "lat": -0.748134,
+      "lng": -78.613284,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.748134%2C-78.613284",
+      "ancla": [
+        13,
+        13
+      ]
     },
     {
       "id": "comida",
@@ -197,8 +197,8 @@
       "lng": -78.6151495,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7487896%2C-78.6151495",
       "ancla": [
-        14,
-        13
+        9,
+        35
       ]
     },
     {
@@ -210,8 +210,8 @@
       "lng": -78.6145389,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486141%2C-78.6145389",
       "ancla": [
-        14,
-        13
+        5,
+        21
       ]
     },
     {
@@ -220,97 +220,11 @@
       "nombre": "Juegos",
       "detalle": "Cancha de básquet junto a la iglesia",
       "lat": -0.7488218,
-      "lng": -78.6154061,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7488218%2C-78.6154061",
+      "lng": -78.6154062,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7488218%2C-78.6154062",
       "ancla": [
-        14,
-        13
-      ]
-    }
-  ],
-  "zonas": [
-    {
-      "id": "zona-juegos",
-      "tipo": "juegos",
-      "forma": [
-        [
-          -0.7487072,
-          -78.615563
-        ],
-        [
-          -0.7486925,
-          -78.6152588
-        ],
-        [
-          -0.7489375,
-          -78.6152493
-        ],
-        [
-          -0.7489498,
-          -78.6155535
-        ]
-      ]
-    },
-    {
-      "id": "zona-comidas",
-      "tipo": "comida",
-      "forma": [
-        [
-          -0.7486165,
-          -78.6152409
-        ],
-        [
-          -0.7486027,
-          -78.6150761
-        ],
-        [
-          -0.748964,
-          -78.6150568
-        ],
-        [
-          -0.7489752,
-          -78.6152241
-        ]
-      ]
-    },
-    {
-      "id": "zona-parqueo",
-      "tipo": "parqueo",
-      "forma": [
-        [
-          -0.7489266,
-          -78.6144181
-        ],
-        [
-          -0.7488008,
-          -78.6137716
-        ],
-        [
-          -0.7492247,
-          -78.613684
-        ],
-        [
-          -0.7493558,
-          -78.6143559
-        ]
-      ]
-    },
-    {
-      "id": "zona-parqueo-estadio",
-      "tipo": "parqueo",
-      "forma": [
-        [
-          -0.7476281,
-          -78.6148252
-        ],
-        [
-          -0.7481074,
-          -78.6147073
-        ],
-        [
-          -0.7483141,
-          -78.6153592
-        ]
+        21,
+        23
       ]
     }
   ],

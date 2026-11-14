@@ -168,3 +168,19 @@ test('cada recordatorio lleva el enlace a su actividad en la invitación', () =>
   const g = new URL(googleCalendarUrl(misa, datos.lugares, 'https://ejemplo.org/')).searchParams.get('details');
   assert.ok(g.endsWith('Ver detalle y posibles cambios de horario: https://ejemplo.org/#a/22-1200-misa-accion-gracias'));
 });
+
+import { colaboradores, claveOrden } from '../js/nucleo.js';
+test('colaboradores: una fila por nombre, con todos sus aportes, en orden alfabético sin tratamiento', () => {
+  const c = colaboradores(A);
+  const nombres = c.map((x) => x.nombre);
+  assert.equal(new Set(nombres).size, nombres.length);
+  assert.ok(!nombres.some((n) => n.startsWith('Señores Priostes 2026')));
+  const alban = c.find((x) => x.nombre === 'Flia. Albán Mena');
+  assert.deepEqual(alban.aportes.map((p) => p.id), ['13-1930-serenata', '21-1345-carpa']);
+  const ivan = c.find((x) => x.nombre === 'Mg. Iván Mena V. y Flia.');
+  assert.deepEqual(ivan.aportes.map((p) => p.rol), ['Gentileza', 'Posada']);
+  assert.ok(ivan.aportes[0].mensaje.startsWith('Mil gracias a Ivancito Mena'));
+  assert.equal(claveOrden('Sr. Nelson Jácome'), 'nelson jacome');
+  const claves = c.map((x) => claveOrden(x.nombre));
+  assert.deepEqual(claves, [...claves].sort((a, b) => a.localeCompare(b, 'es')));
+});

@@ -16,15 +16,15 @@
   --gris-1: #F5F5F4;
   --linea: #ECECEA;
   --tinta: #141414;
-  --tinta-2: #6B6B6B;
-  --tinta-3: #9A9A9A;
+  --tinta-2: #4A4A4A;
+  --tinta-3: #6B6B6B;
 
   --religioso: #A87A1E; --cultural: #B5322B; --popular: #B8611F; --deportivo: #2F5D46;
 
   --titulo: 'Bricolage Grotesque', system-ui, sans-serif;
   --texto: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --w-r: 400; --w-m: 500; --w-s: 600;
-  --t12: 12px; --t13: 13px; --t14: 14px; --t16: 16px; --t18: 18px; --t22: 22px;
+  --t12: 13px; --t13: 14px; --t14: 15px; --t16: 17px; --t18: 19px; --t22: 23px;
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px;
   --barra: 44px; --tabs: 54px; --abajo: env(safe-area-inset-bottom, 0px);
 
@@ -164,7 +164,7 @@ main { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-top: var(--
 .principal { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 6px; background: #FBEFD6; color: #8A5A10; font-size: var(--t12); font-weight: var(--w-m); line-height: 18px; vertical-align: 1px; white-space: nowrap; }
 .fila.en-curso .principal { background: rgba(241,214,140,.18); color: var(--oro-claro); }
 .fila .chev { color: var(--tinta-3); flex: 0 0 auto; }
-.fila.pasada { opacity: .45; }
+.fila.pasada { opacity: .62; }
 .fila.en-curso { margin: var(--s2) 0; }
 .fila.en-curso .fila-main { margin: 0; padding: var(--s3); border-radius: 14px; background: var(--noche); color: #fff; box-shadow: 0 8px 20px rgba(10,9,8,.22); }
 .fila.en-curso .hora, .fila.en-curso .tit { color: #fff; }
@@ -529,3 +529,83 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
   .tr-cabeza, .tr-puf, .splash-chispas i, .hero-viva .hero-virgen::before, .hero-viva .btn-oro::after, .hero-viva + #estado .bloque-t::before, .carrusel .tarjeta-foto { animation: none; }
   body.con-splash #vista-inicio > * { transition: none; opacity: 1; translate: 0 0; }
 }
+
+/* ============ Ajustes tras las pruebas con la familia ============ */
+
+/* Barra superior: sin botón de regreso; la Virgen acompaña en todas las pantallas */
+.barra-virgen { position: absolute; left: 12px; top: 0; height: var(--barra); display: grid; place-items: center; color: var(--oro-fondo); }
+.barra-virgen .ico { width: 24px; height: 24px; }
+
+/* Menú inferior en negro, para que se distinga del contenido */
+.tabs { background: var(--noche); border-top: 0; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 -6px 18px rgba(0,0,0,.18); }
+.tab { color: rgba(255,255,255,.78); }
+.tab[aria-current="page"] { color: #fff; }
+.tab[aria-current="page"] .ico { background: var(--oro-vivo); color: var(--noche); }
+:root { --tabs: 60px; }
+
+/* Portada: la Virgen */
+.splash-virgen { position: absolute; top: 13%; left: 50%; width: min(50%, 210px); transform: translateX(-50%); transition: transform 1.1s var(--ease-out); }
+.splash.fuera .splash-virgen { transform: translateX(-50%) translateY(-40px); }
+.splash-virgen::before { content: ''; position: absolute; inset: -34% -46%; border-radius: 50%; background: radial-gradient(circle, rgba(242,194,48,.30), rgba(242,194,48,.10) 45%, transparent 68%); animation: halo 4s ease-in-out infinite; }
+.splash-virgen svg { position: relative; overflow: visible; }
+.splash-virgen .trazo path { stroke: #FFE08A; stroke-width: 2.2; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 3px rgba(242,194,48,.85)); animation: toro-trazo 1.1s var(--r, .3s) var(--ease-out) forwards; }
+.splash-virgen .halo circle, .splash-virgen .halo path { stroke: #FFE08A; opacity: 0; animation: aparecer-halo 1s 2s forwards; }
+.splash-virgen .brillo { width: 14px; height: 14px; }
+.splash-virgen .b1 { left: -14%; top: 20%; } .splash-virgen .b2 { right: -16%; top: 42%; animation-delay: 1.2s; }
+.splash-virgen .b3 { left: 64%; top: -6%; animation-delay: 2.4s; } .splash-virgen .b4 { left: 4%; top: 72%; width: 10px; height: 10px; animation-delay: .6s; }
+@keyframes aparecer-halo { to { opacity: .7; } }
+
+/* Inicio: la Virgen un poco más grande y más arriba */
+.hero-viva .hero-virgen { width: 84px; }
+.hero-viva .hero-cab { margin-top: -146px !important; }
+.hero-viva .kicker { margin-top: var(--s4); }
+.acceso-priostes { display: flex; align-items: center; gap: var(--s3); width: calc(100% - 2 * var(--s4)); margin: var(--s6) var(--s4) 0; padding: var(--s3) var(--s4); border-radius: 16px; text-align: left; color: #fff; background: linear-gradient(160deg, #C43A30, #8E231D); }
+.acceso-priostes .ic { background: rgba(255,255,255,.16); color: var(--oro-claro); }
+.acceso-priostes .ap-txt { flex: 1; min-width: 0; }
+.acceso-priostes .ap-k { display: block; font: var(--w-s) var(--t16)/1.2 var(--titulo); }
+.acceso-priostes .ap-t { display: block; font-size: var(--t13); color: rgba(255,255,255,.88); }
+.acceso-priostes > .ico { color: var(--oro-claro); }
+
+/* Detalle sin foto: la información va primero */
+.hoja .titulo-simple { font: var(--w-s) 24px/1.15 var(--titulo); letter-spacing: -0.01em; margin: var(--s6) 44px 0 0; text-wrap: balance; }
+.hoja .titulo-simple + .det { margin-top: var(--s2); }
+.hoja-cab img { cursor: zoom-in; }
+.g-nom { display: block; padding: 3px 0; }
+.gracias-resto { display: block; }
+.ver-mas { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; margin-top: 2px; padding: 0 var(--s3); margin-left: calc(-1 * var(--s3)); border-radius: 10px; background: var(--crema); color: var(--crema-tinta); }
+.ver-mas .ico { width: 16px; height: 16px; transition: transform .2s var(--ease-out); }
+.ver-mas[aria-expanded="true"] .ico { transform: rotate(180deg); }
+
+/* Gracias: primero los Priostes y su mensaje; luego una sola lista de nombres */
+#vista-gratitud .cab-vista { padding-bottom: 0; }
+#vista-gratitud .priostes-card { margin-top: var(--s4); }
+#vista-gratitud .lista-priostes li { font-size: var(--t16); padding: 9px 0; }
+#vista-gratitud .agradecimiento { margin-top: var(--s4); }
+.grat-hero { cursor: zoom-in; }
+.colaboradores { padding: 0 var(--s4) var(--s8); margin-top: var(--s8); }
+.colaboradores h2 { font: var(--w-s) var(--t22)/1.2 var(--titulo); }
+.col-sub { font-size: var(--t14); color: var(--tinta-2); margin-top: 2px; }
+.colaboradores .gratitud { list-style: none; padding: 0; margin-top: var(--s3); }
+.colaboradores .gratitud > li { border-bottom: 1px solid var(--linea); }
+.nombre .nom { flex: 1; font-size: var(--t16); font-weight: var(--w-m); line-height: 1.3; color: var(--tinta); }
+.nombre .ico { transition: transform .2s var(--ease-out); }
+.nombre[aria-expanded="true"] .ico { transform: rotate(180deg); }
+.aportes { list-style: none; padding: 0 0 var(--s3); }
+.aportes li { padding: var(--s2) var(--s3); border-radius: 10px; background: var(--crema); }
+.aportes li + li { margin-top: 6px; }
+.aportes span { display: block; }
+.ap-rol { font-size: var(--t13); font-weight: var(--w-s); color: var(--crema-tinta); }
+.ap-act { font-size: var(--t14); color: var(--tinta); }
+.ap-msj { font-size: var(--t14); line-height: 1.5; margin-top: 6px; padding-top: 6px; border-top: 1px solid #E8D49A; }
+
+/* Ver una foto en grande */
+.visor { position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.94); display: grid; place-items: center; cursor: zoom-out; animation: aparecer .2s var(--ease-out); }
+.visor[hidden] { display: none; }
+.visor img { max-width: 100%; max-height: 100dvh; object-fit: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-virgen .trazo path { animation: none; stroke-dashoffset: 0; }
+  .splash-virgen .halo circle, .splash-virgen .halo path { animation: none; opacity: .7; }
+  .splash-virgen::before { animation: none; }
+}
+.pie-acciones .btn { font-size: 14px; white-space: nowrap; }

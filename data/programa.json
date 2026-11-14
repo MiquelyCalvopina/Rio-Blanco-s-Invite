@@ -85,16 +85,7 @@
     }
   },
   "servicios": [
-    {
-      "id": "parqueadero",
-      "tipo": "parqueo",
-      "nombre": "Parqueadero",
-      "detalle": "Estadio Monumental Río Blanco Alto",
-      "lat": -0.747494,
-      "lng": -78.6141981,
-      "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
-    },
-    {"id": "parqueadero-2", "tipo": "parqueo", "nombre": "Parqueadero", "detalle": "A unos 220 m de la plaza central", "lat": -0.7482963, "lng": -78.6126649, "mapa": "https://maps.app.goo.gl/3eL7Pji5M88eSFyq5"},
+    {"id": "parqueadero-2", "tipo": "parqueo", "nombre": "Parqueadero", "detalle": "Cerca del Coliseo del barrio", "lat": -0.7482963, "lng": -78.6126649, "mapa": "https://maps.app.goo.gl/3eL7Pji5M88eSFyq5"},
     {
       "id": "banos-iglesia",
       "tipo": "banos",

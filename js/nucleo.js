@@ -186,3 +186,24 @@ export function reconocimientos(a) {
   }
   return r;
 }
+
+// Lista única de quienes hicieron posible la fiesta, cada uno con todo aquello en que colaboró.
+// Los Priostes van aparte, así que sus menciones genéricas no se repiten aquí.
+// Se ordena por nombre, sin contar el tratamiento (Sr., Lic., Flia., …). Los nombres no se modifican.
+const TRATAMIENTO = /^(Sres\.|Sr\.|Sra\.|Srta\.|Lic\.|Ings\.|Ing\.|Dra\.|Dr\.|Mg\.|Msc\.|Abg\.|Arq\.|Eco\.|Tnlgo\.|M\. V\.|Niña|Niño|Flia\.|Familia|Hnos\.|Hnas\.|Padre)\s+/i;
+export function claveOrden(nombre) {
+  let n = String(nombre);
+  while (TRATAMIENTO.test(n)) n = n.replace(TRATAMIENTO, '');
+  return normalizar(n);
+}
+export function colaboradores(actividades) {
+  const mapa = new Map();
+  for (const a of actividades) {
+    for (const r of reconocimientos(a)) {
+      if (/^Señores Priostes 2026/.test(r.nombre)) continue;
+      if (!mapa.has(r.nombre)) mapa.set(r.nombre, { nombre: r.nombre, aportes: [] });
+      mapa.get(r.nombre).aportes.push({ rol: r.rol || 'Gentileza', titulo: a.titulo, fecha: a.fecha, hora: a.hora, id: a.id, mensaje: r.mensaje || '' });
+    }
+  }
+  return [...mapa.values()].sort((x, y) => claveOrden(x.nombre).localeCompare(claveOrden(y.nombre), 'es'));
+}

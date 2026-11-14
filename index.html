@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilos.css?v=202611140132">
+<link rel="stylesheet" href="css/estilos.css?v=202611140401">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -27,7 +27,7 @@
 </svg>
 
 <div id="splash" class="splash" role="presentation">
-  <div id="splash-toro" class="splash-toro"></div>
+  <div id="splash-virgen" class="splash-virgen"></div>
   <div class="splash-chispas" aria-hidden="true"></div>
   <div class="splash-cont">
     <p class="splash-fiesta">Fiestas de Río Blanco Alto</p>
@@ -36,7 +36,7 @@
 </div>
 
 <header class="barra">
-  <button id="atras" class="atras-barra" data-ir="inicio" hidden><span data-ico="atras"></span>Inicio</button>
+  <span class="barra-virgen" data-ico-act="virgen" aria-hidden="true"></span>
   <p id="titulo-barra" class="marca" aria-live="polite">Río Blanco Alto · 2026</p>
   <button id="abrir-busqueda" class="buscar-barra" hidden><span data-ico="buscar"></span>Buscar</button>
 </header>
@@ -55,12 +55,11 @@
     </div>
     <section class="bloque" aria-live="polite" id="estado"></section>
     <section class="bloque esperado" aria-labelledby="t-esperado"><h2 id="t-esperado" class="bloque-t">Lo más esperado</h2><div id="carrusel" class="carrusel"></div></section>
-    <section class="priostes-card" aria-labelledby="t-priostes">
-      <div class="cab"><span class="ic" data-ico-act="estandarte"></span><div><p class="kick">Gracias</p><h2 id="t-priostes">Priostes 2026</h2></div></div>
-      <p class="msg">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p>
-      <ul id="lista-priostes" class="lista-priostes"></ul>
-      <p class="organizan">Junto al Comité Promejoras y la Liga Deportiva Barrial Central Río Blanco Alto.</p>
-    </section>
+    <button class="acceso-priostes tap" data-ir="gratitud">
+      <span class="ic" data-ico-act="estandarte"></span>
+      <span class="ap-txt"><span class="ap-k">Priostes 2026</span><span class="ap-t">Conozca a quienes hacen posible la fiesta</span></span>
+      <span data-ico="chev"></span>
+    </button>
     <p class="contacto">¿Quisiera una invitación digital como esta? <a href="https://wa.me/593963212258?text=Hola%2C%20quisiera%20una%20invitaci%C3%B3n%20digital%20como%20la%20de%20las%20fiestas%20de%20R%C3%ADo%20Blanco%20Alto." target="_blank" rel="noopener"><span data-ico="whatsapp"></span>Contáctese por WhatsApp al 0963212258</a></p>
   </section>
 
@@ -88,18 +87,28 @@
   <section id="vista-gratitud" class="vista" aria-label="Gracias" hidden>
     <div class="cab-vista">
       <div class="grat-hero"><img src="img/actividades/colchas.jpg" alt=""><div class="grat-txt"><p class="grat-t">Gracias</p><p>A quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p></div></div>
-      <label class="buscador con-etq">
-        <span class="etq-campo">Busque su nombre o el de su familia</span>
-        <span class="campo"><span class="buscador-icono"></span>
-        <input id="buscar" type="search" placeholder="Por ejemplo: Mena" autocomplete="off"></span>
-      </label>
     </div>
-    <div id="gratitud" class="gratitud"></div>
+    <section class="priostes-card" aria-labelledby="t-priostes">
+      <div class="cab"><span class="ic" data-ico-act="estandarte"></span><div><p class="kick">Con gratitud</p><h2 id="t-priostes">Priostes 2026</h2></div></div>
+      <p class="msg">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p>
+      <ul id="lista-priostes" class="lista-priostes"></ul>
+      <p class="organizan">Junto al Comité Promejoras y la Liga Deportiva Barrial Central Río Blanco Alto.</p>
+    </section>
     <section class="agradecimiento" aria-labelledby="t-agradecimiento">
       <h2 id="t-agradecimiento">Agradecimiento</h2>
       <p class="agr-texto">“Santísima Virgen de El Quinche”, elevamos a ti nuestro más profundo agradecimiento por permitirnos rendirte este merecido homenaje, por los innumerables favores recibidos y por cubrirnos siempre con tu amorosa bendición; así como también a todos tus devotos y a cada una de las personas que, con su generosidad, hicieron posible realzar y celebrar con fe y alegría tu día.</p>
       <p class="agr-atte">Atentamente</p>
       <p class="agr-firma">Priostes Santísima Virgen de “El Quinche” 2026.<br>Comité Promejoras Río Blanco Alto.<br>Liga Deportiva Barrial Central Río Blanco Alto.</p>
+    </section>
+    <section class="colaboradores" aria-labelledby="t-colaboradores">
+      <h2 id="t-colaboradores">Hicieron posible la fiesta</h2>
+      <p class="col-sub">Toque un nombre para ver en qué colaboró.</p>
+      <label class="buscador con-etq">
+        <span class="etq-campo">Busque un nombre o una familia</span>
+        <span class="campo"><span class="buscador-icono"></span>
+        <input id="buscar" type="search" placeholder="Por ejemplo: Mena" autocomplete="off"></span>
+      </label>
+      <ul id="gratitud" class="gratitud"></ul>
     </section>
   </section>
 </main>
@@ -122,6 +131,8 @@
   <ul id="resultados" class="lista busq-lista" aria-live="polite"></ul>
 </section>
 
+<div id="visor" class="visor" hidden><img alt=""><span class="visor-cerrar" aria-hidden="true"></span></div>
+
 <div id="velo" class="velo" hidden></div>
 <section id="hoja" class="hoja" role="dialog" aria-modal="true" aria-labelledby="hoja-titulo" hidden>
   <div class="hoja-asa"></div>
@@ -130,6 +141,6 @@
 </section>
 
 
-<script type="module" src="js/app.js?v=202611140132"></script>
+<script type="module" src="js/app.js?v=202611140401"></script>
 </body>
 </html>

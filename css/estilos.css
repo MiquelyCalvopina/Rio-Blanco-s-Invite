@@ -679,3 +679,54 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 #vista-gratitud .nombre .nom { font-size: 15px; }
 #vista-gratitud .grat-t { font-size: 32px; }
 #vista-gratitud .colaboradores h2 { font-size: 20px; }
+
+/* ============ Cuarta ronda: menos elementos y menos color ============ */
+
+/* Sin barra superior en las pestañas */
+:root { --barra: 0px; }
+main { padding-top: env(safe-area-inset-top, 0px); }
+.programa-cabecera { padding-top: var(--s2); }
+.chip-buscar { display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #D9D6CF; color: var(--tinta); }
+.chip-buscar .ico { width: 14px; height: 14px; }
+
+/* Botones como antes: negros. El dorado queda para el botón principal del inicio y la pestaña activa */
+.btn-noche { background: var(--noche); color: #fff; }
+.grupo-cal .btn-caret { border-left: 1px solid rgba(255,255,255,.22); }
+.grupo-cal .btn-caret .ico { color: var(--oro-claro); }
+.fab { background: var(--noche); color: #fff; border: 0; box-shadow: 0 6px 16px rgba(20,20,20,.18); }
+.fab .ico { color: var(--oro-claro); }
+.dia[aria-selected="true"] { background: var(--noche); color: rgba(255,255,255,.8); }
+.dia[aria-selected="true"] b { color: #fff; }
+.btn-llegar { background: var(--noche); color: #fff; }
+.btn-llegar .ico { color: var(--oro-claro); }
+
+/* Priostes: dorado oscuro en lugar del rojo */
+.priostes-card, .acceso-priostes { background: linear-gradient(160deg, #7A560E, #5C4108); box-shadow: none; }
+.priostes-card::after { display: none; }
+.priostes-card { padding-bottom: var(--s5); }
+
+/* Gracias: una sola tarjeta (Priostes) y el resto, texto con jerarquía */
+.grat-cab { padding: var(--s8) var(--s4) 0; }
+.grat-cab h1 { font: var(--w-s) 30px/1.1 var(--titulo); letter-spacing: -.01em; }
+.grat-cab p { font-size: 15px; color: var(--tinta-2); margin-top: 6px; }
+#vista-gratitud .priostes-card { margin-top: var(--s5); }
+#vista-gratitud .priostes-card .kick { display: none; }
+#vista-gratitud .agradecimiento { background: none; border-radius: 0; text-align: left; margin: var(--s6) var(--s4) 0; padding: 0 0 0 var(--s4); border-left: 2px solid #E0C987; }
+#vista-gratitud .agradecimiento h2 { display: none; }
+#vista-gratitud .agr-texto { margin-top: 0; font-size: 14px; line-height: 1.6; color: var(--tinta); }
+#vista-gratitud .agr-atte { display: none; }
+#vista-gratitud .agr-firma { font-size: 13px; font-weight: var(--w-r); color: var(--tinta-2); margin-top: var(--s3); }
+.colaboradores { margin-top: 40px; }
+#vista-gratitud .colaboradores h2 { font-size: 20px; }
+.col-sub { font-size: 13px; }
+.colaboradores .buscador.con-etq { margin-top: var(--s3); }
+.colaboradores .etq-campo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+#vista-gratitud .nombre { min-height: 48px; }
+#vista-gratitud .nombre .nom { font-size: 15px; font-weight: var(--w-r); }
+#vista-gratitud .nombre[aria-expanded="true"] .nom { font-weight: var(--w-s); }
+.aportes { padding: 0 0 var(--s3); }
+.aportes li, .aportes li + li { background: none; border-radius: 0; padding: 0; margin-top: 0; }
+.aportes li + li { margin-top: var(--s2); }
+.ap-act { font-size: 14px; color: var(--tinta); }
+.ap-rol { font-size: 13px; font-weight: var(--w-r); color: var(--tinta-2); }
+.ap-msj { font-size: 13px; color: var(--tinta-2); border-top: 0; padding-top: 0; margin-top: 4px; }

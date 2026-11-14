@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140443';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140443';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140451';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140451';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -85,9 +85,7 @@ function irAlMomento() {
 
 function ir(vista, { alMomento = true } = {}) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
-  $('#titulo-barra').textContent = TITULOS[vista];
   document.body.classList.toggle('en-inicio', vista === 'inicio');
-  $('#abrir-busqueda').hidden = vista !== 'programa';
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const antes = $(`#vista-${vistaActual}`);
   const despues = $(`#vista-${vista}`);
@@ -192,7 +190,7 @@ function pintarDias() {
 
 function pintarFiltros() {
   const ops = [['todo', 'Todo'], ...Object.entries(TIPOS)];
-  $('#filtros').innerHTML = ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
+  $('#filtros').innerHTML = `<button id="abrir-busqueda" class="chip chip-buscar" aria-label="Buscar una actividad">${iconos.buscar}Buscar</button>` + ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
 }
 
 function filaAct(a, enCurso, pasada) {
@@ -507,7 +505,7 @@ function pintarGratitud(q = '') {
   const lista = colaboradores(D.actividades).filter((c) => !nq || normalizar(c.nombre).includes(nq));
   $('#gratitud').innerHTML = lista.map((c) => `<li>
       <button class="nombre tap-suave" data-colab aria-expanded="false"><span class="nom">${marca(c.nombre)}</span>${iconos.abajo}</button>
-      <ul class="aportes" hidden>${c.aportes.map((p) => `<li><span class="ap-rol">${esc(p.rol)}</span><span class="ap-act">${esc(p.titulo)} · ${fechaLarga(p.fecha)}</span>${p.mensaje ? `<span class="ap-msj">${esc(p.mensaje)}</span>` : ''}</li>`).join('')}</ul>
+      <ul class="aportes" hidden>${c.aportes.map((p) => `<li><span class="ap-act">${esc(p.titulo)}</span><span class="ap-rol">${esc(p.rol)} · ${fechaLarga(p.fecha)}</span>${p.mensaje ? `<span class="ap-msj">${esc(p.mensaje)}</span>` : ''}</li>`).join('')}</ul>
     </li>`).join('') || `<li class="vacio">No encontramos ese nombre. Pruebe solo con el apellido.</li>`;
 }
 
@@ -560,7 +558,7 @@ function eventos() {
   document.addEventListener('click', (ev) => {
     if (!$('#visor').hidden) { cerrarVisor(); return; }
     if (ev.target.closest('button, a')) return;
-    const marco = ev.target.closest('.hoja-cab, .grat-hero');
+    const marco = ev.target.closest('.hoja-cab');
     const img = marco && $('img', marco);
     if (img) abrirVisor(img.currentSrc || img.src);
   });
@@ -576,7 +574,6 @@ async function iniciar() {
   $$('.buscador-icono').forEach((e) => { e.innerHTML = iconos.buscar; });
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
   $$('[data-ico-act]').forEach((e) => { e.innerHTML = iconosAct[e.dataset.icoAct]; });
-  $('#barra-virgen').innerHTML = virgen;
   $('#hero-virgen').innerHTML = virgen + '<i class="brillo b1"></i><i class="brillo b2"></i><i class="brillo b3"></i>';
 
   // Los datos se revalidan en cada visita, para que un cambio de horario se vea de inmediato.

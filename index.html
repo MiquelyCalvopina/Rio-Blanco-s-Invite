@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilos.css?v=202611140443">
+<link rel="stylesheet" href="css/estilos.css?v=202611140451">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -34,12 +34,6 @@
     <p class="splash-lema">Raíces fuertes,<br>tradiciones vivas</p>
   </div>
 </div>
-
-<header class="barra">
-  <span id="barra-virgen" class="barra-virgen" aria-hidden="true"></span>
-  <p id="titulo-barra" class="marca" aria-live="polite">Río Blanco Alto · 2026</p>
-  <button id="abrir-busqueda" class="buscar-barra" hidden><span data-ico="buscar"></span>Buscar</button>
-</header>
 
 <main>
   <section id="vista-inicio" class="vista" aria-label="Inicio">
@@ -85,9 +79,10 @@
   </section>
 
   <section id="vista-gratitud" class="vista" aria-label="Gracias" hidden>
-    <div class="cab-vista">
-      <div class="grat-hero"><img src="img/actividades/colchas.jpg" alt=""><div class="grat-txt"><p class="grat-t">Gracias</p><p>A quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p></div></div>
-    </div>
+    <header class="grat-cab">
+      <h1>Gracias</h1>
+      <p>A quienes, con su generosidad, hacen posible la fiesta de Nuestra Patrona.</p>
+    </header>
     <section class="priostes-card" aria-labelledby="t-priostes">
       <div class="cab"><span class="ic" data-ico-act="estandarte"></span><div><p class="kick">Con gratitud</p><h2 id="t-priostes">Priostes 2026</h2></div></div>
       <p class="msg">Con su esfuerzo y generosidad hacen posible la fiesta de Nuestra Patrona.</p>
@@ -106,7 +101,7 @@
       <label class="buscador con-etq">
         <span class="etq-campo">Busque un nombre o una familia</span>
         <span class="campo"><span class="buscador-icono"></span>
-        <input id="buscar" type="search" placeholder="Por ejemplo: Mena" autocomplete="off"></span>
+        <input id="buscar" type="search" placeholder="Buscar un nombre o una familia" autocomplete="off"></span>
       </label>
       <ul id="gratitud" class="gratitud"></ul>
     </section>
@@ -141,6 +136,6 @@
 </section>
 
 
-<script type="module" src="js/app.js?v=202611140443"></script>
+<script type="module" src="js/app.js?v=202611140451"></script>
 </body>
 </html>

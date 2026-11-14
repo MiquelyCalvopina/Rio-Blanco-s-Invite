@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141615';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141615';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141912';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141912';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -255,6 +255,8 @@ function abrirHoja(html, id = '', modo = '', conFoto = false) {
   const h = $('#hoja');
   h.classList.toggle('con-foto', conFoto);
   $('#hoja-contenido').innerHTML = html;
+  const tira = $('.fotos-tira', h); const cuenta = $('.fotos-cuenta b', h);
+  if (tira && cuenta) tira.addEventListener('scroll', () => { cuenta.textContent = Math.round(tira.scrollLeft / tira.clientWidth) + 1; }, { passive: true });
   h.dataset.id = id; h.dataset.modo = modo;
   if (h.hidden) { h.hidden = false; $('#velo').hidden = false; $('#fab').hidden = true; document.body.style.overflow = 'hidden'; }
   h.scrollTop = 0;
@@ -285,15 +287,16 @@ const CIERRE_VELOCIDAD = 0.55; // px por milisegundo
 const CIERRE_MINIMO = 40; // px mínimos para que un jalón rápido cuente
 function arrastreHoja() {
   const h = $('#hoja'); const v = $('#velo');
-  let y0 = null; let dy = 0; let activo = false; let muestras = [];
+  let y0 = null; let x0 = 0; let dy = 0; let activo = false; let muestras = [];
   h.addEventListener('touchstart', (e) => {
     if (e.touches.length !== 1 || h.scrollTop > 0 || h.classList.contains('sale')) { y0 = null; return; }
-    y0 = e.touches[0].clientY; dy = 0; activo = false; muestras = [[e.timeStamp, y0]];
+    y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; activo = false; muestras = [[e.timeStamp, y0]];
   }, { passive: true });
   h.addEventListener('touchmove', (e) => {
     if (y0 === null) return;
     const y = e.touches[0].clientY; dy = y - y0;
     if (!activo) {
+      if (Math.abs(e.touches[0].clientX - x0) > Math.abs(dy)) { y0 = null; return; } // deslizar de lado: pasar fotos
       if (dy < -8) { y0 = null; return; } // va hacia arriba: es lectura, no cierre
       if (dy <= 8 || h.scrollTop > 0) return;
       activo = true; h.style.transition = 'none';
@@ -324,6 +327,8 @@ function detalle(id) {
   const l = lugar(a);
   const ok = agregados.has(a.id);
   const src = a.foto; // sin foto propia no se muestra una genérica: la información va primero
+  // Con varias fotos, la cabecera se desliza de lado; al tocarla se abren en grande.
+  const fotos = a.fotos || (src ? [{ src, pos: a.fotoPos }] : []);
   const info = a.credito
     ? `<button class="info-foto" data-info aria-label="Créditos de la foto">${iconos.info}</button>
        <a class="credito" href="${a.credito.url}" target="_blank" rel="noopener" hidden>Foto: ${esc(a.credito.autor)} · ${a.credito.licencia}</a>` : '';
@@ -331,7 +336,7 @@ function detalle(id) {
   const conToro = a.id.includes('corrida');
   const titulo = `<div class="cab-txt${conToro ? ' con-toro' : ''}"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>${conToro ? `<div class="toro-detalle" aria-hidden="true">${toro}</div>` : ''}`;
   const cabecera = src
-    ? `<div class="hoja-cab afiche"><img class="hoja-foto" src="${src}" alt=""${a.fotoPos ? ` style="object-position:${a.fotoPos}"` : ''}>${titulo}${info}</div>`
+    ? `<div class="hoja-cab afiche${fotos.length > 1 ? ' varias' : ''}"><div class="fotos-tira">${fotos.map((f) => `<img class="hoja-foto" src="${f.src}" alt=""${f.pos ? ` style="object-position:${f.pos}"` : ''}>`).join('')}</div>${fotos.length > 1 ? `<span class="fotos-cuenta">${iconos.fotos}<b>1</b> / ${fotos.length}</span>` : ''}${titulo}${info}</div>`
     : `<h2 id="hoja-titulo" class="titulo-simple">${esc(a.titulo)}</h2>`;
   const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
   const donde = a.lugar === 'posada'
@@ -510,7 +515,13 @@ function pintarGratitud(q = '') {
 }
 
 /* ---------- Ver una foto en grande ---------- */
-function abrirVisor(src) { const v = $('#visor'); $('img', v).src = src; v.hidden = false; }
+function abrirVisor(lista, indice = 0) {
+  const v = $('#visor'); const tira = $('.visor-tira', v);
+  tira.innerHTML = lista.map((s) => `<div class="visor-foto"><img src="${s}" alt=""></div>`).join('');
+  $('.visor-cuenta', v).textContent = lista.length > 1 ? `${indice + 1} / ${lista.length}` : '';
+  v.hidden = false; tira.scrollLeft = indice * tira.clientWidth;
+  tira.onscroll = () => { if (lista.length > 1) $('.visor-cuenta', v).textContent = `${Math.round(tira.scrollLeft / tira.clientWidth) + 1} / ${lista.length}`; };
+}
 function cerrarVisor() { $('#visor').hidden = true; }
 
 /* ---------- Compartir ---------- */
@@ -556,11 +567,12 @@ function eventos() {
   document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!$('#visor').hidden) cerrarVisor(); else if (!$('#hoja').hidden) cerrarHoja(); else cerrarBusqueda(); });
   // Tocar una foto la muestra completa; tocar de nuevo la cierra.
   document.addEventListener('click', (ev) => {
-    if (!$('#visor').hidden) { cerrarVisor(); return; }
+    if (!$('#visor').hidden) { if (ev.target.closest('.visor-cerrar') || !ev.target.closest('img')) cerrarVisor(); return; }
     if (ev.target.closest('button, a')) return;
     const marco = ev.target.closest('.hoja-cab');
-    const img = marco && $('img', marco);
-    if (img) abrirVisor(img.currentSrc || img.src);
+    if (!marco) return;
+    const imgs = $$('.hoja-foto', marco); const tira = $('.fotos-tira', marco);
+    if (imgs.length) abrirVisor(imgs.map((i) => i.currentSrc || i.src), tira ? Math.round(tira.scrollLeft / tira.clientWidth) : 0);
   });
   $('#buscar-act').addEventListener('input', (e) => pintarResultados(e.target.value));
   $('#buscar').addEventListener('input', (e) => pintarGratitud(e.target.value));

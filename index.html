@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilos.css?v=202611141615">
+<link rel="stylesheet" href="css/estilos.css?v=202611141912">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -45,7 +45,7 @@
         <h1>Santísima Virgen de El Quinche</h1>
         <p class="hero-sub">13 al 22 de noviembre de 2026</p>
       </div>
-      <button class="btn btn-oro tap" data-ir="programa"><span data-ico="calendario"></span>Ver actividades y horarios</button>
+      <button class="btn btn-oro tap" data-ir="programa"><span data-ico="calendario"></span>Ver todos los días de fiesta</button>
     </div>
     <section class="bloque" aria-live="polite" id="estado"></section>
     <button class="acceso-priostes tap" data-ir="gratitud">
@@ -59,7 +59,7 @@
 
   <section id="vista-programa" class="vista" aria-label="Actividades" hidden>
     <div class="programa-cabecera">
-      <button id="abrir-busqueda" class="campo-buscar"><span data-ico="buscar"></span>Buscar una actividad</button>
+      <button id="abrir-busqueda" class="campo-buscar"><span data-ico="buscar"></span>Buscar actividad, lugar o persona</button>
       <div id="dias" class="dias" role="tablist" aria-label="Días de la fiesta"></div>
       <div id="filtros" class="filtros" role="group" aria-label="Filtrar por tipo"></div>
     </div>
@@ -125,7 +125,7 @@
   <ul id="resultados" class="lista busq-lista" aria-live="polite"></ul>
 </section>
 
-<div id="visor" class="visor" hidden><img alt=""><span class="visor-cerrar" aria-hidden="true"></span></div>
+<div id="visor" class="visor" hidden><div class="visor-tira"></div><span class="visor-cuenta"></span><button class="visor-cerrar" aria-label="Cerrar"></button></div>
 
 <div id="velo" class="velo" hidden></div>
 <section id="hoja" class="hoja" role="dialog" aria-modal="true" aria-labelledby="hoja-titulo" hidden>
@@ -135,6 +135,6 @@
 </section>
 
 
-<script type="module" src="js/app.js?v=202611141615"></script>
+<script type="module" src="js/app.js?v=202611141912"></script>
 </body>
 </html>

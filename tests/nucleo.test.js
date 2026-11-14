@@ -115,7 +115,7 @@ test('las fotos de las actividades existen y las de terceros tienen crédito', a
 
 test('todas las actividades siguen el mismo esquema de información', () => {
   const obligatorios = ['id', 'fecha', 'hora', 'titulo', 'tipo', 'icono', 'lugar', 'descripcion', 'aCargo', 'gentileza'];
-  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito', 'participan', 'mensajeGracias', 'fotoPos']);
+  const permitidos = new Set([...obligatorios, 'destacado', 'anfitrion', 'foto', 'credito', 'participan', 'mensajeGracias', 'fotoPos', 'fotos']);
   for (const a of A) {
     for (const k of obligatorios) assert.ok(k in a, `${a.id} no tiene ${k}`);
     for (const k of Object.keys(a)) assert.ok(permitidos.has(k), `${a.id} tiene un campo fuera del esquema: ${k}`);

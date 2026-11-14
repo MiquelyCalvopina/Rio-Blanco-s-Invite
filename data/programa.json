@@ -33,6 +33,7 @@
       "nombre": "Plaza central del barrio",
       "corto": "Plaza",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
+      "forma": [[-0.7486571, -78.6146055], [-0.7485825, -78.6142094], [-0.7487316, -78.6141814], [-0.7488318, -78.6145705]],
       "lat": -0.7487619,
       "lng": -78.6146614,
       "icono": "bandera"
@@ -48,6 +49,7 @@
       "nombre": "Estadio Monumental Río Blanco Alto",
       "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47",
       "icono": "balon",
+      "forma": [[-0.7470706, -78.6144894], [-0.7470652, -78.6138725], [-0.7480629, -78.613835], [-0.7480844, -78.6144787]],
       "lat": -0.747494,
       "lng": -78.6141981,
       "corto": "Estadio"
@@ -56,6 +58,7 @@
       "nombre": "Coliseo del Barrio Río Blanco Alto",
       "corto": "Coliseo",
       "mapa": "https://maps.app.goo.gl/rfMhf9NwCNY8qQ2D6",
+      "forma": [[-0.7487924, -78.6136848], [-0.7487388, -78.6134434], [-0.7490767, -78.6133629], [-0.7491304, -78.6136124]],
       "lat": -0.7486908,
       "lng": -78.613664,
       "icono": "voley"

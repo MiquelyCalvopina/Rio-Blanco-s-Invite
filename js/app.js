@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140124';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140124';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140132';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140132';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -424,6 +424,8 @@ async function mapa() {
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(m);
   const grupo = [];
   // Tramo de las carpas de comida
+  // Contorno de los lugares grandes, con el mismo gris con que el mapa dibuja la iglesia.
+  for (const l of Object.values(D.lugares)) if (l.forma) L.polygon(l.forma, { color: '#8F8F8F', weight: 1, fillColor: '#B5B5B5', fillOpacity: .75, interactive: false }).addTo(m);
   for (const x of D.servicios) if (x.tramo) L.polyline(x.tramo, { color: '#DE7A2C', weight: 6, opacity: .75, lineCap: 'round' }).addTo(m);
   // Lugares de la fiesta (un punto por coordenada)
   const vistos = {};

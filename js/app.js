@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140118';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140118';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140124';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140124';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -265,7 +265,7 @@ function cerrarHoja() {
   const h = $('#hoja'); const v = $('#velo');
   if (h.hidden || h.classList.contains('sale')) return;
   h.classList.add('sale'); v.classList.add('sale');
-  setTimeout(() => { h.hidden = true; v.hidden = true; h.classList.remove('sale'); v.classList.remove('sale'); $('#fab').hidden = false; }, 230);
+  setTimeout(() => { h.hidden = true; v.hidden = true; h.classList.remove('sale'); v.classList.remove('sale'); h.style.transform = ''; h.style.transition = ''; v.style.opacity = ''; $('#fab').hidden = false; }, 230);
   document.body.style.overflow = '';
   if (location.hash.startsWith('#a/')) history.replaceState(null, '', location.pathname + location.search);
 }
@@ -278,6 +278,44 @@ function listaGracias(nombres) {
   const resto = nombres.length - GRACIAS_VISIBLES;
   return `${unir(nombres.slice(0, GRACIAS_VISIBLES))}<span class="gracias-resto" hidden> · ${unir(nombres.slice(GRACIAS_VISIBLES))}</span>
     <button class="ver-mas" data-ver-mas="${resto}" aria-expanded="false">Ver más (${resto})</button>`;
+}
+
+// Cerrar la hoja con el dedo: un jalón largo o rápido hacia abajo la cierra;
+// uno corto y suave la deja donde estaba. Solo actúa cuando la hoja está arriba del todo,
+// para no estorbar la lectura cuando el contenido se desplaza.
+const CIERRE_DISTANCIA = 140; // px recorridos
+const CIERRE_VELOCIDAD = 0.55; // px por milisegundo
+const CIERRE_MINIMO = 40; // px mínimos para que un jalón rápido cuente
+function arrastreHoja() {
+  const h = $('#hoja'); const v = $('#velo');
+  let y0 = null; let dy = 0; let activo = false; let muestras = [];
+  h.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1 || h.scrollTop > 0 || h.classList.contains('sale')) { y0 = null; return; }
+    y0 = e.touches[0].clientY; dy = 0; activo = false; muestras = [[e.timeStamp, y0]];
+  }, { passive: true });
+  h.addEventListener('touchmove', (e) => {
+    if (y0 === null) return;
+    const y = e.touches[0].clientY; dy = y - y0;
+    if (!activo) {
+      if (dy < -8) { y0 = null; return; } // va hacia arriba: es lectura, no cierre
+      if (dy <= 8 || h.scrollTop > 0) return;
+      activo = true; h.style.transition = 'none';
+    }
+    e.preventDefault();
+    muestras.push([e.timeStamp, y]); if (muestras.length > 5) muestras.shift();
+    h.style.transform = `translateY(${Math.max(0, dy)}px)`;
+    v.style.opacity = String(Math.max(0.25, 1 - dy / 480));
+  }, { passive: false });
+  const soltar = () => {
+    if (y0 === null || !activo) { y0 = null; return; }
+    const [t1, y1] = muestras[0]; const [t2, y2] = muestras[muestras.length - 1];
+    const velocidad = (y2 - y1) / Math.max(1, t2 - t1);
+    y0 = null; activo = false;
+    if (dy > CIERRE_DISTANCIA || (velocidad > CIERRE_VELOCIDAD && dy > CIERRE_MINIMO)) { cerrarHoja(); return; }
+    h.style.transition = 'transform .3s var(--ease-out)'; h.style.transform = ''; v.style.opacity = '';
+    setTimeout(() => { h.style.transition = ''; }, 320);
+  };
+  h.addEventListener('touchend', soltar); h.addEventListener('touchcancel', soltar);
 }
 
 // Plantilla única para todas las actividades (mismo orden y mismas secciones):
@@ -565,7 +603,7 @@ async function iniciar() {
 
   pintarEstado(); pintarCarrusel(); pintarPriostes(); pintarDias(); pintarFiltros(); pintarLista(); pintarLugares(); pintarGratitud();
   eventos();
-  observarCta(); observarScroll(); fabVisible();
+  observarCta(); observarScroll(); fabVisible(); arrastreHoja();
   setInterval(() => { pintarEstado(); if (!$('#vista-programa').hidden) pintarLista(); }, 60000);
 
   const m = location.hash.match(/^#a\/(.+)$/);

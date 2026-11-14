@@ -122,9 +122,7 @@
     "lat": -0.7490455,
     "lng": -78.6154423
   },
-  "creditosGenerales": [
-    {"uso": "Inicio: volcán Cotopaxi", "autor": "Dr. Carlos Costales Terán", "licencia": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volc%C3%A1n_Cotopaxi_Ecuador.JPG"}
-  ],
+  "creditosGenerales": [],
   "actividades": [
     {"id": "13-0800-embanderamiento", "fecha": "2026-11-13", "hora": "08:00", "titulo": "Embanderamiento del Barrio", "tipo": "popular", "icono": "bandera", "lugar": "barrio", "descripcion": "", "aCargo": "Liga Deportiva Barrial Central Río Blanco Alto", "gentileza": []},
     {"id": "13-1400-engalanamiento", "fecha": "2026-11-13", "hora": "14:00", "titulo": "Engalanamiento del camino de peregrinación", "tipo": "religioso", "icono": "flor", "lugar": "barrio", "descripcion": "Se adorna el camino por donde pasará la Santísima Virgen de El Quinche.", "aCargo": "Devotos y moradores del barrio", "gentileza": []},

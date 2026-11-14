@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611132148';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611132148';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140104';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140104';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -71,7 +71,17 @@ function splash() {
 const VISTAS = ['inicio', 'programa', 'lugares', 'gratitud'];
 const TITULOS = { inicio: 'Río Blanco Alto · 2026', programa: 'Actividades', lugares: 'Mapa del barrio', gratitud: 'Gracias' };
 let vistaActual = 'inicio';
-function ir(vista) {
+// Al entrar a Actividades se muestra el momento actual: el día de hoy y, dentro de él,
+// la actividad en curso; si no hay ninguna, la línea de «Ahora».
+function irAlMomento() {
+  const hoy = diaEcuador(ahora());
+  if (!dias().includes(hoy)) return;
+  if (ui.dia !== hoy) { ui.dia = hoy; pintarDias(); pintarLista(); }
+  const destino = $('#lista .fila.en-curso') || $('#ahora');
+  if (destino) destino.scrollIntoView({ block: 'center' });
+}
+
+function ir(vista, { alMomento = true } = {}) {
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
   $('#titulo-barra').textContent = TITULOS[vista];
   document.body.classList.toggle('en-inicio', vista === 'inicio');
@@ -86,7 +96,7 @@ function ir(vista) {
     antes.hidden = true; antes.classList.remove('sale');
     despues.hidden = false; despues.classList.remove('entra'); void despues.offsetWidth; despues.classList.add('entra');
     window.scrollTo(0, 0);
-    if (vista === 'programa') $('.dia[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' });
+    if (vista === 'programa') { if (alMomento) irAlMomento(); $('.dia[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' }); }
     if (vista === 'lugares') mapa();
     fabVisible();
   }, 150);
@@ -561,7 +571,7 @@ async function iniciar() {
   const m = location.hash.match(/^#a\/(.+)$/);
   if (m && actividad(m[1])) {
     ui.dia = actividad(m[1]).fecha;
-    pintarDias(); pintarLista(); ir('programa'); detalle(m[1]);
+    pintarDias(); pintarLista(); ir('programa', { alMomento: false }); detalle(m[1]);
   }
 }
 

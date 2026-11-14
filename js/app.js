@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141548';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141548';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611141615';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611141615';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -165,7 +165,7 @@ function pintarCarrusel() {
   $('.esperado').hidden = !proximas.length;
   // Lista corta con foto pequeña: la información primero, la imagen acompaña.
   const html = proximas.slice(0, 4).map((a) => `<button class="item item-foto tap-suave" data-act="${a.id}">
-      <img src="${a.foto || FOTOS[a.lugar]}" alt="" loading="lazy">
+      <img src="${a.foto || FOTOS[a.lugar]}" alt="" loading="lazy"${a.fotoPos ? ` style="object-position:${a.fotoPos}"` : ''}>
       <span class="cuerpo"><span class="etq">${esc(cuando(a))}</span><span class="tit">${esc(a.titulo)}</span><span class="met">${esc(lugarTexto(a))}</span></span>
       <span class="chev">${iconos.chev}</span>
     </button>`).join('');
@@ -331,7 +331,7 @@ function detalle(id) {
   const conToro = a.id.includes('corrida');
   const titulo = `<div class="cab-txt${conToro ? ' con-toro' : ''}"><h2 id="hoja-titulo">${esc(a.titulo)}</h2></div>${conToro ? `<div class="toro-detalle" aria-hidden="true">${toro}</div>` : ''}`;
   const cabecera = src
-    ? `<div class="hoja-cab afiche"><img class="hoja-foto" src="${src}" alt="">${titulo}${info}</div>`
+    ? `<div class="hoja-cab afiche"><img class="hoja-foto" src="${src}" alt=""${a.fotoPos ? ` style="object-position:${a.fotoPos}"` : ''}>${titulo}${info}</div>`
     : `<h2 id="hoja-titulo" class="titulo-simple">${esc(a.titulo)}</h2>`;
   const fila = (icono, etiqueta, valor, extra = '') => `<li>${icono}<span><span class="etq-dato">${etiqueta}</span>${valor}</span>${extra}</li>`;
   const donde = a.lugar === 'posada'

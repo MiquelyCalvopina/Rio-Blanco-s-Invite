@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140111';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140111';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, reconocimientos } from './nucleo.js?v=202611140118';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140118';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -555,7 +555,7 @@ async function iniciar() {
   $$('.buscador-icono').forEach((e) => { e.innerHTML = iconos.buscar; });
   $$('[data-ico]').forEach((e) => { e.outerHTML = iconos[e.dataset.ico]; });
   $$('[data-ico-act]').forEach((e) => { e.innerHTML = iconosAct[e.dataset.icoAct]; });
-  $('#hero-virgen').innerHTML = virgen;
+  $('#hero-virgen').innerHTML = virgen + '<i class="brillo b1"></i><i class="brillo b2"></i><i class="brillo b3"></i>';
 
   // Los datos se revalidan en cada visita, para que un cambio de horario se vea de inmediato.
   D = await (await fetch('data/programa.json', { cache: 'no-cache' })).json();

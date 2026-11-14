@@ -123,12 +123,7 @@
     "lng": -78.6154423
   },
   "creditosGenerales": [
-    {
-      "uso": "Inicio y splash: pirotecnia",
-      "autor": "jeiturralde",
-      "licencia": "CC BY-NC-SA 2.0",
-      "url": "https://www.flickr.com/photos/22947248@N05/2292188249"
-    }
+    {"uso": "Inicio: volcán Cotopaxi", "autor": "Dr. Carlos Costales Terán", "licencia": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volc%C3%A1n_Cotopaxi_Ecuador.JPG"}
   ],
   "actividades": [
     {"id": "13-0800-embanderamiento", "fecha": "2026-11-13", "hora": "08:00", "titulo": "Embanderamiento del Barrio", "tipo": "popular", "icono": "bandera", "lugar": "barrio", "descripcion": "", "aCargo": "Liga Deportiva Barrial Central Río Blanco Alto", "gentileza": []},

@@ -422,9 +422,20 @@ body.con-splash.dentro #vista-inicio > :nth-child(3) { transition-delay: .5s; }
 body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 
 /* ---------- Inicio ---------- */
+/* Una sola foto: el Cotopaxi, que se funde con el negro */
+.hero-foto { position: relative; height: 300px; margin: 0 calc(-1 * var(--s4)); overflow: hidden; }
+.hero-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+.hero-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,9,8,0) 0%, rgba(10,9,8,0) 42%, rgba(10,9,8,.72) 70%, var(--noche) 96%); }
 .hero-viva .hero-cab { margin-top: -104px !important; }
 .hero-viva .hero-virgen { width: 64px; position: relative; }
-.hero-viva .hero-virgen::before { content: ''; position: absolute; inset: -26px; border-radius: 50%; background: radial-gradient(circle, rgba(242,194,48,.38), transparent 65%); animation: halo 4s ease-in-out infinite; }
+.hero-viva .hero-virgen::before { content: ''; position: absolute; inset: -30px; border-radius: 50%; background: radial-gradient(circle, rgba(10,9,8,.82) 0 44%, rgba(242,194,48,.34) 58%, transparent 72%); animation: halo 4s ease-in-out infinite; }
+.hero-viva .hero-virgen .trazo path { stroke: #FFE08A; stroke-width: 2.6; filter: url(#marcador) drop-shadow(0 0 2.5px rgba(242,194,48,.9)); }
+.hero-viva .hero-virgen .halo circle, .hero-viva .hero-virgen .halo path { stroke: #FFE08A; opacity: .7; }
+.brillo { position: absolute; width: 10px; height: 10px; background: #FFF4CC; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); opacity: 0; animation: brillo 3.6s ease-in-out infinite; }
+.brillo.b1 { left: -6px; top: 22%; }
+.brillo.b2 { right: -8px; top: 46%; width: 8px; height: 8px; animation-delay: 1.2s; }
+.brillo.b3 { left: 62%; top: -4px; width: 7px; height: 7px; animation-delay: 2.4s; }
+@keyframes brillo { 0%, 55%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); } 70% { opacity: 1; transform: scale(1) rotate(20deg); } 85% { opacity: 0; transform: scale(.4) rotate(40deg); } }
 .hero-viva .hero-virgen svg { position: relative; overflow: visible; }
 .hero-viva h1 { font-size: 26px; line-height: 1.15; }
 .hero-viva .hero-sub { font-size: var(--t14); color: rgba(255,255,255,.8); margin-top: var(--s2); }
@@ -441,6 +452,9 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 /* Solo titila la actividad en curso; el título no lleva punto */
 .hero-viva + #estado .bloque-t::before { display: none; }
 .vivo { animation: latido 1.8s ease-out infinite; }
+
+.credito-inicio { margin: 0 var(--s4); text-align: center; font-size: 11px; color: var(--tinta-2); }
+.credito-inicio a { display: inline-block; padding: 8px 2px; color: inherit; }
 
 /* Contacto para invitaciones: una línea discreta al pie del inicio */
 .contacto { margin: var(--s6) var(--s4) 0; text-align: center; font-size: var(--t12); color: var(--tinta-2); }
@@ -514,6 +528,7 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 @media (prefers-reduced-motion: reduce) {
   .tr-t, .tr-rel, .tr-ojo, .tr-nar { animation: none; stroke-dashoffset: 0; fill-opacity: 1; opacity: 1; }
   .tr-t.tr-fino { opacity: .6; }
+  .brillo { animation: none; }
   .tr-cabeza, .tr-puf, .splash-chispas i, .hero-viva .hero-virgen::before, .hero-viva .btn-oro::after, .hero-viva + #estado .bloque-t::before, .carrusel .tarjeta-foto { animation: none; }
   body.con-splash #vista-inicio > * { transition: none; opacity: 1; translate: 0 0; }
 }

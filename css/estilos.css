@@ -644,3 +644,6 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 .toro-detalle .tr-t { stroke-width: 6; }
 .toro-detalle .tr-fino { stroke-width: 3.5; }
 .toro-detalle .tr-ceja { stroke-width: 9; }
+
+/* Mapa: juegos */
+.s-juegos { background: #EFE3F3; color: #6B3A86; }

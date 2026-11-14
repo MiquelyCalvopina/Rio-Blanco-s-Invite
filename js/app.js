@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140427';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140427';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140430';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140430';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -378,7 +378,8 @@ function cargar(src, tipo) {
     e.onload = res; e.onerror = rej; document.head.appendChild(e);
   });
 }
-const SRV_ICO = { parqueo: 'parqueo', banos: 'banos', comida: 'comida' };
+const SRV_ICO = { parqueo: 'parqueo', banos: 'banos', comida: 'comida', juegos: 'juegos' };
+const ZONA_COLOR = { parqueo: ['#2F5D46', '#CFE3D8'], comida: ['#A9531B', '#F7D9BF'], juegos: ['#6B3A86', '#E6D5EE'] };
 const pinSrv = (tipo) => `<span class="pin-srv s-${tipo}">${iconos[SRV_ICO[tipo]]}</span>`;
 let mapaL = null; const marcadores = {};
 
@@ -423,6 +424,8 @@ async function mapa() {
   // Tramo de las carpas de comida
   // Contorno de los lugares grandes, con el mismo gris con que el mapa dibuja la iglesia.
   for (const l of Object.values(D.lugares)) if (l.forma) L.polygon(l.forma, { color: '#8F8F8F', weight: 1, fillColor: '#B5B5B5', fillOpacity: .75, interactive: false }).addTo(m);
+  // Zonas de servicio (parqueo, comidas, juegos), con el color de su ícono.
+  for (const z of D.zonas || []) { const [borde, fondo] = ZONA_COLOR[z.tipo]; L.polygon(z.forma, { color: borde, weight: 1, dashArray: '4 3', fillColor: fondo, fillOpacity: .7, interactive: false }).addTo(m); }
   for (const x of D.servicios) if (x.tramo) L.polyline(x.tramo, { color: '#DE7A2C', weight: 6, opacity: .75, lineCap: 'round' }).addTo(m);
   // Lugares de la fiesta (un punto por coordenada)
   const vistos = {};

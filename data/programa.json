@@ -33,23 +33,61 @@
       "nombre": "Plaza central del barrio",
       "corto": "Plaza",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
-      "forma": [[-0.7486571, -78.6146055], [-0.7485825, -78.6142094], [-0.7487316, -78.6141814], [-0.7488318, -78.6145705]],
-      "lat": -0.7487008,
-      "lng": -78.6143917,
+      "forma": [
+        [
+          -0.7485977,
+          -78.615071
+        ],
+        [
+          -0.7485786,
+          -78.6145135
+        ],
+        [
+          -0.7489398,
+          -78.6144942
+        ],
+        [
+          -0.748969,
+          -78.6150518
+        ]
+      ],
+      "lat": -0.7487713,
+      "lng": -78.6147826,
       "icono": "bandera"
     },
     "plazaToros": {
       "nombre": "Plaza de toros del barrio",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
-      "lat": -0.7487008,
-      "lng": -78.6143917,
+      "lat": -0.7487713,
+      "lng": -78.6147826,
       "icono": "toro"
     },
     "estadio": {
       "nombre": "Estadio Monumental Río Blanco Alto",
       "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47",
       "icono": "balon",
-      "forma": [[-0.7470706, -78.6144894], [-0.7470652, -78.6138725], [-0.7480629, -78.613835], [-0.7480844, -78.6144787]],
+      "forma": [
+        [
+          -0.747147,
+          -78.6146794
+        ],
+        [
+          -0.7469423,
+          -78.6143114
+        ],
+        [
+          -0.746938,
+          -78.6137032
+        ],
+        [
+          -0.7481887,
+          -78.6136939
+        ],
+        [
+          -0.7482203,
+          -78.6145936
+        ]
+      ],
       "lat": -0.747494,
       "lng": -78.6141981,
       "corto": "Estadio"
@@ -58,7 +96,24 @@
       "nombre": "Coliseo del Barrio Río Blanco Alto",
       "corto": "Coliseo",
       "mapa": "https://maps.app.goo.gl/rfMhf9NwCNY8qQ2D6",
-      "forma": [[-0.7487924, -78.6136848], [-0.7487388, -78.6134434], [-0.7490767, -78.6133629], [-0.7491304, -78.6136124]],
+      "forma": [
+        [
+          -0.7487924,
+          -78.6136848
+        ],
+        [
+          -0.7487388,
+          -78.6134434
+        ],
+        [
+          -0.7490767,
+          -78.6133629
+        ],
+        [
+          -0.7491304,
+          -78.6136124
+        ]
+      ],
       "lat": -0.7486908,
       "lng": -78.613664,
       "icono": "voley"
@@ -85,7 +140,32 @@
     }
   },
   "servicios": [
-    {"id": "parqueadero-2", "tipo": "parqueo", "nombre": "Parqueadero", "detalle": "Cerca del Coliseo del barrio", "lat": -0.7482963, "lng": -78.6126649, "mapa": "https://maps.app.goo.gl/3eL7Pji5M88eSFyq5"},
+    {
+      "id": "parqueadero",
+      "tipo": "parqueo",
+      "nombre": "Parqueadero",
+      "detalle": "Terreno junto al Coliseo del barrio",
+      "lat": -0.749077,
+      "lng": -78.6140574,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.749077%2C-78.6140574",
+      "ancla": [
+        14,
+        13
+      ]
+    },
+    {
+      "id": "parqueadero-estadio",
+      "tipo": "parqueo",
+      "nombre": "Estacionamiento pequeño",
+      "detalle": "Junto al Estadio Monumental",
+      "lat": -0.7480165,
+      "lng": -78.6149639,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7480165%2C-78.6149639",
+      "ancla": [
+        14,
+        13
+      ]
+    },
     {
       "id": "banos-iglesia",
       "tipo": "banos",
@@ -108,8 +188,131 @@
       "lng": -78.6141981,
       "mapa": "https://maps.app.goo.gl/T2kfsPxNL3ET54o47"
     },
-    {"id": "comida", "tipo": "comida", "nombre": "Comida", "detalle": "Puestos alrededor de la plaza central", "lat": -0.7485383, "lng": -78.6144866, "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7485383%2C-78.6144866", "tramo": [[-0.7487223, -78.6147919], [-0.7485988, -78.6147919], [-0.7485592, -78.6146987], [-0.7485173, -78.6142746]]},
-    {"id": "comida-2", "tipo": "comida", "nombre": "Comida", "detalle": "Puestos en la esquina de la plaza central", "lat": -0.7486524, "lng": -78.6147849, "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486524%2C-78.6147849", "ancla": [14, 13]}
+    {
+      "id": "comida",
+      "tipo": "comida",
+      "nombre": "Comida",
+      "detalle": "Puestos entre los juegos y la plaza",
+      "lat": -0.7487896,
+      "lng": -78.6151495,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7487896%2C-78.6151495",
+      "ancla": [
+        14,
+        13
+      ]
+    },
+    {
+      "id": "comida-2",
+      "tipo": "comida",
+      "nombre": "Comida",
+      "detalle": "Puesto en la esquina de la plaza",
+      "lat": -0.7486141,
+      "lng": -78.6145389,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486141%2C-78.6145389",
+      "ancla": [
+        14,
+        13
+      ]
+    },
+    {
+      "id": "juegos",
+      "tipo": "juegos",
+      "nombre": "Juegos",
+      "detalle": "Cancha de básquet junto a la iglesia",
+      "lat": -0.7488218,
+      "lng": -78.6154061,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7488218%2C-78.6154061",
+      "ancla": [
+        14,
+        13
+      ]
+    }
+  ],
+  "zonas": [
+    {
+      "id": "zona-juegos",
+      "tipo": "juegos",
+      "forma": [
+        [
+          -0.7487072,
+          -78.615563
+        ],
+        [
+          -0.7486925,
+          -78.6152588
+        ],
+        [
+          -0.7489375,
+          -78.6152493
+        ],
+        [
+          -0.7489498,
+          -78.6155535
+        ]
+      ]
+    },
+    {
+      "id": "zona-comidas",
+      "tipo": "comida",
+      "forma": [
+        [
+          -0.7486165,
+          -78.6152409
+        ],
+        [
+          -0.7486027,
+          -78.6150761
+        ],
+        [
+          -0.748964,
+          -78.6150568
+        ],
+        [
+          -0.7489752,
+          -78.6152241
+        ]
+      ]
+    },
+    {
+      "id": "zona-parqueo",
+      "tipo": "parqueo",
+      "forma": [
+        [
+          -0.7489266,
+          -78.6144181
+        ],
+        [
+          -0.7488008,
+          -78.6137716
+        ],
+        [
+          -0.7492247,
+          -78.613684
+        ],
+        [
+          -0.7493558,
+          -78.6143559
+        ]
+      ]
+    },
+    {
+      "id": "zona-parqueo-estadio",
+      "tipo": "parqueo",
+      "forma": [
+        [
+          -0.7476281,
+          -78.6148252
+        ],
+        [
+          -0.7481074,
+          -78.6147073
+        ],
+        [
+          -0.7483141,
+          -78.6153592
+        ]
+      ]
+    }
   ],
   "llegada": {
     "nombre": "Iglesia del Barrio Río Blanco Alto",

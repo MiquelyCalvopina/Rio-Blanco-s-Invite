@@ -761,3 +761,11 @@ main { padding-top: env(safe-area-inset-top, 0px); }
 .visor-cerrar { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.16); }
 .visor-cerrar::before, .visor-cerrar::after { content: ''; position: absolute; left: 13px; top: 21px; width: 18px; height: 2px; background: #fff; transform: rotate(45deg); }
 .visor-cerrar::after { transform: rotate(-45deg); }
+
+/* Inicio: el botón principal se lee como botón (más alto, con sombra y flecha) y hay más aire entre bloques */
+.hero-viva .btn-oro { height: 50px; border-radius: 14px; font-size: var(--t16); font-weight: var(--w-s); box-shadow: 0 6px 16px rgba(242,194,48,.28), inset 0 -2px 0 rgba(0,0,0,.12); margin-top: var(--s5); }
+.hero-viva .btn-oro .ico:last-child { margin-left: 2px; width: 16px; height: 16px; }
+.hero-viva .hero-sub { margin-top: var(--s2); }
+.hero-viva { padding-bottom: 48px; }
+.acceso-priostes { margin-top: var(--s5); }
+.esperado { padding-top: 40px; }

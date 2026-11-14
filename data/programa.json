@@ -34,15 +34,15 @@
       "corto": "Plaza",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
       "forma": [[-0.7486571, -78.6146055], [-0.7485825, -78.6142094], [-0.7487316, -78.6141814], [-0.7488318, -78.6145705]],
-      "lat": -0.7487619,
-      "lng": -78.6146614,
+      "lat": -0.7487008,
+      "lng": -78.6143917,
       "icono": "bandera"
     },
     "plazaToros": {
       "nombre": "Plaza de toros del barrio",
       "mapa": "https://maps.app.goo.gl/VGYCZjhXWmveSsbQ7",
-      "lat": -0.7487619,
-      "lng": -78.6146614,
+      "lat": -0.7487008,
+      "lng": -78.6143917,
       "icono": "toro"
     },
     "estadio": {

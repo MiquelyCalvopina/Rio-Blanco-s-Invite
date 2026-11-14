@@ -730,3 +730,8 @@ main { padding-top: env(safe-area-inset-top, 0px); }
 .ap-act { font-size: 14px; color: var(--tinta); }
 .ap-rol { font-size: 13px; font-weight: var(--w-r); color: var(--tinta-2); }
 .ap-msj { font-size: 13px; color: var(--tinta-2); border-top: 0; padding-top: 0; margin-top: 4px; }
+
+/* Actividades: el buscador es un campo propio, arriba de los días */
+.campo-buscar { display: flex; align-items: center; gap: var(--s2); width: calc(100% - 2 * var(--s4)); height: 46px; margin: var(--s2) var(--s4) var(--s1); padding: 0 var(--s3); border-radius: 12px; background: var(--gris-1); color: var(--tinta-2); font-size: var(--t14); text-align: left; }
+.campo-buscar .ico { width: 18px; height: 18px; color: var(--tinta-3); }
+.filtros .chip { height: 36px; padding: 0 var(--s4); }

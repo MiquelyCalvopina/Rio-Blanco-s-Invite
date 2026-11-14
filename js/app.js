@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140451';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140451';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611140504';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611140504';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -190,7 +190,7 @@ function pintarDias() {
 
 function pintarFiltros() {
   const ops = [['todo', 'Todo'], ...Object.entries(TIPOS)];
-  $('#filtros').innerHTML = `<button id="abrir-busqueda" class="chip chip-buscar" aria-label="Buscar una actividad">${iconos.buscar}Buscar</button>` + ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
+  $('#filtros').innerHTML = ops.map(([k, v]) => `<button class="chip" data-filtro="${k}" aria-pressed="${ui.filtro === k}">${k !== 'todo' ? `<i class="k-${k}" style="background:var(--${k})"></i>` : ''}${v}</button>`).join('');
 }
 
 function filaAct(a, enCurso, pasada) {

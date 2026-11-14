@@ -171,8 +171,8 @@
       "lng": -78.6153353,
       "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7492236%2C-78.6153353",
       "ancla": [
-        3,
-        -9
+        5,
+        8
       ]
     },
     {
@@ -192,39 +192,39 @@
       "id": "comida",
       "tipo": "comida",
       "nombre": "Comida",
-      "detalle": "Puestos entre los juegos y la plaza",
-      "lat": -0.7487896,
-      "lng": -78.6151495,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7487896%2C-78.6151495",
+      "detalle": "Puestos alrededor de la plaza",
+      "lat": -0.7486,
+      "lng": -78.61456,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486%2C-78.61456",
       "ancla": [
-        9,
-        35
+        13,
+        13
       ]
     },
     {
       "id": "comida-2",
       "tipo": "comida",
       "nombre": "Comida",
-      "detalle": "Puesto en la esquina de la plaza",
-      "lat": -0.7486141,
-      "lng": -78.6145389,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486141%2C-78.6145389",
+      "detalle": "Puestos en la esquina de la plaza",
+      "lat": -0.7486,
+      "lng": -78.615,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7486%2C-78.615",
       "ancla": [
-        5,
-        21
+        13,
+        13
       ]
     },
     {
       "id": "juegos",
       "tipo": "juegos",
       "nombre": "Juegos",
-      "detalle": "Cancha de básquet junto a la iglesia",
-      "lat": -0.7488218,
-      "lng": -78.6154062,
-      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.7488218%2C-78.6154062",
+      "detalle": "Cancha de básquet, frente a la iglesia",
+      "lat": -0.74892,
+      "lng": -78.61525,
+      "mapa": "https://www.google.com/maps/search/?api=1&query=-0.74892%2C-78.61525",
       "ancla": [
-        21,
-        23
+        7,
+        16
       ]
     }
   ],

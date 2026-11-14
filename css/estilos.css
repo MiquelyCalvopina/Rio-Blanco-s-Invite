@@ -452,6 +452,9 @@ body.con-splash.dentro #vista-inicio > :nth-child(4) { transition-delay: .6s; }
 .dia b { font-size: 19px; font-weight: var(--w-s); }
 
 /* ---------- Detalle ---------- */
+/* El crédito de la foto va arriba a la izquierda, para que el título no lo tape */
+.info-foto { z-index: 3; right: auto; bottom: auto; left: 10px; top: 10px; width: 36px; height: 36px; }
+.credito { z-index: 3; right: auto; bottom: auto; left: 52px; top: 17px; }
 .hoja-cab.afiche::after { background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(122,86,14,0) 35%, rgba(122,86,14,.94) 100%); }
 
 .ver-mas { display: block; min-height: 44px; margin-top: 2px; font-size: var(--t14); font-weight: var(--w-s); color: var(--poncho); }

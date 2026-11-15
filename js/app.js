@@ -1,5 +1,5 @@
-import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611142103';
-import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611142103';
+import { estado, inicioUTC, diaEcuador, horaEcuador, googleCalendarUrl, normalizar, buscarActividades, colaboradores } from './nucleo.js?v=202611151554';
+import { toro, virgen, iconos, iconosAct } from './ilustraciones.js?v=202611151554';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -24,6 +24,11 @@ const ui = { dia: null, filtro: 'todo' };
 function ahora() {
   const p = new URLSearchParams(location.search).get('ahora');
   return p ? new Date(p + ':00-05:00') : new Date();
+}
+
+// Cuenta una acción en el contador de visitas. Si el contador no cargó, no hace nada.
+function contar(accion, titulo) {
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: accion, title: titulo || accion, event: true }); } catch {}
 }
 
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -84,6 +89,7 @@ function irAlMomento() {
 }
 
 function ir(vista, { alMomento = true } = {}) {
+  if (vista !== vistaActual) contar('ver-' + (vista === 'programa' ? 'cronograma' : vista === 'lugares' ? 'mapa' : vista === 'gratitud' ? 'gracias' : vista));
   $$('.tab').forEach((t) => (t.dataset.ir === vista ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
   document.body.classList.toggle('en-inicio', vista === 'inicio');
   if (vista === vistaActual) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
@@ -244,6 +250,7 @@ function pintarLista(animar = true) {
 /* ---------- Agregar al calendario (según el teléfono) ---------- */
 function agregar(id) {
   const a = actividad(id);
+  contar('recordatorio', a.titulo);
   marcarAgregado(id);
   if (SO === 'android') window.open(googleCalendarUrl(a, D.lugares, URL_SITIO), '_blank', 'noopener');
   else location.href = `ics/${a.id}.ics`;
@@ -323,6 +330,7 @@ function arrastreHoja() {
 function detalle(id) {
   const a = actividad(id);
   if (!a) return;
+  if ($('#hoja').dataset.id !== id || $('#hoja').hidden) contar('actividad-' + a.id, a.titulo);
   history.replaceState(null, '', `${location.search}#a/${a.id}`);
   const l = lugar(a);
   const ok = agregados.has(a.id);
@@ -544,7 +552,8 @@ function eventos() {
     if (d.filtro) { ui.filtro = d.filtro; pintarFiltros(); pintarLista(); return; }
     if (d.agregar) return agregar(d.agregar);
     if (d.resultado) { const a = actividad(d.resultado); cerrarBusqueda(); ui.dia = a.fecha; pintarDias(); pintarLista(); return detalle(a.id); }
-    if (b.id === 'abrir-busqueda') return abrirBusqueda();
+    if (d.contar) contar(d.contar);
+    if (b.id === 'abrir-busqueda') { contar('buscar'); return abrirBusqueda(); }
     if (b.id === 'cerrar-busqueda') return cerrarBusqueda();
     if ('colab' in d) { const u = b.nextElementSibling; u.hidden = !u.hidden; b.setAttribute('aria-expanded', String(!u.hidden)); return; }
     if (d.act) return detalle(d.act);
@@ -555,10 +564,12 @@ function eventos() {
     if ('info' in d) { const c = b.parentElement.querySelector('.credito'); c.hidden = !c.hidden; return; }
     if (d.marcar) { marcarAgregado(d.marcar); return; }
     if (d.compartirAct) {
+      contar('compartir-actividad');
       const a = actividad(d.compartirAct);
       return compartir({ title: a.titulo, text: `${a.titulo} · ${fechaLarga(a.fecha)}, ${a.hora}. Fiestas de la Santísima Virgen de El Quinche, Río Blanco Alto.`, url: `${URL_SITIO}#a/${a.id}` });
     }
     if (b.id === 'fab') {
+      contar('compartir-fiesta');
       return compartir({ title: 'Fiestas Río Blanco Alto 2026', text: 'Les invitamos a las fiestas en honor a la Santísima Virgen de El Quinche en Río Blanco Alto, del 13 al 22 de noviembre. Aquí está todo el cronograma:', url: URL_SITIO });
     }
     if (b.id === 'hoja-cerrar') cerrarHoja();

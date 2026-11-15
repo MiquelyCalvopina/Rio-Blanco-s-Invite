@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilos.css?v=202611142103">
+<link rel="stylesheet" href="css/estilos.css?v=202611151554">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -54,7 +54,7 @@
       <span data-ico="chev"></span>
     </button>
     <section class="bloque esperado" aria-labelledby="t-esperado"><h2 id="t-esperado" class="bloque-t">Lo más esperado</h2><div id="carrusel" class="esperado-lista"></div></section>
-    <p class="contacto">¿Quisiera un cronograma digital como este? <a href="https://wa.me/593963212258?text=Hola%2C%20quisiera%20un%20cronograma%20digital%20como%20el%20de%20las%20fiestas%20de%20R%C3%ADo%20Blanco%20Alto." target="_blank" rel="noopener"><span data-ico="whatsapp"></span>Contáctese por WhatsApp al 0963212258</a></p>
+    <p class="contacto">¿Quisiera un cronograma digital como este? <a data-contar="contacto-whatsapp" href="https://wa.me/593963212258?text=Hola%2C%20quisiera%20un%20cronograma%20digital%20como%20el%20de%20las%20fiestas%20de%20R%C3%ADo%20Blanco%20Alto." target="_blank" rel="noopener"><span data-ico="whatsapp"></span>Contáctese por WhatsApp al 0963212258</a></p>
   </section>
 
   <section id="vista-programa" class="vista" aria-label="Cronograma" hidden>
@@ -70,7 +70,7 @@
   <section id="vista-lugares" class="vista" aria-label="Lugares" hidden>
     <div class="mapa-fijo">
       <div id="mapa" class="mapa" role="region" aria-label="Mapa del barrio"></div>
-      <a id="llegar" class="btn-llegar tap" target="_blank" rel="noopener"><span data-ico="ruta"></span>Ruta al barrio en Google Maps<span data-ico="externo"></span></a>
+      <a id="llegar" data-contar="ruta-al-barrio" class="btn-llegar tap" target="_blank" rel="noopener"><span data-ico="ruta"></span>Ruta al barrio en Google Maps<span data-ico="externo"></span></a>
       <div id="tarjeta-lugar" class="tarjeta-lugar" hidden></div>
     </div>
     <h3 class="lista-t">Servicios</h3>
@@ -135,6 +135,8 @@
 </section>
 
 
-<script type="module" src="js/app.js?v=202611142103"></script>
+<script type="module" src="js/app.js?v=202611151554"></script>
+<!-- Contador de visitas sin cookies ni datos personales (GoatCounter) -->
+<script data-goatcounter="https://miquely.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
